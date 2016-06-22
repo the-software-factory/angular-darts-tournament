@@ -6644,8 +6644,8 @@ function $CacheFactoryProvider() {
  * Adding via the `$templateCache` service:
  *
  * ```js
- * var dartsApp = angular.module('dartsApp', []);
- * dartsApp.run(function($templateCache) {
+ * var myApp = angular.module('myApp', []);
+ * myApp.run(function($templateCache) {
  *   $templateCache.put('templateId.html', 'This is the content of the template');
  * });
  * ```
@@ -11745,7 +11745,7 @@ function $HttpProvider() {
  * Replace or decorate this service to create your own custom XMLHttpRequest objects.
  *
  * ```
- * angular.module('dartsApp', [])
+ * angular.module('myApp', [])
  * .factory('$xhrFactory', function() {
  *   return function createXhr(method, url) {
  *     return new window.XMLHttpRequest({mozSystem: true});
@@ -18054,7 +18054,7 @@ function adjustMatchers(matchers) {
  * Here is what a secure configuration for this scenario might look like:
  *
  * ```
- *  angular.module('dartsApp', []).config(function($sceDelegateProvider) {
+ *  angular.module('myApp', []).config(function($sceDelegateProvider) {
  *    $sceDelegateProvider.resourceUrlWhitelist([
  *      // Allow same origin resource loads.
  *      'self',
@@ -18597,7 +18597,7 @@ function $SceDelegateProvider() {
  * That said, here's how you can completely disable SCE:
  *
  * ```
- * angular.module('dartsAppWithSceDisableddartsApp', []).config(function($sceProvider) {
+ * angular.module('myAppWithSceDisabledmyApp', []).config(function($sceProvider) {
  *   // Completely disable SCE.  For demonstration purposes only!
  *   // Do not use in new projects.
  *   $sceProvider.enabled(false);

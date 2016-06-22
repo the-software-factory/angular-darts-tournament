@@ -9,6 +9,11 @@ angular.module('dartsRound', ['ngRoute'])
   });
 }])
 
-.controller('roundCtrl', [function() {
+.controller('roundCtrl', ['$scope', '$localStorage', function ($scope, $localStorage) {
+	$scope.saved = localStorage.getItem('players');
+	$scope.players = JSON.parse($scope.saved);
+
+	$scope.totPlayers = $scope.players.length;
+
 
 }]);
