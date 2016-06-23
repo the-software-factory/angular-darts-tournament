@@ -1,7 +1,7 @@
 {
   "name": "angular-darts-tournament",
   "description": "A starter project for AngularJS",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/the-software-factory/angular-darts-tournament",
   "license": "MIT",
   "private": true,
