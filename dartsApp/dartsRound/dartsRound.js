@@ -74,6 +74,8 @@ angular.module('dartsRound', [
 		if ($scope.currentScore < 0) {
 			$scope.currentScore += currentShot;
 			$scope.scoreRound = 0;
+			$scope.buttonClicked2 = true;
+			$scope.buttonClicked3 = true;
 		}
 
 	}
@@ -91,6 +93,7 @@ angular.module('dartsRound', [
 		if ($scope.currentScore < 0) {
 			$scope.currentScore += currentShot;
 			$scope.scoreRound = 0;
+			$scope.buttonClicked3 = true;
 		}
 
 	}
