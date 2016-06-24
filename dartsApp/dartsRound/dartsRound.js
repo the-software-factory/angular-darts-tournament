@@ -61,6 +61,9 @@ angular.module('dartsRound', [
 		}
 	}
 
+
+/*########### devo trasformare queste 3 funzioni in 1 ###################*/
+
 	$scope.addScore1 = function() {
 		currentShot = 0;
 		$scope.buttonClicked1 = true;
@@ -68,8 +71,13 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.fShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
+/*
+			$.post("https://hooks.slack.com/services/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" ,{
+				'payload' : '{"text": "I won :)"}'
+			});
+*/
 			$scope.win = true;
-			$scope.complimenti = "Complimenti sei il vincitore!!!";
+			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
 		if ($scope.currentScore < 0) {
 			$scope.currentScore += currentShot;
@@ -87,8 +95,13 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.sShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
+			/*
+			$.post("https://hooks.slack.com/services/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" ,{
+				'payload' : '{"text": "I won :)"}'
+			});
+*/
 			$scope.win = true;
-			$scope.complimenti = "Complimenti sei il vincitore!!!";
+			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
 		if ($scope.currentScore < 0) {
 			$scope.currentScore += currentShot;
@@ -105,8 +118,13 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.tShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
+			/*
+			$.post("https://hooks.slack.com/services/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" ,{
+				'payload' : '{"text": "I won :)"}'
+			});
+*/
 			$scope.win = true;
-			$scope.complimenti = "complimenti sei il vincitore!!!";
+			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
 		if ($scope.currentScore < 0) {
 			$scope.currentScore += currentShot;
@@ -121,5 +139,9 @@ angular.module('dartsRound', [
 		$scope.sShot = '';
 		$scope.tShot = '';
 	};
+
+
+
+
 
 }]);

@@ -1,8 +1,40 @@
 <div class="jumbotron dartsContainer">
 	<h1>Inserisci i giocatori*</h1>
 	<p>*(I giocatori devono essere minimo 2)</p>
+
+	<div class=".col-md-6 .col-md-offset-3 playerList">
+		<div class="panel panel-success">
+			<div class="panel-heading">Lista giocatori abituali </div>
+			<p>{{players}}</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Inserisci</th>
+						<th>Cancella</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="friend in storagePlayers track by $index">
+						<td>{{friend.name}}</td>
+						<td>
+							<button type="button" class="btn btn-success" ng-click="addPlayerInList(itemA)">
+								+
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger" ng-click="removePlayerStorage(itemR)">
+								x
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 	<div class="alert alert-info playerList" role="alert">
-		{{ 	players.length }} Giocatori
+		Hai inserito {{ players.length }} giocatori
 	</div>
 
 	<div class=".col-md-6 .col-md-offset-3 playerList">
@@ -28,3 +60,5 @@
     	<a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="players.length >= 2">Inizia la partita</a>
 	</div>
 </div>
+
+<!--  -->

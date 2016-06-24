@@ -19,3 +19,7 @@ body {
 .dartsInput {
 	margin-top: 2rem;
 }
+
+thead tr th {
+	text-align:center;
+}
