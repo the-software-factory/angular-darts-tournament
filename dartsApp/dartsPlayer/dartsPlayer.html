@@ -2,10 +2,10 @@
 	<h1>Inserisci i giocatori*</h1>
 	<p>*(I giocatori devono essere minimo 2)</p>
 
-	<div class=".col-md-6 .col-md-offset-3 playerList">
+	<div class=".col-md-6 .col-md-offset-3 playerList" ng-show="storagePlayers.length >= 1">
 		<div class="panel panel-success">
 			<div class="panel-heading">Lista giocatori abituali </div>
-			<p>{{players}}</p>
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -15,15 +15,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="friend in storagePlayers track by $index">
+					<tr ng-repeat="friend in storagePlayers">
 						<td>{{friend.name}}</td>
 						<td>
-							<button type="button" class="btn btn-success" ng-click="addPlayerInList(itemA)">
+							<button type="button" class="btn btn-success" ng-click="addPlayerInList(friend)">
 								+
 							</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger" ng-click="removePlayerStorage(itemR)">
+							<button type="button" class="btn btn-danger" ng-click="removePlayerStorage(item)">
 								x
 							</button>
 						</td>

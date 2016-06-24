@@ -54,17 +54,17 @@ angular.module('dartsPlayer', [
 	};
 
 	// rimuove solo il giocatore "selezionato" nella tabella dei giocatori abituali
-	$scope.removePlayerStorage = function(itemR) {
-		var index = $scope.storagePlayers.indexOf(itemR);
+	$scope.removePlayerStorage = function(item) {
+		var index = $scope.storagePlayers.indexOf(item);
 		$scope.storagePlayers.splice(index, 1);
 		localStorage.setItem('storagePlayers', JSON.stringify($scope.storagePlayers));
 	}
 
-
+	
 	//inserisce il giocatore della tabella dei giocatori abituali nella lista dei giocatori "pronti" ad iniziare
-	$scope.addPlayerInList = function(itemA) {
-		
-		
+	$scope.addPlayerInList = function(friend) {
+		$scope.players.push(friend);
+		localStorage.setItem('players', JSON.stringify($scope.players));
 	}
 
 }]);
