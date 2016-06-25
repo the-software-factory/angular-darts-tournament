@@ -33,6 +33,8 @@ angular.module('dartsRound', [
 	// Serve per fermare il gioco in caso di vittoria
 	$scope.win = false;
 
+	$scope.arrayScore = [];
+
 	//viariabili che contengono il punteggio del round e il punteggio corrente di ogni lancio
 	$scope.scoreRound = 0;
 	var currentShot = 0;
@@ -46,6 +48,22 @@ angular.module('dartsRound', [
 		$scope.buttonClicked3 = false;
 		$scope.players[i].totScore = $scope.currentScore;
 		localStorage.setItem('players', JSON.stringify($scope.players));
+
+
+		if ($scope.arrayScore.length >= $scope.totPlayers) {
+			$scope.arrayScore = [];
+		}
+		else{
+			$scope.arrayScore.push($scope.currentScore);
+			$scope.arrayScore.sort();
+			if ($scope.arrayScore[$scope.arrayScore.length-1] - $scope.arrayScore[0] >= 60) {
+		/*
+			$.post("https://hooks.slack.com/services/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" ,{
+				'payload' : '{"text": "I'm winning :P"}'
+			});
+		*/
+			}
+		}
 
 
 		if(i != 0) {
@@ -71,11 +89,11 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.fShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
-/*
+		/*
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
-*/
+		*/
 			$scope.win = true;
 			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
@@ -95,11 +113,11 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.sShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
-			/*
+		/*
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
-*/
+		*/
 			$scope.win = true;
 			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
@@ -118,11 +136,11 @@ angular.module('dartsRound', [
 		currentShot = parseInt($scope.tShot);
 		$scope.currentScore -= currentShot;
 		if ($scope.currentScore == 0) {
-			/*
+		/*
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
-*/
+		*/
 			$scope.win = true;
 			$scope.congratulations = "Complimenti sei il vincitore!!!";
 		}
@@ -139,9 +157,5 @@ angular.module('dartsRound', [
 		$scope.sShot = '';
 		$scope.tShot = '';
 	};
-
-
-
-
 
 }]);

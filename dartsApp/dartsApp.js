@@ -5,7 +5,7 @@ angular.module('dartsApp', [
   'ngRoute',
   'dartsHome',
   'dartsPlayer',
-  'dartsRound',
+  'dartsRound'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
