@@ -28,6 +28,8 @@ angular.module('dartsPlayer', [
 		$scope.storagePlayers = JSON.parse($scope.savedStorage);
 	}
 
+	//$scope.storagePlayers = []; debug -> elimino tutto
+
 	localStorage.setItem('players', JSON.stringify($scope.players));
 	localStorage.setItem('storagePlayers', JSON.stringify($scope.storagePlayers));
 
