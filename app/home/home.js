@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('dartsHome', ['ngRoute'])
+angular.module('home', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: 'dartsHome/dartsHome.html',
+    templateUrl: 'home/home.html',
     controller: 'homeCtrl'
   });
 }])

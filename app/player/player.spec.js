@@ -4,7 +4,7 @@
 describe('playerCtrl', function() {
 
 	// Include Modules
-	beforeEach(module('dartsPlayer'));
+	beforeEach(module('player'));
 	beforeEach(module('ngRoute'));
 	beforeEach(module('ngStorage'));
 

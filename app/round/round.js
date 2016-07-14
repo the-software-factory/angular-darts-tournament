@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('dartsRound', [
+angular.module('round', [
 	'ngRoute',
 	'ngStorage'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/round', {
-    templateUrl: 'dartsRound/dartsRound.html',
+    templateUrl: 'round/round.html',
     controller: 'roundCtrl'
   });
 }])

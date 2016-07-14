@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('dartsPlayer', [
+angular.module('player', [
 	'ngRoute',
 	'ngStorage'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/player', {
-    templateUrl: 'dartsPlayer/dartsPlayer.html',
+    templateUrl: 'player/player.html',
     controller: 'playerCtrl'
   });
 }])
