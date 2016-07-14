@@ -1,16 +1,6 @@
 'use strict';
 
-angular.module('player', [
-	'ngRoute',
-	'ngStorage'
-])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/player', {
-    templateUrl: 'player/player.html',
-    controller: 'playerCtrl'
-  });
-}])
+angular.module('player')
 
 .controller('playerCtrl', ['$scope', '$localStorage', function ($scope, $localStorage) {
 	//Array che conterrà i vari oggetti giocatori

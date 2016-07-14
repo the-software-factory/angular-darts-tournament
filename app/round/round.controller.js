@@ -1,16 +1,6 @@
 'use strict';
 
-angular.module('round', [
-	'ngRoute',
-	'ngStorage'
-])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/round', {
-    templateUrl: 'round/round.html',
-    controller: 'roundCtrl'
-  });
-}])
+angular.module('round')
 
 .controller('roundCtrl', ['$scope', '$localStorage', function ($scope, $localStorage) {
 
