@@ -2,8 +2,7 @@
 
 angular.module('app.player')
 
-.controller('playerCtrl', [function () {
-
+.controller('playerCtrl', [function() {
 	var vm = this;
 
 	//Array with all players
@@ -26,19 +25,17 @@ angular.module('app.player')
 	localStorage.setItem('players', JSON.stringify(vm.players));
 	localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
 
-
-
 	// add player with a name, and a initial score
 	vm.addPlayer = function() {
 		vm.players.push({ 
 			'name':vm.name,
 			'totScore':501
 		});
-    	vm.name = ''; //clear input
-    	currentPlayerSaved = vm.players[vm.players.length-1]; 
-    	vm.storagePlayers.push(currentPlayerSaved); //add player in the bookmark
-    	localStorage.setItem('players', JSON.stringify(vm.players));
-    	localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
+  vm.name = ''; //clear input
+  currentPlayerSaved = vm.players[vm.players.length - 1]; 
+  vm.storagePlayers.push(currentPlayerSaved); //add player in the bookmark
+  localStorage.setItem('players', JSON.stringify(vm.players));
+  localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
 	};
 
 	//remove all players in the list
@@ -52,12 +49,12 @@ angular.module('app.player')
 		var index = vm.storagePlayers.indexOf(friend);
 		vm.storagePlayers.splice(index, 1);
 		localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
-	}
+	};
 	
 	//take a player from table and put it in the list of player
 	vm.addPlayerInList = function(friend) {
 		vm.players.push(friend);
 		localStorage.setItem('players', JSON.stringify(vm.players));
-	}
+	};
 
 }]);

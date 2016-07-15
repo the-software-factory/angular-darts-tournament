@@ -2,7 +2,7 @@
 
 angular.module('app.round')
 
-.controller('roundCtrl', [function () {
+.controller('roundCtrl', [function() {
 
 	var vm = this;
 
@@ -55,9 +55,9 @@ angular.module('app.round')
 		else {
 			vm.arrayScore.push(vm.currentScore);
 			vm.arrayScore.sort();
-			if (vm.arrayScore[vm.arrayScore.length-1] - vm.arrayScore[0] >= 60) {
+			if (vm.arrayScore[vm.arrayScore.length - 1] - vm.arrayScore[0] >= 60) {
 		
-			$.post("https://hooks.slack.com/services/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" ,{
+			$.post("https://hooks.slack.com/services/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", {
 				'payload' : '{"text": "I\'m winning :P"}'
 			});
 		
@@ -69,19 +69,18 @@ angular.module('app.round')
 		aggiorno il anche il numero del round
 		*/
 
-		if(i != 0) {
+		if (i != 0) {
 			i--;
 			vm.currentPlayer = vm.players[i].name;
 			vm.currentScore = vm.players[i].totScore;
 		}
-		else{
+		else {
 			vm.rounds += 1;
 			i = vm.totPlayers - 1;
 			vm.currentPlayer = vm.players[i].name;
 			vm.currentScore = vm.players[i].totScore;
 		}
-	}
-
+	};
 
 /*
 
@@ -104,7 +103,7 @@ angular.module('app.round')
 		vm.currentScore -= currentShot;
 		if (vm.currentScore == 0) {
 		
-			$.post("https://hooks.slack.com/services/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" ,{
+			$.post("https://hooks.slack.com/services/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", {
 				'payload' : '{"text": "I won :)"}'
 			});
 		
@@ -118,7 +117,7 @@ angular.module('app.round')
 			vm.buttonClicked3 = true;
 		}
 
-	}
+	};
 
 	vm.addScore2 = function() {
 		currentShot = 0;
@@ -128,7 +127,7 @@ angular.module('app.round')
 		vm.currentScore -= currentShot;
 		if (vm.currentScore == 0) {
 		
-			$.post("https://hooks.slack.com/services/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" ,{
+			$.post("https://hooks.slack.com/services/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", {
 				'payload' : '{"text": "I won :)"}'
 			});
 		
@@ -141,7 +140,7 @@ angular.module('app.round')
 			vm.buttonClicked3 = true;
 		}
 
-	}
+	};
 
 	vm.addScore3 = function() {
 		currentShot = 0;
@@ -151,7 +150,7 @@ angular.module('app.round')
 		vm.currentScore -= currentShot;
 		if (vm.currentScore == 0) {
 		
-			$.post("https://hooks.slack.com/services/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" ,{
+			$.post("https://hooks.slack.com/services/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", {
 				'payload' : '{"text": "I won :)"}'
 			});
 		
@@ -163,7 +162,7 @@ angular.module('app.round')
 			vm.scoreRound = 0;
 		}
 
-	} 
+	}; 
 
 	//Ripulisce le input dopo ogni click
 	var clearInput = function() {

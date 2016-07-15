@@ -1,17 +1,27 @@
 'use strict';
 
-
 describe('playerCtrl', function() {
 
 	// Include Modules
+	beforeEach(module('app'));
 	beforeEach(module('player'));
 	beforeEach(module('ngRoute'));
-	beforeEach(module('ngStorage'));
 
+	scope = {};
 
-	var scope = {};
+	describe('controller: playerCtrl', function() {
+		var testController;
+
+		beforeEach(inject(function($controller) {
+			testController = $controller('playerCtrl', {});
+		}));
+
+		it('should have model defined', function() {
+	   	expect(testController).toBeDefined();
+	   	expect(testController.model).toBeDefined();
+});
+	});
 	
-
 	//Uso $controller per creare un istanza di playerCtrl.
 	it('should create a object array "players" with 0 players', inject(function($controller) {
 		var ctrl = $controller('playerCtrl', {$scope: scope});
@@ -22,10 +32,5 @@ describe('playerCtrl', function() {
 		var ctrl = $controller('playerCtrl', {$scope: scope});
 		expect(scope.storagePlayers.length).toBe(0);
 	}));
-
-
-
-
-
 
 });
