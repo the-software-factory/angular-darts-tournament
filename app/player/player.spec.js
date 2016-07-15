@@ -1,36 +1,26 @@
 'use strict';
 
-describe('playerCtrl', function() {
+describe('Unit: players', function() {
 
+	var ctrl;
 	// Include Modules
-	beforeEach(module('app'));
-	beforeEach(module('player'));
+	beforeEach(angular.mock.module('app'));
+	beforeEach(module('app.player'));
 	beforeEach(module('ngRoute'));
 
-	scope = {};
-
-	describe('controller: playerCtrl', function() {
-		var testController;
-
-		beforeEach(inject(function($controller) {
-			testController = $controller('playerCtrl', {});
-		}));
-
-		it('should have model defined', function() {
-	   	expect(testController).toBeDefined();
-	   	expect(testController.model).toBeDefined();
-});
-	});
-	
-	//Uso $controller per creare un istanza di playerCtrl.
-	it('should create a object array "players" with 0 players', inject(function($controller) {
-		var ctrl = $controller('playerCtrl', {$scope: scope});
-		expect(scope.players.length).toBe(0);
+	it('Should have a players array', inject(function($controller) {
+		ctrl = $controller('playerCtrl', {}, {});
+		expect(ctrl.players).toBeDefined();
 	}));
 
-	it('should create a object array "storagePlayers" with 0 players', inject(function($controller) {
-		var ctrl = $controller('playerCtrl', {$scope: scope});
-		expect(scope.storagePlayers.length).toBe(0);
+	it('Should have 0 players', inject(function($controller) {
+		ctrl = $controller('playerCtrl', {}, {});
+		expect(ctrl.players.length).toEqual(0);
+	}));
+
+	it('Should have a storagePlayers array', inject(function($controller) {
+		ctrl = $controller('playerCtrl', {}, {});
+		expect(ctrl.storagePlayers).toBeDefined();
 	}));
 
 });

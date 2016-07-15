@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var eslint = require('gulp-eslint');
+var Server = require('karma').Server;
 
 // JS concat and minify
 gulp.task('scripts', function() {
@@ -60,6 +61,13 @@ gulp.task('lint', function() {
   }))
   .pipe(eslint.format())
   .pipe(eslint.failOnError());
+});
+
+gulp.task('test', function (done) {
+  new Server({
+    configFile:__dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 

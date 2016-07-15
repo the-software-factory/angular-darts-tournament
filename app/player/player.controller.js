@@ -11,6 +11,9 @@ angular.module('app.player')
 	vm.storagePlayers = [];
 	//save the last player
 	var currentPlayerSaved = {};
+	//the button for add player in the table of players is abilited
+
+	vm.buttonAddPlayerTable = false;
 
 	vm.saved = localStorage.getItem('players');
 	vm.savedStorage = localStorage.getItem('storagePlayers');
@@ -36,6 +39,7 @@ angular.module('app.player')
   vm.storagePlayers.push(currentPlayerSaved); //add player in the bookmark
   localStorage.setItem('players', JSON.stringify(vm.players));
   localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
+
 	};
 
 	//remove all players in the list
@@ -53,6 +57,7 @@ angular.module('app.player')
 	
 	//take a player from table and put it in the list of player
 	vm.addPlayerInList = function(friend) {
+		vm.buttonAddPlayerTable = true;
 		vm.players.push(friend);
 		localStorage.setItem('players', JSON.stringify(vm.players));
 	};

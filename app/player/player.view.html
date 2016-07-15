@@ -18,7 +18,7 @@
 					<tr ng-repeat="friend in vm.storagePlayers">
 						<td>{{friend.name}}</td>
 						<td>
-							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)">
+							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)" ng-hide="vm.buttonAddPlayerTable">
 								+
 							</button>
 						</td>
