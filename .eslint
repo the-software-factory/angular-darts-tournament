@@ -1,0 +1,44 @@
+{
+    "plugins": ["jasmine", "angular"],
+    "rules": {
+        "indent": [
+            "error",
+            2,
+            {
+              "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "angular/di": [
+          0,
+          "array"
+        ],
+        "keyword-spacing": ["error"],
+        "dot-notation": ["error"],
+        "array-bracket-spacing": ["error", "never"],
+        "no-multiple-empty-lines": ["error", {"max": 1, "maxBOF": 0, "maxEOF": 0}],
+        "space-in-parens": ["error", "never"],
+        "object-curly-spacing": ["error", "never"],
+        "comma-spacing": ["error", {"before": false, "after": true}],
+        "computed-property-spacing": ["error", "never"],
+        "space-before-function-paren": [2, "never"],
+        "brace-style": ["error", "stroustrup"],
+        "space-before-blocks": [2],
+        "space-infix-ops": [2]
+    },
+    "env": {
+        "browser": true,
+        "jasmine": true
+    },
+    "globals": {
+        "angular": 1
+    },
+    "extends": "eslint:recommended"
+}

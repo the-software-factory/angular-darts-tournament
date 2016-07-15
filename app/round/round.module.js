@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-angular.module('round', [
+angular.module('app.round', [
 	'ngRoute',
 	'ngStorage'
 ])
@@ -8,6 +8,7 @@ angular.module('round', [
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/round', {
     templateUrl: 'round/round.view.html',
-    controller: 'roundCtrl'
+    controller: 'roundCtrl',
+    controllerAs: 'vm'
   });
 }]);

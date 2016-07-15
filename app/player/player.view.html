@@ -1,8 +1,8 @@
 <div class="jumbotron dartsContainer">
 	<h1>Inserisci i giocatori*</h1>
 	<p>*(I giocatori devono essere minimo 2)</p>
-
-	<div class=".col-md-6 .col-md-offset-3 playerList" ng-show="storagePlayers.length >= 1">
+	
+	<div class=".col-md-6 .col-md-offset-3 playerList" ng-show="vm.storagePlayers.length >= 1">
 		<div class="panel panel-success">
 			<div class="panel-heading">Lista giocatori abituali </div>
 			
@@ -15,15 +15,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="friend in storagePlayers">
+					<tr ng-repeat="friend in vm.storagePlayers">
 						<td>{{friend.name}}</td>
 						<td>
-							<button type="button" class="btn btn-success" ng-click="addPlayerInList(friend)">
+							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)">
 								+
 							</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger" ng-click="removePlayerStorage(item)">
+							<button type="button" class="btn btn-danger" ng-click="vm.removePlayerStorage(friend)">
 								x
 							</button>
 						</td>
@@ -34,14 +34,14 @@
 	</div>
 
 	<div class="alert alert-info playerList" role="alert">
-		Hai inserito {{ players.length }} giocatori
+		Hai inserito {{ vm.players.length }} giocatori
 	</div>
 
 	<div class=".col-md-6 .col-md-offset-3 playerList">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Aggiungi un nuovo giocatore..." ng-model="name">
+			<input type="text" class="form-control" placeholder="Aggiungi un nuovo giocatore..." ng-model="vm.name">
 			<span class="input-group-btn">
-			    <button class="btn btn-default" type="button" ng-click="addPlayer()">
+			    <button class="btn btn-default" type="button" ng-click="vm.addPlayer()">
 			    	<span class="glyphicon glyphicon-plus"></span>
 			    </button>
 			</span>
@@ -49,14 +49,14 @@
 	</div> <!-- col-lg-6 -->
 	<div>
 		<ul class="list-group playerList">
-			<li class="list-group-item" ng-repeat="player in players">
+			<li class="list-group-item" ng-repeat="player in vm.players">
 				{{ player.name }}
 			</li>
 		</ul>
 	</div>
 
 	<div class="dartsButton">
-		<a class="btn btn-warning btn-lg" role="button" ng-click="removePlayer()" ng-show="players.length >= 1">Cancella i giocatori</a>
-    	<a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="players.length >= 2">Inizia la partita</a>
+		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removePlayer()" ng-show="vm.players.length >= 1">Cancella i giocatori</a>
+    <a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="vm.players.length >= 2">Inizia la partita</a>
 	</div>
 </div>

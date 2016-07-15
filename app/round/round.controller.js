@@ -1,33 +1,35 @@
 'use strict';
 
-angular.module('round')
+angular.module('app.round')
 
-.controller('roundCtrl', ['$scope', '$localStorage', function ($scope, $localStorage) {
+.controller('roundCtrl', [function () {
 
-	$scope.saved = localStorage.getItem('players');
-	$scope.players = JSON.parse($scope.saved);
+	var vm = this;
+
+	vm.saved = localStorage.getItem('players');
+	vm.players = JSON.parse(vm.saved);
 
 	// Inizializzo il round a 1, e poi viene incrementato
-	$scope.rounds = 1;
+	vm.rounds = 1;
 
 	// Calcolo il numero di giocatori che stanno giocando
-	$scope.totPlayers = $scope.players.length;
-	var i = $scope.totPlayers - 1;
+	vm.totPlayers = vm.players.length;
+	var i = vm.totPlayers - 1;
 
 	// Inizializza la schermata con l'ultimo giocatore aggiunto
-	$scope.currentPlayer = $scope.players[i].name;
+	vm.currentPlayer = vm.players[i].name;
 
 	// Inizializzo il punteggio con quello dell'ultimo giocatore (perchè sarà il primo a giocare)
-	$scope.currentScore = $scope.players[i].totScore;
+	vm.currentScore = vm.players[i].totScore;
 
 	// Serve per fermare il gioco in caso di vittoria
-	$scope.win = false;
+	vm.win = false;
 
 	//serve per salvare ad ogni round il punteggio di tutti i giocatori e vedere se c'è una differenza di 60 punti
-	$scope.arrayScore = [];
+	vm.arrayScore = [];
 
 	//viariabili che contengono rispettivamente il punteggio del round e il punteggio corrente di ogni lancio
-	$scope.scoreRound = 0;
+	vm.scoreRound = 0;
 	var currentShot = 0;
 
 	/*
@@ -35,25 +37,25 @@ angular.module('round')
 		- i pulsanti + vengono attivati
 		- il punteggio tot del giocatore viene aggiornato e salvato
 	*/
-	$scope.loadRound = function() {
-		$scope.scoreRound = 0;
+	vm.loadRound = function() {
+		vm.scoreRound = 0;
 		clearInput();
-		$scope.buttonClicked1 = false;
-		$scope.buttonClicked2 = false;
-		$scope.buttonClicked3 = false;
-		$scope.players[i].totScore = $scope.currentScore;
-		localStorage.setItem('players', JSON.stringify($scope.players));
+		vm.buttonClicked1 = false;
+		vm.buttonClicked2 = false;
+		vm.buttonClicked3 = false;
+		vm.players[i].totScore = vm.currentScore;
+		localStorage.setItem('players', JSON.stringify(vm.players));
 
 		/*
 			confronto i punteggi dei vari giocatori, e in caso di una diffenza di 60 punti, mando una notifica su slack
 		*/ 
-		if ($scope.arrayScore.length >= $scope.totPlayers) {
-			$scope.arrayScore = [];
+		if (vm.arrayScore.length >= vm.totPlayers) {
+			vm.arrayScore = [];
 		}
-		else{
-			$scope.arrayScore.push($scope.currentScore);
-			$scope.arrayScore.sort();
-			if ($scope.arrayScore[$scope.arrayScore.length-1] - $scope.arrayScore[0] >= 60) {
+		else {
+			vm.arrayScore.push(vm.currentScore);
+			vm.arrayScore.sort();
+			if (vm.arrayScore[vm.arrayScore.length-1] - vm.arrayScore[0] >= 60) {
 		
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I\'m winning :P"}'
@@ -69,14 +71,14 @@ angular.module('round')
 
 		if(i != 0) {
 			i--;
-			$scope.currentPlayer = $scope.players[i].name;
-			$scope.currentScore = $scope.players[i].totScore;
+			vm.currentPlayer = vm.players[i].name;
+			vm.currentScore = vm.players[i].totScore;
 		}
 		else{
-			$scope.rounds += 1;
-			i = $scope.totPlayers - 1;
-			$scope.currentPlayer = $scope.players[i].name;
-			$scope.currentScore = $scope.players[i].totScore;
+			vm.rounds += 1;
+			i = vm.totPlayers - 1;
+			vm.currentPlayer = vm.players[i].name;
+			vm.currentScore = vm.players[i].totScore;
 		}
 	}
 
@@ -94,80 +96,80 @@ angular.module('round')
 		disattivando i pulsanti + attivi
 	*/
 
-	$scope.addScore1 = function() {
+	vm.addScore1 = function() {
 		currentShot = 0;
-		$scope.buttonClicked1 = true;
-		$scope.scoreRound += parseInt($scope.fShot);
-		currentShot = parseInt($scope.fShot);
-		$scope.currentScore -= currentShot;
-		if ($scope.currentScore == 0) {
+		vm.buttonClicked1 = true;
+		vm.scoreRound += parseInt(vm.fShot);
+		currentShot = parseInt(vm.fShot);
+		vm.currentScore -= currentShot;
+		if (vm.currentScore == 0) {
 		
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
 		
-			$scope.win = true;
-			$scope.congratulations = "Complimenti sei il vincitore!!!";
+			vm.win = true;
+			vm.congratulations = "Complimenti sei il vincitore!!!";
 		}
-		if ($scope.currentScore < 0) {
-			$scope.currentScore += currentShot;
-			$scope.scoreRound = 0;
-			$scope.buttonClicked2 = true;
-			$scope.buttonClicked3 = true;
+		if (vm.currentScore < 0) {
+			vm.currentScore += currentShot;
+			vm.scoreRound = 0;
+			vm.buttonClicked2 = true;
+			vm.buttonClicked3 = true;
 		}
 
 	}
 
-	$scope.addScore2 = function() {
+	vm.addScore2 = function() {
 		currentShot = 0;
-		$scope.buttonClicked2 = true;
-		$scope.scoreRound += parseInt($scope.sShot);
-		currentShot = parseInt($scope.sShot);
-		$scope.currentScore -= currentShot;
-		if ($scope.currentScore == 0) {
+		vm.buttonClicked2 = true;
+		vm.scoreRound += parseInt(vm.sShot);
+		currentShot = parseInt(vm.sShot);
+		vm.currentScore -= currentShot;
+		if (vm.currentScore == 0) {
 		
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
 		
-			$scope.win = true;
-			$scope.congratulations = "Complimenti sei il vincitore!!!";
+			vm.win = true;
+			vm.congratulations = "Complimenti sei il vincitore!!!";
 		}
-		if ($scope.currentScore < 0) {
-			$scope.currentScore += currentShot;
-			$scope.scoreRound = 0;
-			$scope.buttonClicked3 = true;
+		if (vm.currentScore < 0) {
+			vm.currentScore += currentShot;
+			vm.scoreRound = 0;
+			vm.buttonClicked3 = true;
 		}
 
 	}
 
-	$scope.addScore3 = function() {
+	vm.addScore3 = function() {
 		currentShot = 0;
-		$scope.buttonClicked3 = true;
-		$scope.scoreRound += parseInt($scope.tShot);
-		currentShot = parseInt($scope.tShot);
-		$scope.currentScore -= currentShot;
-		if ($scope.currentScore == 0) {
+		vm.buttonClicked3 = true;
+		vm.scoreRound += parseInt(vm.tShot);
+		currentShot = parseInt(vm.tShot);
+		vm.currentScore -= currentShot;
+		if (vm.currentScore == 0) {
 		
 			$.post("https://hooks.slack.com/services/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" ,{
 				'payload' : '{"text": "I won :)"}'
 			});
 		
-			$scope.win = true;
-			$scope.congratulations = "Complimenti sei il vincitore!!!";
+			vm.win = true;
+			vm.congratulations = "Complimenti sei il vincitore!!!";
 		}
-		if ($scope.currentScore < 0) {
-			$scope.currentScore += currentShot;
-			$scope.scoreRound = 0;
+		if (vm.currentScore < 0) {
+			vm.currentScore += currentShot;
+			vm.scoreRound = 0;
 		}
 
 	} 
 
 	//Ripulisce le input dopo ogni click
 	var clearInput = function() {
-		$scope.fShot = '';
-		$scope.sShot = '';
-		$scope.tShot = '';
+		vm.fShot = '';
+		vm.sShot = '';
+		vm.tShot = '';
 	};
 
 }]);

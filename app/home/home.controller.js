@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('home')
+angular.module('app.home')
+.controller('homeCtrl', function() {
 
-.controller('homeCtrl', [function() {
-
-}]);
+});

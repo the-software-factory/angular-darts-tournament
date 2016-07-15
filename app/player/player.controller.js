@@ -1,62 +1,63 @@
 'use strict';
 
-angular.module('player')
+angular.module('app.player')
 
-.controller('playerCtrl', ['$scope', '$localStorage', function ($scope, $localStorage) {
-	//Array che conterrà i vari oggetti giocatori
-	$scope.players = [];
-	//Array che conterrà i vari oggetti giocatori "permanenti"
-	$scope.storagePlayers = [];
-	// Serve per salvarci temporalmente l'ultimo giocatore inserito
+.controller('playerCtrl', [function () {
+
+	var vm = this;
+
+	//Array with all players
+	vm.players = [];
+	//Array with bookmark players
+	vm.storagePlayers = [];
+	//save the last player
 	var currentPlayerSaved = {};
 
-	$scope.saved = localStorage.getItem('players');
-	$scope.savedStorage = localStorage.getItem('storagePlayers');
+	vm.saved = localStorage.getItem('players');
+	vm.savedStorage = localStorage.getItem('storagePlayers');
 
-	// se sono presenti dei giocatori abituali, li carico
+	// load the bookmark players in the table
 	if (localStorage.getItem('storagePlayers') !== null) {
-		$scope.storagePlayers = JSON.parse($scope.savedStorage);
+		vm.storagePlayers = JSON.parse(vm.savedStorage);
 	}
 
-	//$scope.storagePlayers = []; debug -> elimino tutto
+	//vm.storagePlayers = []; //for debug -> remove all players saved
 
-	localStorage.setItem('players', JSON.stringify($scope.players));
-	localStorage.setItem('storagePlayers', JSON.stringify($scope.storagePlayers));
+	localStorage.setItem('players', JSON.stringify(vm.players));
+	localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
 
 
 
-	// Aggiunge un giocatore tramite l'input e inizializza il punteggio, creando un array di oggetti in player
-	$scope.addPlayer = function() {
-		$scope.players.push({ 
-			'name':$scope.name,
+	// add player with a name, and a initial score
+	vm.addPlayer = function() {
+		vm.players.push({ 
+			'name':vm.name,
 			'totScore':501
 		});
-    	$scope.name = ''; //pulisce l'input
-    	currentPlayerSaved = $scope.players[$scope.players.length-1]; 
-    	$scope.storagePlayers.push(currentPlayerSaved); //inserisco il giocatore nella lista dei giocatori abituali
-    	localStorage.setItem('players', JSON.stringify($scope.players));
-    	localStorage.setItem('storagePlayers', JSON.stringify($scope.storagePlayers));
+    	vm.name = ''; //clear input
+    	currentPlayerSaved = vm.players[vm.players.length-1]; 
+    	vm.storagePlayers.push(currentPlayerSaved); //add player in the bookmark
+    	localStorage.setItem('players', JSON.stringify(vm.players));
+    	localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
 	};
 
-
-	//Cancella tutti i giocatori inseriti nell'input
-	$scope.removePlayer = function() {
-		$scope.players = [];
-		localStorage.setItem('players', JSON.stringify($scope.players));
+	//remove all players in the list
+	vm.removePlayer = function() {
+		vm.players = [];
+		localStorage.setItem('players', JSON.stringify(vm.players));
 	};
 
-	// rimuove solo il giocatore "selezionato" nella tabella dei giocatori abituali
-	$scope.removePlayerStorage = function(item) {
-		var index = $scope.storagePlayers.indexOf(item);
-		$scope.storagePlayers.splice(index, 1);
-		localStorage.setItem('storagePlayers', JSON.stringify($scope.storagePlayers));
+	// remove the player in the table (where there are all players saved)
+	vm.removePlayerStorage = function(friend) {
+		var index = vm.storagePlayers.indexOf(friend);
+		vm.storagePlayers.splice(index, 1);
+		localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
 	}
-
 	
-	//inserisce il giocatore della tabella dei giocatori abituali nella lista dei giocatori "pronti" ad iniziare
-	$scope.addPlayerInList = function(friend) {
-		$scope.players.push(friend);
-		localStorage.setItem('players', JSON.stringify($scope.players));
+	//take a player from table and put it in the list of player
+	vm.addPlayerInList = function(friend) {
+		vm.players.push(friend);
+		localStorage.setItem('players', JSON.stringify(vm.players));
 	}
 
 }]);
