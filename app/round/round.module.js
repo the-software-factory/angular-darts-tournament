@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('app.round', [
-	'ngRoute'
+	'ngRoute',
+  'ngStorage'
 ])
 
 .config(['$routeProvider', function($routeProvider) {

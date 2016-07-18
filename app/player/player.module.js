@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('app.player', [
-	'ngRoute'
+	'ngRoute',
+  'ngStorage'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
