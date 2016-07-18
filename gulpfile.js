@@ -31,34 +31,7 @@ gulp.task('bower-scripts', function() {
 
 gulp.task('lint', function() {
   return gulp.src('app/**/*.js')
-  .pipe(eslint({
-    "rules": {
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "semi": [
-        "error",
-        "always"
-      ],
-      "angular/di": [
-        0,
-        "array"
-      ],
-      "keyword-spacing": ["error"],
-      "dot-notation": ["error"],
-      "array-bracket-spacing": ["error", "never"],
-      "no-multiple-empty-lines": ["error", {"max": 1, "maxBOF": 0, "maxEOF": 0}],
-      "space-in-parens": ["error", "never"],
-      "object-curly-spacing": ["error", "never"],
-      "comma-spacing": ["error", {"before": false, "after": true}],
-      "computed-property-spacing": ["error", "never"],
-      "space-before-function-paren": [2, "never"],
-      "brace-style": ["error", "stroustrup"],
-      "space-before-blocks": [2],
-      "space-infix-ops": [2]
-    }
-  }))
+  .pipe(eslint())
   .pipe(eslint.format())
   .pipe(eslint.failOnError());
 });
