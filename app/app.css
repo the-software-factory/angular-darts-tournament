@@ -23,3 +23,7 @@ body {
 thead tr th {
 	text-align: center;
 }
+
+.errorLength {
+  color: red;
+}

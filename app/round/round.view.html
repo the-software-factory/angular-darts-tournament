@@ -5,10 +5,10 @@
 	<h2>Punteggio totale: {{vm.currentScore}}</h2>
 	<h2 ng-hide="win">Punteggio: {{vm.scoreRound}}</h2>
 
-	<div class=".col-md-6 .col-md-offset-3 playerList">
+	<div class=".col-md-6 .col-md-offset-3 playerList" ng-form>
 
 		<div class="input-group dartsInput">
-			<input type="text" class="form-control" placeholder="Inserisci il punteggio del primo lancio..." ng-model="vm.fShot">
+			<input type="text" class="form-control" ngMinlength="0" ngMaxlength="180" placeholder="Inserisci il punteggio del primo lancio..." ng-model="vm.fShot">
 			<span class="input-group-btn">
 			    <button class="btn btn-default" type="button" ng-click="vm.addScore1()" ng-disabled="vm.buttonClicked1">
 			    	<span class="glyphicon glyphicon-plus"></span>
@@ -17,7 +17,7 @@
 		</div> <!-- input-group -->
 
 		<div class="input-group dartsInput">
-			<input type="text" class="form-control" placeholder="Inserisci il punteggio del secondo lancio..." ng-model="vm.sShot">
+			<input type="text" class="form-control" ngMinlength="0" ngMaxlength="180" placeholder="Inserisci il punteggio del secondo lancio..." ng-model="vm.sShot">
 			<span class="input-group-btn">
 			    <button class="btn btn-default" type="button" ng-click="vm.addScore2()" ng-disabled="vm.buttonClicked2">
 			    	<span class="glyphicon glyphicon-plus"></span>
@@ -26,7 +26,7 @@
 		</div> <!-- input-group -->
 
 		<div class="input-group dartsInput">
-			<input type="text" class="form-control" placeholder="Inserisci il punteggio del terzo lancio..." ng-model="vm.tShot">
+			<input type="text" class="form-control" ngMinlength="0" ngMaxlength="180" placeholder="Inserisci il punteggio del terzo lancio..." ng-model="vm.tShot">
 			<span class="input-group-btn">
 			    <button class="btn btn-default" type="button" ng-click="vm.addScore3()" ng-disabled="vm.buttonClicked3">
 			    	<span class="glyphicon glyphicon-plus"></span>

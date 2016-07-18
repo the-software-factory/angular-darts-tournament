@@ -38,14 +38,18 @@
 	</div>
 
 	<div class=".col-md-6 .col-md-offset-3 playerList">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Aggiungi un nuovo giocatore..." ng-model="vm.name">
+		<div class="input-group" ng-form name="playerForm">
+			<input type="text" class="form-control" name="namePlayer" placeholder="Aggiungi un nuovo giocatore..." ng-model="vm.name" ng-minlength="2" ng-maxlength="50" required>
 			<span class="input-group-btn">
-			    <button class="btn btn-default" type="button" ng-click="vm.addPlayer()">
+			    <button class="btn btn-default" type="button" ng-click="vm.addPlayer()" ng-disabled="playerForm.$invalid">
 			    	<span class="glyphicon glyphicon-plus"></span>
 			    </button>
 			</span>
 		</div> <!-- input-group -->
+		<div role="alert" class="errorLength">
+      <span class="error" ng-show="playerForm.namePlayer.$error.maxlength">Too long!</span>
+      <span class="error" ng-show="playerForm.namePlayer.$error.minlength">Too short!</span>
+    </div>
 	</div> <!-- col-lg-6 -->
 	<div>
 		<ul class="list-group playerList">

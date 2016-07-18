@@ -4,10 +4,7 @@ describe('Unit: round', function() {
 
   var ctrl;
   // Include Modules
-  beforeEach(angular.mock.module('app'));
-  beforeEach(module('app.player'));
   beforeEach(module('app.round'));
-  beforeEach(module('ngRoute'));
 
   beforeEach(function() {
     localStorage.players = '[{"name":"asd", "totScore":123}]';
