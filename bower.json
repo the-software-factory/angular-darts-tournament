@@ -15,9 +15,5 @@
   },
   "authors": [
     "Francesco Iubatti"
-  ],
-  "ignore": [
-    "node_modules",
-    "bower_components"
   ]
 }

@@ -9,6 +9,10 @@ describe('Unit: round', function() {
   beforeEach(module('app.round'));
   beforeEach(module('ngRoute'));
 
+  beforeEach(function() {
+    localStorage.players = '[{"name":"asd", "totScore":123}]';
+  });
+
   it('Should have round to equal one', inject(function($controller) {
     ctrl = $controller('roundCtrl', {}, {});
     expect(ctrl.rounds).toEqual(1);
@@ -23,5 +27,4 @@ describe('Unit: round', function() {
     ctrl = $controller('roundCtrl', {}, {});
     expect(ctrl.scoreRound).toEqual(0);
   }));
-
 });

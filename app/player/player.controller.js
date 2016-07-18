@@ -2,28 +2,19 @@
 
 angular.module('app.player')
 
-.controller('playerCtrl', [function() {
+.controller('playerCtrl', ['$localStorage', function($localStorage) {
 	var vm = this;
-
-	//Array with all players
+	//Array with all players ready to start the game
 	vm.players = [];
 	//Array with bookmark players
 	vm.storagePlayers = [];
-	//save the last player
-	var currentPlayerSaved = {};
-	//the button for add player in the table of players is abilited
 
-	vm.buttonAddPlayerTable = false;
-
-	vm.saved = localStorage.getItem('players');
 	vm.savedStorage = localStorage.getItem('storagePlayers');
 
 	// load the bookmark players in the table
 	if (localStorage.getItem('storagePlayers') !== null) {
 		vm.storagePlayers = JSON.parse(vm.savedStorage);
 	}
-
-	//vm.storagePlayers = []; //for debug -> remove all players saved
 
 	localStorage.setItem('players', JSON.stringify(vm.players));
 	localStorage.setItem('storagePlayers', JSON.stringify(vm.storagePlayers));
@@ -35,6 +26,8 @@ angular.module('app.player')
 			'totScore':501
 		});
   vm.name = ''; //clear input
+  //save the last player
+	var currentPlayerSaved = {};
   currentPlayerSaved = vm.players[vm.players.length - 1]; 
   vm.storagePlayers.push(currentPlayerSaved); //add player in the bookmark
   localStorage.setItem('players', JSON.stringify(vm.players));
@@ -43,7 +36,7 @@ angular.module('app.player')
 	};
 
 	//remove all players in the list
-	vm.removePlayer = function() {
+	vm.removeAllPlayers = function() {
 		vm.players = [];
 		localStorage.setItem('players', JSON.stringify(vm.players));
 	};

@@ -6,15 +6,14 @@ angular.module('app.round')
 
 	var vm = this;
 
-	vm.saved = localStorage.getItem('players');
-	vm.players = JSON.parse(vm.saved);
+	vm.players = JSON.parse(localStorage.getItem('players'));
 
 	// Inizializzo il round a 1, e poi viene incrementato
-	vm.rounds = 1;
+	vm.currentRound = 1;
 
 	// Calcolo il numero di giocatori che stanno giocando
-	vm.totPlayers = vm.players.length;
-	var i = vm.totPlayers - 1;
+	var totPlayers = vm.players.length;
+	var i = totPlayers - 1;
 
 	// Inizializza la schermata con l'ultimo giocatore aggiunto
 	vm.currentPlayer = vm.players[i].name;
@@ -49,14 +48,14 @@ angular.module('app.round')
 		/*
 			confronto i punteggi dei vari giocatori, e in caso di una diffenza di 60 punti, mando una notifica su slack
 		*/ 
-		if (vm.arrayScore.length >= vm.totPlayers) {
+		if (vm.arrayScore.length >= totPlayers) {
 			vm.arrayScore = [];
 		}
 		else {
 			vm.arrayScore.push(vm.currentScore);
 			vm.arrayScore.sort();
 			if (vm.arrayScore[vm.arrayScore.length - 1] - vm.arrayScore[0] >= 60) {
-		
+
 			$.post("https://hooks.slack.com/services/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", {
 				'payload' : '{"text": "I\'m winning :P"}'
 			});
@@ -75,18 +74,12 @@ angular.module('app.round')
 			vm.currentScore = vm.players[i].totScore;
 		}
 		else {
-			vm.rounds += 1;
-			i = vm.totPlayers - 1;
+			vm.currentRound += 1;
+			i = totPlayers - 1;
 			vm.currentPlayer = vm.players[i].name;
 			vm.currentScore = vm.players[i].totScore;
 		}
 	};
-
-/*
-
-	dovrei trasformare le 3 funzioni addScore in 1 !!!
-
-*/
 
 	/*
 		ogni volta che si clicca il pulsante + dell'input, aggiorno il punteggio, e disattivo il pulsante

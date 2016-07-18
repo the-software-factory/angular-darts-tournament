@@ -18,7 +18,7 @@
 					<tr ng-repeat="friend in vm.storagePlayers">
 						<td>{{friend.name}}</td>
 						<td>
-							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)" ng-hide="vm.buttonAddPlayerTable">
+							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)">
 								+
 							</button>
 						</td>
@@ -56,7 +56,7 @@
 	</div>
 
 	<div class="dartsButton">
-		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removePlayer()" ng-show="vm.players.length >= 1">Cancella i giocatori</a>
+		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removeAllPlayers()" ng-show="vm.players.length >= 1">Cancella i giocatori</a>
     <a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="vm.players.length >= 2">Inizia la partita</a>
 	</div>
 </div>
