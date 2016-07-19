@@ -2,11 +2,11 @@
 
 angular.module('app.round')
 
-.controller('roundCtrl', [function() {
+.controller('roundCtrl', ['$localStorage', function($localStorage) {
 
 	var vm = this;
 
-	vm.players = JSON.parse(localStorage.getItem('players'));
+	vm.players = $localStorage.players;
 
 	// Inizializzo il round a 1, e poi viene incrementato
 	vm.currentRound = 1;
@@ -43,7 +43,7 @@ angular.module('app.round')
 		vm.buttonClicked2 = false;
 		vm.buttonClicked3 = false;
 		vm.players[i].totScore = vm.currentScore;
-		localStorage.setItem('players', JSON.stringify(vm.players));
+		$localStorage.players = vm.players;
 
 		/*
 			confronto i punteggi dei vari giocatori, e in caso di una diffenza di 60 punti, mando una notifica su slack

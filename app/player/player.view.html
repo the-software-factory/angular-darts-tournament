@@ -1,7 +1,7 @@
 <div class="jumbotron dartsContainer">
 	<h1>Add players*</h1>
 	<p>*(Players must be at least 2)</p>
-	
+
 	<div class=".col-md-6 .col-md-offset-3 playerList" ng-show="vm.storagePlayers.length >= 1">
 		<div class="panel panel-success">
 			<div class="panel-heading">List of VIP player(s)</div>
@@ -39,7 +39,7 @@
 
 	<div class=".col-md-6 .col-md-offset-3 playerList">
 		<div class="input-group" ng-form name="playerForm">
-			<input type="text" class="form-control" name="namePlayer" placeholder="Add a new player..." ng-model="vm.name" ng-minlength="2" ng-maxlength="50" required>
+			<input type="text" class="form-control" name="namePlayer" placeholder="Add a new player..." ng-model="vm.name" minlength="2" maxlength="50" required>
 			<span class="input-group-btn">
 			    <button class="btn btn-default" type="button" ng-click="vm.addPlayer()" ng-disabled="playerForm.$invalid">
 			    	<span class="glyphicon glyphicon-plus"></span>
@@ -47,7 +47,6 @@
 			</span>
 		</div> <!-- input-group -->
 		<div role="alert" class="errorLength">
-      <span class="error" ng-show="playerForm.namePlayer.$error.maxlength">Too long!</span>
       <span class="error" ng-show="playerForm.namePlayer.$error.minlength">Too short!</span>
     </div>
 	</div> <!-- col-lg-6 -->
@@ -60,7 +59,7 @@
 	</div>
 
 	<div class="dartsButton">
-		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removePlayer()" ng-show="vm.players.length >= 1">Remove Players</a>
+		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removeAllPlayers()" ng-show="vm.players.length >= 1">Remove Players</a>
     <a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="vm.players.length >= 2">Start</a>
 	</div>
 </div>
