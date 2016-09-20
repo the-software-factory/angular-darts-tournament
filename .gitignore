@@ -1,4 +1,12 @@
-node_modules/
-bower_components/
-.DS_Store
+# npm dependencies folder
+node_modules
+
+# bower dependencies folder
+bower_components
+
+# Using PHPStorm project settings are stored with each specific project as a set of xml files under the .idea folder.
+# If you specify the default project settings, these settings will be automatically used for each newly created project.
 .idea
+
+# A hidden file created by MacOS
+.DS_Store

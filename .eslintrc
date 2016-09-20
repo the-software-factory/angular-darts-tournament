@@ -1,15 +1,22 @@
 {
   "plugins": ["jasmine", "angular"],
   "rules": {
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "semi": [
-        "error",
-        "always"
-      ],
-      "angular/di": [
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "angular/di": [
       0,
       "array"
     ],
@@ -31,7 +38,7 @@
     "jasmine": true
   },
   "globals": {
-    "angular": 1
+    "angular": true
   },
   "extends": "eslint:recommended"
 }
