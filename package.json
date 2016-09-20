@@ -1,17 +1,16 @@
 {
   "name": "angular-darts-tournament",
-  "version": "0.0.1",
-  "description": "Play darts with your co-workers.",
+  "version": "0.1.0",
+  "description": "Play darts with your co-workers",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/the-software-factory/angular-darts-tournament.git"
   },
   "license": "MIT",
   "devDependencies": {
-    "angular-mocks": "^1.5.7",
-    "bower": "^1.7.7",
+    "bower": "^1.7.9",
     "eslint": "^3.0.1",
-    "eslint-plugin-angular": "^1.3.0",
+    "eslint-plugin-angular": "^1.4.0",
     "eslint-plugin-jasmine": "^1.8.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
@@ -28,26 +27,11 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "prestart": "npm install",
     "start": "http-server -a localhost -p 8000 -c-1 ./",
-    "pretest": "npm install",
-    "test": "karma start karma.conf.js",
-    "test-single-run": "karma start karma.conf.js --single-run"
+    "test": "karma start karma.conf.js"
   },
   "bugs": {
     "url": "https://github.com/the-software-factory/angular-darts-tournament/issues"
   },
-  "homepage": "https://github.com/the-software-factory/angular-darts-tournament#readme",
-  "main": "karma.conf.js",
-  "dependencies": {
-    "bower": "^1.7.9",
-    "jasmine-core": "^2.4.1",
-    "http-server": "^0.9.0",
-    "eslint-plugin-angular": "^1.3.0",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma": "^1.0.0",
-    "eslint-plugin-jasmine": "^1.8.1"
-  }
+  "homepage": "https://github.com/the-software-factory/angular-darts-tournament#readme"
 }
