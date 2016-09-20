@@ -1,8 +1,7 @@
 {
   "name": "angular-darts-tournament",
-  "private": true,
   "version": "0.0.1",
-  "description": "A starter project for AngularJS",
+  "description": "Play darts with your co-workers.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/the-software-factory/angular-darts-tournament.git"
@@ -50,6 +49,5 @@
     "karma-jasmine": "^1.0.2",
     "karma": "^1.0.0",
     "eslint-plugin-jasmine": "^1.8.1"
-  },
-  "author": "Francesco Iubatti"
+  }
 }
