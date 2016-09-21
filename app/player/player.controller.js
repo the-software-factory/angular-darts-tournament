@@ -67,20 +67,17 @@ angular.module('app.player')
 
 	vm.slectDeselectPlayer = function(friend) {
 		var index = vm.selectedPlayers.indexOf(friend);
-		alert(vm.selectedPlayers.length + ' ' + friend.selected);
 		if(index == -1)  //select
 			vm.selectedPlayers.push(friend);
 		else  //deselect
 			vm.selectedPlayers.splice(index, 1);
 		friend.selected=!friend.selected;
 		//$localStorage.selectedPlayers = vm.selectedPlayers;
-		alert(vm.selectedPlayers.length);
 	};
 
 	vm.start = function() {
 	for(var i in vm.selectedPlayers)
 		vm.selectedPlayers[i].selected=false;
-		alert(vm.selectedPlayers[i].selected);
 	};
 
 
