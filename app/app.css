@@ -36,9 +36,11 @@ table thead tr th{text-align:center}
 
 .errorLength{color:red}
 
+.flex {max-width: 15%}
+
 ul#menu li {
     display: inline;
     padding: 10px;
 }
 
-.flex {max-width: 15%}
+
