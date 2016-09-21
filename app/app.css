@@ -1,31 +1,5 @@
 /* app css stylesheet */
-/*body {
-	background-image: url("images/darts.jpg");
-}
 
-.dartsContainer {
-	text-align:center;
-}
-
-.playerList {
-	margin: 5rem 40rem 3rem 40rem;
-}
-
-.dartsButton {
-	margin-top: 5rem;
-}
-
-.dartsInput {
-	margin-top: 2rem;
-}
-
-thead tr th {
-	text-align: center;
-}
-
-.errorLength {
-  color: red;
-}*/
 body{background-image:url("images/darts.jpg");background-position:center;background-repeat:no-repeat}
 
 table thead tr th{text-align:center}
