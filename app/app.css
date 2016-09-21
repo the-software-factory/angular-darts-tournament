@@ -26,3 +26,10 @@ thead tr th {
 .errorLength {
   color: red;
 }
+
+ul#menu li {
+    display: inline;
+    padding: 10px;
+}
+
+.flex {max-width: 15%}
