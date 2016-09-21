@@ -2,26 +2,28 @@
 
 describe('Unit: round', function() {
 
-  var ctrl;
+  var createCtrl;
+  var $localStorage;
   // Include Modules
   beforeEach(module('app.round'));
 
-  beforeEach(function() {
-    localStorage.players = '[{"name":"asd", "totScore":123}]';
+  beforeEach(inject(function($controller) {
+    $localStorage = {};
+    $localStorage.players = '[{"name":"asd", "totScore":123}]';
+    createCtrl = function() {
+      return $controller('roundCtrl', {
+        $localStorage: $localStorage
+      });
+    };
+  }));
+
+  it('Should have an arrayScore array', function() {
+    var ctrl = createCtrl();
+    expect(ctrl.arrayScore).toBeDefined();
   });
 
-  it('Should have round to equal one', inject(function($controller) {
-    ctrl = $controller('roundCtrl', {}, {});
-    expect(ctrl.rounds).toEqual(1);
-  }));
-
-  it('Should have an arrayScore array', inject(function($controller) {
-    ctrl = $controller('roundCtrl', {}, {});
-    expect(ctrl.arrayScore).toBeDefined();
-  }));
-
-  it('Should have a scoreRound to equal zero', inject(function($controller) {
-    ctrl = $controller('roundCtrl', {}, {});
+  it('Should have a scoreRound to equal zero', function() {
+    var ctrl = createCtrl();
     expect(ctrl.scoreRound).toEqual(0);
-  }));
+  });
 });
