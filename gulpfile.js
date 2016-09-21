@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var eslint = require('gulp-eslint');
 var Server = require('karma').Server;
+var sass = require('gulp-sass');
 
 // JS concat and minify
 gulp.task('scripts', function() {
@@ -27,6 +28,13 @@ gulp.task('bower-scripts', function() {
     .pipe(concat('bower-script.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./dist/scripts/'));
+});
+
+gulp.task('sass', function () {
+  return gulp.src('./app/scss/**/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(concat('app.css'))
+    .pipe(gulp.dest('./app/'));
 });
 
 gulp.task('lint', function() {
