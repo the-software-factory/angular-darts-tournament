@@ -26,17 +26,11 @@ thead tr th {
 .errorLength {
   color: red;
 }*/
-body{
-	background-image:url("images/darts.jpg");
-	background-position:center;background-repeat:no-repeat}
+body{background-image:url("images/darts.jpg");background-position:center;background-repeat:no-repeat}
 
 table thead tr th{text-align:center}
 
-.dartsContainer{text-align:center}.dartsContainer 
-
-.dartsButton{margin-top:5rem}.dartsContainer 
-
-.dartsInput{margin-top:2rem}
+.dartsContainer{text-align:center}.dartsContainer .dartsButton{margin-top:5rem}.dartsContainer .dartsInput{margin-top:2rem}
 
 .playerList{margin:5rem 40rem 3rem 40rem}
 
