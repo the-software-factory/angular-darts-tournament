@@ -1,8 +1,11 @@
 {
   "plugins": ["jasmine", "angular"],
   "rules": {
+    "no-undef" : [
+      "warn"
+    ],
     "indent": [
-      "error",
+      "warn",
       2,
       {
         "SwitchCase": 1
@@ -38,7 +41,9 @@
     "jasmine": true
   },
   "globals": {
-    "angular": true
+    "angular": true,
+    "module": 1,
+    "inject": 1
   },
   "extends": "eslint:recommended"
 }

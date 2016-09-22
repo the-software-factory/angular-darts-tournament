@@ -22,13 +22,13 @@ angular.module('app.player')
 			'name':vm.name,
 			'totScore':501
 		});
-  	vm.name = ''; //clear input
-	  //save the last player
+		vm.name = ''; //clear input
+		//save the last player
 		var currentPlayerSaved = {};
-	  currentPlayerSaved = vm.players[vm.players.length - 1]; 
-	  vm.storagePlayers.push(currentPlayerSaved); //add player in the VIP array
-	  $localStorage.players = vm.players;
-	  $localStorage.storagePlayers = vm.storagePlayers;
+		currentPlayerSaved = vm.players[vm.players.length - 1]; 
+		vm.storagePlayers.push(currentPlayerSaved); //add player in the VIP array
+		$localStorage.players = vm.players;
+		$localStorage.storagePlayers = vm.storagePlayers;
 	};
 
 	//remove all players in the list
