@@ -11,8 +11,10 @@ angular
   ])
 
   .config([
+    '$locationProvider',
     '$routeProvider',
-    function($routeProvider) {
+    function($locationProvider, $routeProvider) {
+      $locationProvider.hashPrefix('!');
       // Redirects user to the main page if the selected one does not exist
       $routeProvider.otherwise({redirectTo: '/'});
     }
