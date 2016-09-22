@@ -42,8 +42,8 @@
   },
   "globals": {
     "angular": true,
-    "module": 1,
-    "inject": 1
+    "module": true,
+    "inject": true
   },
   "extends": "eslint:recommended"
 }
