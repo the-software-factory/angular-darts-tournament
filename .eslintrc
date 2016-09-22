@@ -2,7 +2,7 @@
   "plugins": ["jasmine", "angular"],
   "rules": {
     "indent": [
-      "error",
+      "warn",
       2,
       {
         "SwitchCase": 1
@@ -20,6 +20,8 @@
       0,
       "array"
     ],
+    "no-undef" : ["warn"],
+    "no-mixed-spaces-and-tabs" : ["warn"],
     "keyword-spacing": ["error"],
     "dot-notation": ["error"],
     "array-bracket-spacing": ["error", "never"],
@@ -38,7 +40,9 @@
     "jasmine": true
   },
   "globals": {
-    "angular": true
+    "angular": true,
+    "module": true,
+    "inject": true
   },
   "extends": "eslint:recommended"
 }
