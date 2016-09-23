@@ -20,5 +20,4 @@ describe('Players controller', function() {
     expect(angular.isArray(ctrl.storagePlayers)).toBeTruthy();
   });
 
-  
 });
