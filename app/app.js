@@ -1,15 +1,15 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular
-  .module('app', [
+angular.module('app', [
     'ngRoute',
     'ngStorage',
     'app.home',
     'app.player',
-    'app.round'
-  ])
 
+    'app.round'
+    'app.score'
+  ])
   .config([
     '$locationProvider',
     '$routeProvider',
@@ -18,4 +18,4 @@ angular
       // Redirects user to the main page if the selected one does not exist
       $routeProvider.otherwise({redirectTo: '/'});
     }
-  ]);
+]);
