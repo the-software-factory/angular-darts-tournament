@@ -6,14 +6,16 @@ angular.module('app', [
     'ngStorage',
     'app.home',
     'app.player',
-    'app.round',
+
+    'app.round'
     'app.score'
-])
-.config([
+  ])
+  .config([
     '$locationProvider',
     '$routeProvider',
     function($locationProvider, $routeProvider) {
-        $locationProvider.hashPrefix('!');
-        $routeProvider.otherwise({redirectTo: '/'});
+      $locationProvider.hashPrefix('!');
+      // Redirects user to the main page if the selected one does not exist
+      $routeProvider.otherwise({redirectTo: '/'});
     }
 ]);
