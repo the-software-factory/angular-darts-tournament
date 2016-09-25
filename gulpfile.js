@@ -5,7 +5,7 @@ var uglify = require('gulp-uglify');
 var eslint = require('gulp-eslint');
 var Server = require('karma').Server;
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var minifyCss = require('gulp-clean-css');
 
 // JS concat and minify
 gulp.task('scripts', function() {
