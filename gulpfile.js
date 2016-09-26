@@ -5,6 +5,7 @@ var uglify = require('gulp-uglify');
 var eslint = require('gulp-eslint');
 var Server = require('karma').Server;
 var sass = require('gulp-sass');
+var minifyCss = require('gulp-clean-css');
 
 // JS concat and minify
 gulp.task('minifyJS', function() {
@@ -16,6 +17,14 @@ gulp.task('minifyJS', function() {
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./dist/scripts/'));
+});
+
+// Minify CSS task
+gulp.task('minifyCss', ['sass'], function () {
+  gulp.src('app/**/*.css')
+    .pipe(concat('vendor.min.css'))
+    .pipe(minifyCss())
+    .pipe(gulp.dest('./dist/css/'));
 });
 
 gulp.task('bower-scripts', function() {
