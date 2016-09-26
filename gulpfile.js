@@ -7,13 +7,13 @@ var Server = require('karma').Server;
 var sass = require('gulp-sass');
 
 // JS concat and minify
-gulp.task('scripts', function() {
+gulp.task('minifyJS', function() {
   gulp.src([
     'app/**/*.module.js',
     'app/**/*.controller.js',
     'app/app.js'
     ])
-    .pipe(concat('script.js'))
+    .pipe(concat('vendor.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./dist/scripts/'));
 });
