@@ -3,15 +3,12 @@
 angular.module('app.score')
 
 .controller('scoreCtrl', ['$localStorage', function($localStorage) {
-    var vm = this;
-    // load selected players
-    vm.selectedPlayers = $localStorage.selectedPlayers;
+  var vm = this;     
+  vm.selectedPlayers = $localStorage.selectedPlayers; // load selected players
     
-    // load the list of the rounds
-    vm.rounds = $localStorage.rounds;
+  vm.rounds = $localStorage.rounds; // load the list of the rounds
     
-    // load the index of the next player
-    vm.indexCurrentPlayer = $localStorage.indexCurrentPlayer;
+  vm.indexCurrentPlayer = $localStorage.indexCurrentPlayer; // load the index of the next player
     
     /*vm.rounds.push('Round 1')
     window.alert(vm.rounds[vm.rounds.length-1]);*/

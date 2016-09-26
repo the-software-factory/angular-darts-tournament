@@ -2,5 +2,4 @@
 
 describe('Unit: score', function() {
 
-  
 });

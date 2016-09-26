@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.home', [
-	'ngRoute',
+  'ngRoute',
   'ngStorage'
 ])
 
