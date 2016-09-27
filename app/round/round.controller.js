@@ -3,156 +3,132 @@
 angular.module('app.round')
 
 .controller('roundCtrl', ['$localStorage', function($localStorage) {
+  var vm = this;
 
-	var vm = this;
+  nextShot = nextShot;
+  nextPlayer = nextPlayer;
+  nextRound = nextRound;
+  vm.addShotScore = addShotScore;
+  vm.deleteShotScore = deleteShotScore;
+  setButtonDisabledProperty = setButtonDisabledProperty;
+  resetScoreIfNegative = resetScoreIfNegative;
+  vm.winCheck = winCheck;
 
-	vm.players = $localStorage.players;
+  vm.selectedPlayers = $localStorage.selectedPlayers; // load selected players
+ 
+  vm.rounds = $localStorage.rounds; // load the list of the rounds
+  
+  vm.indexCurrentPlayer = $localStorage.indexCurrentPlayer; // load the index of the current player
+  
+  var shotNumber = $localStorage.shotNumber; //load a value, previously initialized to zero, used to track the number of the shot in the round
 
-	// Inizializzo il round a 1, e poi viene incrementato
-	vm.currentRound = 1;
+  vm.shotsScores = ['-', '-', '-']; // initialize the 3-length array which contains the score of each shot per round (every player has 3 shot each round)
 
-	// Calcolo il numero di giocatori che stanno giocando
-	var totPlayers = vm.players.length;
-	var i = totPlayers - 1;
+  vm.totalScoreOfRound = 0; // the value of the sum of the 3 shots each round (initialized to 0)
 
-	// Inizializza la schermata con l'ultimo giocatore aggiunto
-	vm.currentPlayer = vm.players[i].name;
+  var bonus = $localStorage.bonus; // used to double points and triple points 
+  
+  vm.buttonList = [];
+  for (var buttonValue = 0; buttonValue <= 20; buttonValue++){
+    vm.buttonList.push({  
+      'value':buttonValue,  
+      'disabled':false
+    });
+  }
+  vm.buttonList.push({
+    'value':25,
+    'disabled':false
+  });
+  vm.buttonList.push({
+    'value':50,
+    'disabled':false
+  });
 
-	// Inizializzo il punteggio con quello dell'ultimo giocatore (perchè sarà il primo a giocare)
-	vm.currentScore = vm.players[i].totScore;
+  function nextShot() {
+    shotNumber++;
+    if (shotNumber > 2 || resetScoreIfNegative()) { //tiri finiti, prossimo giocatore (prima aggiungo il punteggo totale del round, e riporto a 0 lo shotNumber)
+      var oldScore = vm.selectedPlayers[vm.indexCurrentPlayer].scores.pop();
+      vm.selectedPlayers[vm.indexCurrentPlayer].scores.push(oldScore);
+      vm.selectedPlayers[vm.indexCurrentPlayer].scores.push(oldScore - vm.totalScoreOfRound);
+      shotNumber = 0;
+      nextPlayer();
+    } 
+    else { //ancora tiri disponibili
+      bonus = 1;
+      setButtonDisabledProperty(false);
+      window.location = '#!/round';
+    }
+  }
 
-	// Serve per fermare il gioco in caso di vittoria
-	vm.win = false;
+  function nextPlayer() {
+    vm.indexCurrentPlayer++;
+    $localStorage.indexCurrentPlayer = vm.indexCurrentPlayer;
+    if (vm.indexCurrentPlayer >= vm.selectedPlayers.length) { //giocatori finiti, prossimo turno
+      $localStorage.indexCurrentPlayer = 0;
+      nextRound();
+    } 
+    else { //ci sono giocatori che devono finire il turno corrente
+      setButtonDisabledProperty(false);
+      window.location = '#!/score';
+    }
+  }
 
-	//serve per salvare ad ogni round il punteggio di tutti i giocatori e vedere se c'è una differenza di 60 punti
-	vm.arrayScore = [];
+  function nextRound() {
+    vm.rounds.push('Round ' + vm.rounds.length);
+    window.location = '#!/score';
+  }
 
-	//viariabili che contengono rispettivamente il punteggio del round e il punteggio corrente di ogni lancio
-	vm.scoreRound = 0;
-	var currentShot = 0;
+  /* Add the score of single shot. index is the indiex of the clicked button in buttonList */
+  function addShotScore(score, index) {
+    if (!vm.buttonList[index].disabled) {
+      setButtonDisabledProperty(true);
+      vm.shotsScores[shotNumber] = bonus * score;
+      vm.totalScoreOfRound += score;
+      bonus++;
+      if(bonus <= 3 && score <= 20)
+        vm.buttonList[index].disabled = false;
+      else 
+        vm.buttonList[index].disabled = true;
+    }
+  }
 
-	/*
-		ad ogni click sul pulsante avanti un altro:
-		- i pulsanti + vengono attivati
-		- il punteggio tot del giocatore viene aggiornato e salvato
-	*/
-	vm.loadRound = function() {
-		vm.scoreRound = 0;
-		clearInput();
-		vm.buttonClicked1 = false;
-		vm.buttonClicked2 = false;
-		vm.buttonClicked3 = false;
-		vm.players[i].totScore = vm.currentScore;
-		$localStorage.players = vm.players;
+  /* Delete the last shot score */
+  function deleteShotScore() {
+    if (vm.shotsScores[shotNumber] != '-') {
+      vm.totalScoreOfRound -= vm.shotsScores[shotNumber];
+      vm.shotsScores[vm.shotNumber] = '-';
+      setButtonDisabledProperty(false);
+      bonus = 1;
+    }
+  }
 
-		/*
-			confronto i punteggi dei vari giocatori, e in caso di una diffenza di 60 punti, mando una notifica su slack
-		*/ 
-		if (vm.arrayScore.length >= totPlayers) {
-			vm.arrayScore = [];
-		}
-		else {
-			vm.arrayScore.push(vm.currentScore);
-			vm.arrayScore.sort();
-			if (vm.arrayScore[vm.arrayScore.length - 1] - vm.arrayScore[0] >= 60) {
+  function setButtonDisabledProperty(boolFlag) {
+    var button;
+    for(button of vm.buttonList)
+      button.disabled = boolFlag;
+  }
 
-			$.post("https://hooks.slack.com/services/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", {
-				'payload' : '{"text": "I\'m winning :P"}'
-			});
-		
-			}
-		}
+  function resetScoreIfNegative() {
+      var oldScore = vm.selectedPlayers[vm.indexCurrentPlayer].scores.pop();
+      vm.selectedPlayers[vm.indexCurrentPlayer].scores.push(oldScore);
+    var flag = false;
+    if ((oldScore - vm.totalScoreOfRound) < 0) {
+      vm.totalScoreOfRound = 0;
+      flag = true;
+    }
+    return flag;
+  }
 
-		/*
-		ad ogni click aggiorno il nome e punteggio del giocatore, quando tutti i giocatori hanno lanciato,
-		aggiorno il anche il numero del round
-		*/
-
-		if (i != 0) {
-			i--;
-			vm.currentPlayer = vm.players[i].name;
-			vm.currentScore = vm.players[i].totScore;
-		}
-		else {
-			vm.currentRound += 1;
-			i = totPlayers - 1;
-			vm.currentPlayer = vm.players[i].name;
-			vm.currentScore = vm.players[i].totScore;
-		}
-	};
-
-	/*
-		ogni volta che si clicca il pulsante + dell'input, aggiorno il punteggio, e disattivo il pulsante
-		-in caso il punteggio è 0 si vince e viene inviata la notifica su slack
-		-se il punteggio del lancio è maggiore del punteggio corrente, allora il round del giocatore finisce,
-		disattivando i pulsanti + attivi
-	*/
-
-	vm.addScore1 = function() {
-		currentShot = 0;
-		vm.buttonClicked1 = true;
-		vm.scoreRound += parseInt(vm.fShot);
-		currentShot = parseInt(vm.fShot);
-		vm.currentScore -= currentShot;
-		if (vm.currentScore == 0) {
-			$.post("https://hooks.slack.com/services/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", {
-				'payload' : '{"text": "I won :)"}'
-			});		
-			vm.win = true;
-			vm.congratulations = "Complimenti sei il vincitore!!!";
-		}
-		if (vm.currentScore < 0) {
-			vm.currentScore += currentShot;
-			vm.scoreRound = 0;
-			vm.buttonClicked2 = true;
-			vm.buttonClicked3 = true;
-		}
-	};
-
-	vm.addScore2 = function() {
-		currentShot = 0;
-		vm.buttonClicked2 = true;
-		vm.scoreRound += parseInt(vm.sShot);
-		currentShot = parseInt(vm.sShot);
-		vm.currentScore -= currentShot;
-		if (vm.currentScore == 0) {
-			$.post("https://hooks.slack.com/services/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", {
-				'payload' : '{"text": "I won :)"}'
-			});
-			vm.win = true;
-			vm.congratulations = "Complimenti sei il vincitore!!!";
-		}
-		if (vm.currentScore < 0) {
-			vm.currentScore += currentShot;
-			vm.scoreRound = 0;
-			vm.buttonClicked3 = true;
-		}
-	};
-
-	vm.addScore3 = function() {
-		currentShot = 0;
-		vm.buttonClicked3 = true;
-		vm.scoreRound += parseInt(vm.tShot);
-		currentShot = parseInt(vm.tShot);
-		vm.currentScore -= currentShot;
-		if (vm.currentScore == 0) {
-			$.post("https://hooks.slack.com/services/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", {
-				'payload' : '{"text": "I won :)"}'
-			});
-			vm.win = true;
-			vm.congratulations = "Complimenti sei il vincitore!!!";
-		}
-		if (vm.currentScore < 0) {
-			vm.currentScore += currentShot;
-			vm.scoreRound = 0;
-		}
-	}; 
-
-	//Ripulisce le input dopo ogni click
-	var clearInput = function() {
-		vm.fShot = '';
-		vm.sShot = '';
-		vm.tShot = '';
-	};
+  function winCheck(){
+    var oldScore = vm.selectedPlayers[vm.indexCurrentPlayer].scores.pop();
+    vm.selectedPlayers[vm.indexCurrentPlayer].scores.push(oldScore);
+    if ((oldScore - vm.totalScoreOfRound) == 0) {
+      window.alert("VITTORIA");
+      window.location = '#!/win';
+    }
+    else {
+      nextShot();
+    }
+  }
 
 }]);

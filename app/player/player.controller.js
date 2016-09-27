@@ -3,51 +3,66 @@
 angular.module('app.player')
 
 .controller('playerCtrl', ['$localStorage', function($localStorage) {
-	var vm = this;
-	//Array with all players ready to start the game
-	vm.players = [];
-	//Array with VIP players
-	vm.storagePlayers = [];
+  var vm = this;
+  var minNumPlayersForTournament = 2; // minimum number of players to start a tournament
+  
+  vm.addPlayer = addPlayer;
+  vm.addPlayerButtonClicked = addPlayerButtonClicked;
+  vm.togglePlayer = togglePlayer;
+  vm.startTournament = startTournament;
+  
+  vm.isAddPlayerButtonClicked = false; // addButton is initially visibile and not clicked
 
-	vm.savedStorage = $localStorage.storagePlayers = $localStorage.storagePlayers || [];
+  vm.storagePlayers = []; // array with VIP players
+  
+  vm.selectedPlayers = []; // array with selected players
 
-	// load the VIP players in the table
-	if (vm.savedStorage !== null) {
-		vm.storagePlayers = vm.savedStorage;
-	}
+  vm.savedStorage = $localStorage.storagePlayers = $localStorage.storagePlayers || [];
+  
+  vm.storagePlayers = vm.savedStorage; // load the VIP players in the table
+  
+  vm.isStartButtonVisible = false; //controls the shown of start button
+  
+  /* add player with a name, initial score and state (selected or not) */
+  function addPlayer() {
+    vm.storagePlayers.push({ 
+      'name':vm.name,
+      'scores':[201],
+      'selected':false
+    });
+    vm.name = ''; // clear input
+    $localStorage.storagePlayers = vm.storagePlayers;
+    vm.isAddPlayerButtonClicked = false; // when a player has been added, addButton has to be visibile
+  }
 
-	// add player with a name, and a initial score
-	vm.addPlayer = function() {
-		vm.players.push({ 
-			'name':vm.name,
-			'totScore':501
-		});
-  	vm.name = ''; //clear input
-	  //save the last player
-		var currentPlayerSaved = {};
-	  currentPlayerSaved = vm.players[vm.players.length - 1]; 
-	  vm.storagePlayers.push(currentPlayerSaved); //add player in the VIP array
-	  $localStorage.players = vm.players;
-	  $localStorage.storagePlayers = vm.storagePlayers;
-	};
+  /* sets the value of isAddButtonClicked on true when addButton is clicked */
+  function addPlayerButtonClicked() {
+    vm.isAddPlayerButtonClicked = true;
+  }
 
-	//remove all players in the list
-	vm.removeAllPlayers = function() {
-		vm.players = [];
-		$localStorage.players = vm.players;
-	};
+  /* put or remove the vip player in the list of selected player */
+  function togglePlayer(friend) {
+    var index = vm.selectedPlayers.indexOf(friend);
+    friend.scores = [201];
+    if (index == -1)  // select
+      vm.selectedPlayers.push(friend);
+    else  // deselect
+      vm.selectedPlayers.splice(index, 1);
+    friend.selected = !friend.selected;
+    $localStorage.selectedPlayers = vm.selectedPlayers; 
+    
+    vm.isStartButtonVisible = false;
+    if (vm.selectedPlayers.length >= minNumPlayersForTournament)
+      vm.isStartButtonVisible = true;
+  }
 
-	// remove only the VIP player selected
-	vm.removePlayerStorage = function(friend) {
-		var index = vm.storagePlayers.indexOf(friend);
-		vm.storagePlayers.splice(index, 1);
-		$localStorage.storagePlayers = vm.storagePlayers;
-	};
-
-	//take the selected VIP player from table and put it in the list of player
-	vm.addPlayerInList = function(friend) {
-		vm.buttonAddPlayerTable = true;
-		vm.players.push(friend);
-		$localStorage.players = vm.players;
-	};
+  /* brings back to false the state (selected or not) of the selected players */
+  function startTournament() {
+    $localStorage.rounds = ['Start', 'Round 1'];
+    $localStorage.indexCurrentPlayer = 0;
+    $localStorage.shotNumber = 0;
+    $localStorage.bonus = 1;
+    for (var i in vm.selectedPlayers)
+      vm.selectedPlayers[i].selected = false;
+  }
 }]);

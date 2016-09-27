@@ -7,7 +7,9 @@ angular
     'ngStorage',
     'app.home',
     'app.player',
-    'app.round'
+    'app.round',
+    'app.score',
+    'app.win'
   ])
 
   .config([
