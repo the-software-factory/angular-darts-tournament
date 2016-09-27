@@ -6,49 +6,35 @@
     <div class="panel panel-success">
       <table class="table">                         
         <tr><td></td> <td><p>Points left</p></td> <td></td></tr>
-        <tr><td></td> <td>{{vm.selectedPlayers[vm.indexCurrentPlayer].scores[vm.rounds.length - 1]}}</td> <td></td></tr>
+        <tr><td></td> <td>{{vm.selectedPlayers[vm.indexCurrentPlayer].scores[vm.rounds.length - 2] - vm.totalScoreOfRound}}</td> <td></td></tr>
         <tr><td><p>1° shot</p></td> <td><p>2° shot</p></td> <td><p>3° shot</p></td></tr>
         <tr><td>{{vm.shotsScores[0]}}</td><td>{{vm.shotsScores[1]}}</td><td>{{vm.shotsScores[2]}}</td></tr>
         <tr><td></td> <td><p>Total Round</p></td> <td></td></tr>   
         <tr><td></td> <td>{{vm.totalScoreOfRound}}</td> <td></td></tr>  
       </table>
     </div>   
-    <div class="panel panel-success">
+    <div class="panel panel-success">     
       <table class="table">
-        <tr>  
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(0)" >0</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(1)">1</a></td> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(2)">2</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(3)">3</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(4)">4</a></td>          
-        </tr>
-        <tr> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(5)">5</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(6)">6</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(7)">7</a></td> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(8)">8</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(9)">9</a></td>    
-        </tr>
-        <tr>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(10)">10</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(11)">11</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(12)">12</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(13)">13</a></td> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(14)">14</a></td>
-        </tr>
-        <tr>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(15)">15</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(16)">16</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(17)">17</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(18)">18</a></td> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(19)">19</a></td>  
-        </tr>
-        <tr>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.deleteShotScore()"><i class="glyphicon glyphicon-remove"></i></a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(20)">20</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(25)">25</a></td> 
-          <td><a class="btn btn-default btn-circle btn-xl" ng-disabled="vm.isPointButtonsClickable" ng-click="vm.addShotScore(50)">50</a></td>
-          <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.nextShot()"><i class="glyphicon glyphicon-chevron-right"></i> </a></td>
+        <tr>   
+          <tr><td ng-repeat="button in vm.buttonList.slice(0, 5)">
+            <a class="btn btn-default btn-circle btn-xl" ng-disabled="button.disabled" ng-click="vm.addShotScore(button.value, vm.buttonList.indexOf(button))">{{button.value}}</a>
+          </td></tr> 
+          <tr><td ng-repeat="button in vm.buttonList.slice(5, 10)">
+            <a class="btn btn-default btn-circle btn-xl" ng-disabled="button.disabled" ng-click="vm.addShotScore(button.value, vm.buttonList.indexOf(button))">{{button.value}}</a>
+          </td></tr>
+          <tr><td ng-repeat="button in vm.buttonList.slice(10, 15)">
+            <a class="btn btn-default btn-circle btn-xl" ng-disabled="button.disabled" ng-click="vm.addShotScore(button.value, vm.buttonList.indexOf(button))">{{button.value}}</a>
+          </td></tr>
+          <tr><td ng-repeat="button in vm.buttonList.slice(15, 20)">
+            <a class="btn btn-default btn-circle btn-xl" ng-disabled="button.disabled" ng-click="vm.addShotScore(button.value, vm.buttonList.indexOf(button))">{{button.value}}</a>
+          </td></tr>
+          <tr>
+            <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.deleteShotScore()"><i class="glyphicon glyphicon-remove"></i></a></td>
+            <td ng-repeat="button in vm.buttonList.slice(20, 23)">
+              <a class="btn btn-default btn-circle btn-xl" ng-disabled="button.disabled" ng-click="vm.addShotScore(button.value, vm.buttonList.indexOf(button))">{{button.value}}</a>
+            </td>
+            <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.winCheck()"><i class="glyphicon glyphicon-chevron-right"></i> </a></td>
+          </tr>
         </tr>
       </table>
     </div>   

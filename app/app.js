@@ -8,7 +8,8 @@ angular
     'app.home',
     'app.player',
     'app.round',
-    'app.score'
+    'app.score',
+    'app.win'
   ])
 
   .config([

@@ -58,9 +58,10 @@ angular.module('app.player')
 
   /* brings back to false the state (selected or not) of the selected players */
   function startTournament() {
-    $localStorage.rounds = ['Start'];
+    $localStorage.rounds = ['Start', 'Round 1'];
     $localStorage.indexCurrentPlayer = 0;
     $localStorage.shotNumber = 0;
+    $localStorage.bonus = 1;
     for (var i in vm.selectedPlayers)
       vm.selectedPlayers[i].selected = false;
   }
