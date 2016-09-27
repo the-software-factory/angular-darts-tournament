@@ -19,5 +19,4 @@ describe('Players controller', function() {
     var ctrl = createCtrl();
     expect(angular.isArray(ctrl.storagePlayers)).toBeTruthy();
   });
-
 });

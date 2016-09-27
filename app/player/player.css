@@ -1,0 +1,8 @@
+.flex {max-width: 15%;}
+
+ul#menu li {
+    display: inline;
+    padding: 10px;
+    background-image:url("images/darts.jpg");
+}
+

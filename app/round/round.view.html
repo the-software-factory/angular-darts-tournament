@@ -1,53 +1,58 @@
 <div class="jumbotron dartsContainer">
-	<h2>Round: {{vm.currentRound}}</h2>
-	<h2>Player: {{vm.currentPlayer}}</h2>
-	<h2>{{vm.congratulations}}</h2>
-	<h2>Total Score: {{vm.currentScore}}</h2>
-	<h2 ng-hide="win">Current Score: {{vm.scoreRound}}</h2>
-
-	<div class=".col-md-6 .col-md-offset-3 playerList">
-		<div class="input-group dartsInput" ng-form name="roundForm1">
-			<input type="number" class="form-control" name="roundShot1" min="0" max="180" placeholder="Add the score of the first shot..." ng-model="vm.fShot" required>
-			<span class="input-group-btn">
-			  <button class="btn btn-default" type="button" ng-click="vm.addScore1()" ng-disabled="vm.buttonClicked1 || roundForm1.$invalid">
-			    <span class="glyphicon glyphicon-plus"></span>
-			  </button>
-			</span>
-		</div> <!-- input-group -->
-		<div role="alert" class="errorLength">
-	    <span class="error" ng-show="roundForm1.roundShot1.$error.max">Too big, it's impossible!</span>
-	    <span class="error" ng-show="roundForm1.roundShot1.$error.min">Too small, it's impossible!</span>
+    <h2>{{vm.rounds[vm.rounds.length-1]}}</h2>
+    <h2>{{vm.selectedPlayers[vm.indexCurrentPlayer].name}}</h2>
+    <h2></h2>
+    <div class=".col-md-6 .col-md-offset-3 playerList">
+        
+           
+                <div class="panel panel-success">
+                    <table class="table">                         
+                        <tr><td></td> <td><p>Points left</p></td> <td></td></tr>
+                        <tr><td></td> <td>{{vm.selectedPlayers[vm.indexCurrentPlayer].totScore}}</td> <td></td></tr>
+                        <tr><td><p>1° shot</p></td> <td><p>2° shot</p></td> <td><p>3° shot</p></td></tr>
+                        <tr><td>-</td> <td>-</td> <td>-</td></tr>
+                        <tr><td></td> <td><p>Total Round</p></td> <td></td></tr>   
+                        <tr><td></td> <td>-</td> <td></td></tr>  
+                    </table>
+                </div>   
+            <div class="panel panel-success">
+            <table class="table">
+                <tr>  
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(0)" >0</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(1)" >1</a></td> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(2)" >2</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(3)" >3</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(4)" >4</a></td>          
+                </tr>
+                <tr> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(5)" >5</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(6)" >6</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(7)" >7</a></td> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(8)" >8</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(9)" >9</a></td>    
+                </tr>
+                <tr>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(10)" >10</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(11)" >11</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(12)" >12</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(13)" >13</a></td> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(14)" >14</a></td>
+                </tr>
+                <tr>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(15)" >15</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(16)" >16</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(17)" >17</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(18)" >18</a></td> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(19)" >19</a></td>  
+                </tr>
+                <tr>
+                    <td><a class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-remove"></i></a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(20)" >20</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(25)" >25</a></td> 
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.addScore(50)" >50</a></td>
+                    <td><a class="btn btn-default btn-circle btn-xl" ng-click="vm.nextShot()"><i class="glyphicon glyphicon-chevron-right"></i> </a></td>
+                </tr>
+            </table>
+        </div>   
     </div>
-
-		<div class="input-group dartsInput" ng-form name="roundForm2">
-			<input type="number" class="form-control" name="roundShot2" min="0" max="180" placeholder="Add the score of the second shot..." ng-model="vm.sShot" required>
-			<span class="input-group-btn">
-			  <button class="btn btn-default" type="button" ng-click="vm.addScore2()" ng-disabled="vm.buttonClicked2 || roundForm2.$invalid">
-			    <span class="glyphicon glyphicon-plus"></span>
-			  </button>
-			</span>
-		</div> <!-- input-group -->
-		<div role="alert" class="errorLength">
-	    <span class="error" ng-show="roundForm2.roundShot2.$error.max">Too long, it's impossible!</span>
-	    <span class="error" ng-show="roundForm2.roundShot2.$error.min">Too short, it's impossible!</span>
-    </div>
-
-		<div class="input-group dartsInput" ng-form name="roundForm3">
-			<input type="number" class="form-control" name="roundShot3" min="0" max="180" placeholder="Add the score of the third shot..." ng-model="vm.tShot" required>
-			<span class="input-group-btn">
-			  <button class="btn btn-default" type="button" ng-click="vm.addScore3()" ng-disabled="vm.buttonClicked3 || roundForm3.$invalid">
-			    <span class="glyphicon glyphicon-plus"></span>
-			  </button>
-			</span>
-		</div> <!-- input-group -->
-		<div role="alert" class="errorLength">
-	    <span class="error" ng-show="roundForm3.roundShot3.$error.max">Too long, it's impossible!</span>
-	    <span class="error" ng-show="roundForm3.roundShot3.$error.min">Too short, it's impossible!</span>
-    </div>
-		
-		<div class="dartsButton">
-			<a class="btn btn-warning btn-lg" role="button" href="#!/player">Go Back</a>
-	    <a class="btn btn-info btn-lg" role="button" ng-click="vm.loadRound()" ng-hide="vm.win">Next Player</a>
-		</div>
-	</div>
 </div>
