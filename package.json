@@ -31,7 +31,6 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "http-server -a localhost -p 8000 -c-1 ./",
-    "test": "karma start karma.conf.js",
     "prepush": "gulp test"
   },
   "bugs": {
