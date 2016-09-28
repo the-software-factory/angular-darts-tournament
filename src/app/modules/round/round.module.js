@@ -7,7 +7,7 @@ angular.module('app.round', [
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/round', {
-    templateUrl: 'round/round.view.html',
+    templateUrl: 'app/modules/round/round.view.html',
     controller: 'roundCtrl',
     controllerAs: 'vm'
   });

@@ -11,10 +11,10 @@ module.exports = function (config) {
       'bower_components/ngstorage/ngStorage.min.js',
 
       // Application build and unit tests
-      'app/app.js',
-      'app/**/*.module.js',
-      'app/**/*.html',
-      'app/**/*.js'
+      'src/app/app.js',
+      'src/app/**/*.module.js',
+      'src/app/**/*.html',
+      'src/app/**/*.js'
     ],
 
     // enable / disable colors in the output (reporters and logs)

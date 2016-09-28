@@ -10,3 +10,9 @@ bower_components
 
 # A hidden file created by MacOS
 .DS_Store
+
+# Distribution folder is not added in source control
+dist/
+
+# Ignore any kind of logs
+*.log

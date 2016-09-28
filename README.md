@@ -1,8 +1,7 @@
-> The point of having style guidelines is to have a common vocabulary so people can concentrate on what you're saying
-> rather than on how you're saying it.
+> TODO missing text
 
 # Angular Darts Tournament
-[*Missing text*]
+[TODO *Missing text*]
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -15,7 +14,7 @@ This project requires [bower](http://bower.io/):
 $ bower install --save-dev https://github.com/the-software-factory/angular-darts-tournament.git
 ```
 
-## ChangeLog
+## ChangeLog [TODO to implement]
 Take a look at the [CHANGELOG.md](CHANGELOG.md) to verify if a case has been included in a release or not.
 It contains the list of commits grouped by tag.
 
@@ -37,7 +36,7 @@ app/ // The source folder
 ```
 
 ### Distribution
-[*Missing text*]
+[TODO *Missing text*]
 
 ### Source
-[]*Missing text*]
+[TODO *Missing text*]
