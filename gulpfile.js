@@ -20,28 +20,46 @@ gulp.task('minifyJS', function() {
 });
 
 // Minify CSS task
-gulp.task('minifyCss', ['sass'], function () {
-  gulp.src('app/**/*.css')
+gulp.task('style', ['sass'], function () {
+  gulp.src([
+    'bower_components/bootstrap/dist/css/bootstrap.min.css'
+  ])
     .pipe(concat('vendor.min.css'))
-    .pipe(minifyCss())
-    .pipe(gulp.dest('./dist/css/'));
+    .pipe(gulp.dest('./dist/production/'));
+
+  gulp.src([
+    'bower_components/bootstrap/dist/css/bootstrap.css'
+  ])
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./dist/development/'));
 });
 
-gulp.task('bower-scripts', function() {
+gulp.task('script', function() {
   gulp.src([
-    'bower_components/angular/angular.js',
-    'bower_components/angular-route/angular-route.js',
-    'bower_components/ngstorage/ngStorage.min.js',
-    'bower_components/jquery/dist/jquery.min.js'
+      'bower_components/angular/angular.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/ngstorage/ngStorage.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js'
     ])
-    .pipe(concat('bower-script.js'))
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./dist/development/'));
+
+  gulp.src([
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular-route/angular-route.min.js',
+    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/ngstorage/ngStorage.min.js'
+  ])
+    .pipe(concat('vendor.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./dist/scripts/'));
+    .pipe(gulp.dest('./dist/production/'));
 });
 
 gulp.task('sass', function () {
   return gulp.src('./app/scss/**/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(concat('app.css'))
     .pipe(gulp.dest('./app/'));
 });
