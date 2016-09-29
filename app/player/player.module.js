@@ -9,11 +9,11 @@ angular.module('app.player', [
   this.vipPlayerList = $localStorage.storagePlayers || [];
 
   this.initVipPlayer = function() {
-    for(var vipPlayer of this.vipPlayerList) {
-      vipPlayer.scores = [201];
-      vipPlayer.selected = false;
+    for (var i in this.vipPlayerList) {
+      this.vipPlayerList[i].scores = [201];
+      this.vipPlayerList[i].selected = false;
     }
-  }
+  };
 
   this.addPlayerWithName = function(name) { 
     this.vipPlayerList.push({ 
@@ -21,13 +21,13 @@ angular.module('app.player', [
       'scores':[201],
       'selected':false
     }); 
-  }
+  };
 
   this.selectedPlayers = $localStorage.selectedPlayers || [];
   
-  this.deselectAllPlayer = function(){
+  this.deselectAllPlayer = function() {
     this.selectedPlayers = [];
-  }
+  };
 
   this.togglePlayer = function(friend) {
     var index = this.selectedPlayers.indexOf(friend);
@@ -36,13 +36,13 @@ angular.module('app.player', [
     else  // deselect
       this.selectedPlayers.splice(index, 1);
     $localStorage.selectedPlayers = this.selectedPlayers;
-  }
+  };
 
   this.indexCurrentPlayer = 0;
 
-  this.setIndexCurrentPlayer = function(index){
+  this.setIndexCurrentPlayer = function(index) {
     this.indexCurrentPlayer = index;
-  }
+  };
 })
 
 .config(['$routeProvider', function($routeProvider) {
@@ -52,5 +52,3 @@ angular.module('app.player', [
     controllerAs: 'vm'
   });
 }]);
-
-

@@ -12,6 +12,7 @@ angular.module('app.player')
   vm.startTournament = startTournament;
   
   player.deselectAllPlayer(); //svuota la lista dei giocatori selezionati al caricamento del modulo
+  player.initVipPlayer(); //initialize the vip player list (selected property to false end scores to [201])
 
   vm.vipPlayersList = player.vipPlayerList; // load the VIP players in the table
   vm.selectedPlayers = player.selectedPlayers; // array with selected players

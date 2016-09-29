@@ -4,14 +4,9 @@ angular.module('app.round')
 
 .controller('roundCtrl', function($localStorage, player, round) {
   var vm = this;
-
-  nextShot = nextShot;
-  nextPlayer = nextPlayer;
-  nextRound = nextRound;
+  
   vm.addShotScore = addShotScore;
   vm.deleteShotScore = deleteShotScore;
-  setButtonDisabledProperty = setButtonDisabledProperty;
-  resetScoreIfNegative = resetScoreIfNegative;
   vm.winCheck = winCheck;
 
   vm.selectedPlayers = player.selectedPlayers; // load selected players
@@ -26,7 +21,6 @@ angular.module('app.round')
   true if the button is disabled false otherwise*/
   vm.buttonList = round.buttonList();
   
-
   /*called every shot*/
   function nextShot() {
     shotNumber++;
@@ -70,7 +64,7 @@ angular.module('app.round')
       vm.shotsScores[shotNumber] = bonus * score;
       vm.totalScoreOfRound += score;
       bonus++;
-      if(bonus <= 3 && score <= 20) //25 e 50 non possono essere ne doppi ne tripli
+      if (bonus <= 3 && score <= 20) //25 e 50 non possono essere ne doppi ne tripli
         vm.buttonList[index].disabled = false;
       else 
         vm.buttonList[index].disabled = true;
@@ -89,15 +83,15 @@ angular.module('app.round')
 
   /*Enables or disables all the button in buttonList*/
   function setButtonDisabledProperty(boolFlag) {
-    var button;
-    for(button of vm.buttonList)
-      button.disabled = boolFlag;
+    var i;
+    for (i in vm.buttonList)
+      vm.buttonList[i].disabled = boolFlag;
   }
 
   /*cancel the last round of the player who is gone under zero*/
   function resetScoreIfNegative() {
-      var oldScore = vm.selectedPlayers[player.indexCurrentPlayer].scores.pop();
-      vm.selectedPlayers[player.indexCurrentPlayer].scores.push(oldScore);
+    var oldScore = vm.selectedPlayers[player.indexCurrentPlayer].scores.pop();
+    vm.selectedPlayers[player.indexCurrentPlayer].scores.push(oldScore);
     var flag = false;
     if ((oldScore - vm.totalScoreOfRound) < 0) {
       vm.totalScoreOfRound = 0;
@@ -107,7 +101,7 @@ angular.module('app.round')
   }
 
   /*check if someone won the tournament*/
-  function winCheck(){
+  function winCheck() {
     var oldScore = vm.selectedPlayers[player.indexCurrentPlayer].scores.pop();
     vm.selectedPlayers[vm.indexCurrentPlayer].scores.push(oldScore);
     if ((oldScore - vm.totalScoreOfRound) == 0) {
