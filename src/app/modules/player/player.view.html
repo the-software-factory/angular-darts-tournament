@@ -1,65 +1,22 @@
-<div class="jumbotron dartsContainer">
-	<h1>Add players*</h1>
-	<p>*(Players must be at least 2)</p>
+<div class="container text-center">
+	<h2>seleziona giocatori</h2>
+</div>
 
-	<div class=".col-md-6 .col-md-offset-3 playerList" ng-show="vm.storagePlayers.length >= 1">
-		<div class="panel panel-success">
-			<div class="panel-heading">List of VIP player(s)</div>
-			
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Add</th>
-						<th>Remove</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="friend in vm.storagePlayers">
-						<td>{{friend.name}}</td>
-						<td>
-							<button type="button" class="btn btn-success" ng-click="vm.addPlayerInList(friend)">
-								+
-							</button>
-						</td>
-						<td>
-							<button type="button" class="btn btn-danger" ng-click="vm.removePlayerStorage(friend)">
-								x
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+<div class="container text-center">
+	<div ng-show="vm.storagePlayers.length >= 1">sono stato selezionati {{ vm.players.length }} giocatori</div>
+
+	<div class="adt-card">
+		<input type="text" name="namePlayer" ng-model="vm.name" minlength="2" maxlength="20" required>
+		<button ng-click="vm.addPlayer()">aggiungi</button>
 	</div>
 
-	<div class="alert alert-info playerList" role="alert">
-		There are {{ vm.players.length }} player(s)
-	</div>
+	<div class="adt-card"
+			ng-repeat="friend in vm.storagePlayers"
+			ng-bind="friend.name"
+			ng-class="{'is-adt-card-selected': vm.isSelected(friend)}"
+			ng-click="vm.togglePlayer(friend)"></div>
+</div>
 
-	<div class=".col-md-6 .col-md-offset-3 playerList">
-		<div class="input-group" ng-form name="playerForm">
-			<input type="text" class="form-control" name="namePlayer" placeholder="Add a new player..." ng-model="vm.name" minlength="2" maxlength="50" required>
-			<span class="input-group-btn">
-			    <button class="btn btn-default" type="button" ng-click="vm.addPlayer()" ng-disabled="playerForm.$invalid">
-			    	<span class="glyphicon glyphicon-plus"></span>
-			    </button>
-			</span>
-		</div> <!-- input-group -->
-		<div role="alert" class="errorLength">
-      <span class="error" ng-show="playerForm.namePlayer.$error.minlength">Too short!</span>
-    </div>
-	</div> <!-- col-lg-6 -->
-	<div>
-		<ul class="list-group playerList">
-			<li class="list-group-item" ng-repeat="player in vm.players">
-				{{ player.name }}
-			</li>
-		</ul>
-	</div>
-
-	<div class="dartsButton">
-		<a class="btn btn-warning btn-lg" role="button" ng-click="vm.removeAllPlayers()" ng-show="vm.players.length >= 1">Remove Players</a>
-    <a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="vm.players.length >= 2">Start</a>
-	</div>
+<div class="container text-center">
+	<a class="btn btn-info btn-lg" role="button" href="#!/round" ng-show="vm.players.length >= 2">start</a>
 </div>

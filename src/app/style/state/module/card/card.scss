@@ -1,0 +1,9 @@
+$adt-card-selected-bg-color: grey;
+
+.adt-card {
+
+  &.is-adt-card-selected {
+    background: $adt-card-selected-bg-color;
+  }
+
+}

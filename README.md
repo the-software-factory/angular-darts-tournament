@@ -12,9 +12,7 @@ An AngularJS app to play darts:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Installation
-
-## ChangeLog
+<!-- ## ChangeLog
 Take a look at the [CHANGELOG.md](CHANGELOG.md) to verify if a case has been included in a release or not.
 It contains the list of commits grouped by tag.
 <!-- TODO Add plugin for the changelog -->
@@ -54,6 +52,8 @@ package.json
 ...
 ```
 
+Then run `npm start` to access the application at [http://localhost:8000/](http://localhost:8000/)
+
 ### Source
 The entire AngularJS source code is within the `src` folder.
-Click [here](src) for more details
+Click [here](src) for more details.

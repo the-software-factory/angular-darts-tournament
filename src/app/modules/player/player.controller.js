@@ -18,17 +18,20 @@ angular.module('app.player')
 
 	// add player with a name, and a initial score
 	vm.addPlayer = function() {
-		vm.players.push({ 
-			'name':vm.name,
-			'totScore':501
-		});
-  	vm.name = ''; //clear input
-	  //save the last player
-		var currentPlayerSaved = {};
-	  currentPlayerSaved = vm.players[vm.players.length - 1]; 
-	  vm.storagePlayers.push(currentPlayerSaved); //add player in the VIP array
-	  $localStorage.players = vm.players;
-	  $localStorage.storagePlayers = vm.storagePlayers;
+		if (vm.name) {
+
+			vm.players.push({
+				'name':vm.name,
+				'totScore':501
+			});
+			vm.name = ''; //clear input
+			//save the last player
+			var currentPlayerSaved = {};
+			currentPlayerSaved = vm.players[vm.players.length - 1];
+			vm.storagePlayers.push(currentPlayerSaved); //add player in the VIP array
+			$localStorage.players = vm.players;
+			$localStorage.storagePlayers = vm.storagePlayers;
+		}
 	};
 
 	//remove all players in the list
@@ -50,4 +53,18 @@ angular.module('app.player')
 		vm.players.push(friend);
 		$localStorage.players = vm.players;
 	};
+
+	vm.togglePlayer = function(friend) {
+		if (vm.players.indexOf(friend) >= 0) {
+			vm.removeAllPlayers();
+		}
+		else {
+			vm.addPlayerInList(friend);
+		}
+	};
+
+	vm.isSelected = function(friend) {
+		return vm.players.indexOf(friend) >= 0;
+	};
+
 }]);
