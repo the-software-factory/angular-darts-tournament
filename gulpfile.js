@@ -8,6 +8,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-clean-css');
 var preprocess = require('gulp-preprocess');
 var copy = require('gulp-contrib-copy');
+var connect = require('gulp-connect');
 
 var srcDir = 'src';
 var appDir = srcDir + '/app';
@@ -123,6 +124,15 @@ gulp.task('test', ['lint'], function (done) {
     configFile:__dirname + '/karma.conf.js',
     singleRun: true
   }, done).start();
+});
+
+gulp.task('connect', function () {
+  connect.server({
+    name: 'Dev App',
+    root: ['dist/development'],
+    port: 8000,
+    livereload: true
+  });
 });
 
 gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript']);

@@ -1,0 +1,33 @@
+<div class="container text-center">
+  <!-- TODO translate string -->
+  <h2>seleziona giocatori</h2>
+</div>
+
+<div class="container text-center">
+  <div ng-show="vm.adapter.getSavedPlayers().length">
+    <!-- TODO translate string -->
+    sono stati selezionati {{ vm.adapter.getSelectedPlayers().length }} giocatori
+  </div>
+
+  <div class="adt-card">
+    <input type="text"
+        name="namePlayer"
+        ng-model="vm.newPlayerName">
+    <!-- TODO translate string -->
+    <button ng-click="vm.addNewPlayer()">aggiungi</button>
+  </div>
+
+  <div class="adt-card"
+      ng-repeat="player in vm.adapter.getSavedPlayers() track by player.id"
+      ng-bind="player.name"
+      ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
+      ng-click="vm.togglePlayer(player)"></div>
+</div>
+
+<div class="container text-center">
+  <!-- TODO translate string -->
+  <a class="btn btn-info btn-lg"
+      role="button"
+      href="#!/round"
+      ng-show="vm.areSelectedPlayersEnough()">start</a>
+</div>

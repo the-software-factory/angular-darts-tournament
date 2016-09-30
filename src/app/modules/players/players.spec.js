@@ -3,10 +3,10 @@
 describe('Players controller', function() {
   var createCtrl;
 
-  beforeEach(module('app.player'));
+  beforeEach(module('app.players'));
   beforeEach(inject(function($controller) {
     createCtrl = function() {
-      return $controller('playerCtrl', {}, {});
+      return $controller('PlayersController', {}, {});
     };
   }));
 

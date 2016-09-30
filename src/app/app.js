@@ -6,7 +6,7 @@ angular
     'ngRoute',
     'ngStorage',
     'app.home',
-    'app.player',
+    'app.players',
     'app.round'
   ])
 
