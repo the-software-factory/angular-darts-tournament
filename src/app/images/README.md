@@ -1,3 +1,4 @@
 # images
-This folder is for all images of the app.
-Developer can manage its internal structure as he prefers. There is no limitation or restriction.
+This folder is a container for all images.
+
+Developer can manage its structure without any limit or restriction.

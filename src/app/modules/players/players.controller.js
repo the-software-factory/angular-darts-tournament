@@ -22,7 +22,12 @@ angular
       vm.selectPlayer = selectPlayer;
       vm.togglePlayer = togglePlayer;
 
-      // TODO Add docblock
+      /**
+       * @ngdoc property
+       * @name PlayersController#adapter
+       * @type {Object}
+       * @propertyOf app.players.controller:PlayersController
+       */
       vm.adapter = PlayersAdapter;
 
       /**
@@ -70,7 +75,15 @@ angular
         return vm.adapter.getSelectedPlayers().length >= 2;
       }
 
-      // TODO Add docblock
+      /**
+       * @ngdoc method
+       * @name PlayersController#deselectPlayer
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @param {Object} player The player to remove from the selected players list.
+       * @description
+       * Remove the given player from the selected players list.
+       */
       function deselectPlayer(player) {
         var selectedPlayers = vm.adapter.getSelectedPlayers();
         var offset = selectedPlayers.indexOf(player);
@@ -78,23 +91,37 @@ angular
         vm.adapter.persistSelectedPlayers(selectedPlayers);
       }
 
-      // TODO Add docblock
+      /**
+       * @ngdoc method
+       * @name PlayersController#selectPlayer
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @param {Object} player The player to add into the selected players list.
+       * @description
+       * Add the given player into the selected players list.
+       */
       function selectPlayer(player) {
         var selectedPlayers = vm.adapter.getSelectedPlayers();
         selectedPlayers.push(player);
         vm.adapter.persistSelectedPlayers(selectedPlayers);
       }
 
-      // TODO Add docblock
-      // TODO Refactor this function
+      /**
+       * @ngdoc method
+       * @name PlayersController#addNewPlayer
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @description
+       * Creates a new player and adds it into:
+       * - selected players list
+       * - saved players list
+       */
       function addNewPlayer() {
         if (vm.newPlayerName) {
           var newPlayer = PlayerFactory.create(vm.newPlayerName);
           vm.newPlayerName = null;
 
-          var selectedPlayers = vm.adapter.getSelectedPlayers();
-          selectedPlayers.push(newPlayer);
-          vm.adapter.persistSelectedPlayers(selectedPlayers);
+          vm.selectPlayer(newPlayer);
 
           var savedPlayers = vm.adapter.getSavedPlayers();
           savedPlayers.push(newPlayer);
