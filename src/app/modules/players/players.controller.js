@@ -41,7 +41,13 @@ angular
        * Determines if the give player has been already selected or not.
        */
       function isPlayerSelected(player) {
-        return vm.adapter.getSelectedPlayers().indexOf(player) >= 0;
+        var isPlayerSelected = false;
+        angular.forEach(vm.adapter.getSelectedPlayers(), function(selectedPlayer) {
+          if (selectedPlayer.id === player.id) {
+            isPlayerSelected = true;
+          }
+        });
+        return isPlayerSelected;
       }
 
       /**
