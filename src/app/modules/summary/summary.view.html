@@ -11,8 +11,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="round in vm.getRounds()">
-        <td ng-repeat="player in vm.getPlayers()" ng-bind="vm.getPoints(player, round)"></td>
+      <tr>
+        <td ng-repeat="player in vm.getPlayers()" ng-bind="vm.match.getInitialPoints()"></td>
+      </tr>
+      <tr ng-repeat="round in vm.match.getRounds()">
+        <td ng-repeat="player in vm.getPlayers()"
+            ng-if="angular.isDefined(vm.getMissingPoints(player, round))"
+            ng-bind="vm.getMissingPoints(player, round)"></td>
+
+        <td ng-repeat="player in vm.getPlayers()"
+            ng-if="!angular.isDefined(vm.getMissingPoints(player, round))"
+            ng-bind="vm.getMissingPoints(player, round)"></td>
       </tr>
     </tbody>
   </table>

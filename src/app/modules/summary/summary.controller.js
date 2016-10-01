@@ -10,14 +10,22 @@ angular
    */
   .controller('SummaryController', [
     'SelectedPlayers',
+    'Match',
     'Storage',
-    function(SelectedPlayers, Storage) {
+    function(SelectedPlayers, Match, Storage) {
       var vm = this;
 
       // Exposes public methods
       vm.getPlayers = getPlayers;
-      vm.getPoints = getPoints;
-      vm.getRounds = getRounds;
+      vm.getMissingPoints = getMissingPoints;
+
+      /**
+       * @ngdoc property
+       * @name SummaryController#match
+       * @type {Object}
+       * @propertyOf app.players.controller:SummaryController
+       */
+      vm.match = Match;
 
       /**
        * @ngdoc method
@@ -34,30 +42,18 @@ angular
 
       /**
        * @ngdoc method
-       * @name SummaryController#getRounds
+       * @name SummaryController#getMissingPoints
        * @kind function
        * @methodOf app.players.controller:SummaryController
-       * @return {Array} The list of rounds.
-       * @description
-       * Returns all rounds.
-       */
-      function getRounds() {
-        // TODO we should use a service for this
-        return Storage.get('rounds') || [];
-      }
-
-      /**
-       * @ngdoc method
-       * @name SummaryController#getPoints
-       * @kind function
-       * @methodOf app.players.controller:SummaryController
-       * @return {number} The missing points of the given player after selected round.
+       * @return {number|undefined} The missing points of the given player after selected round.
        * @description
        * Returns the missing points of the selected player after the given round.
        */
-      function getPoints(player, round) {
-        // TODO we should use a service for this
-        return round[player.id].missingPoint;
+      function getMissingPoints(player, round) {
+        // FIXME of course it does not work but it's only a first step to see the points of the specific round.
+        if (round[player.id].points) {
+          return round[player.id].points;
+        }
       }
 
     }

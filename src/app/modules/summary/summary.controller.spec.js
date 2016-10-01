@@ -9,6 +9,7 @@ describe('Summary controller', function() {
     createCtrl = function() {
       return $controller('SummaryController', {
         'SelectedPlayers': {},
+        'Match': {},
         'Storage': {}
       });
     };

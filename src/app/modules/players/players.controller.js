@@ -13,8 +13,8 @@ angular
     'SavedPlayers',
     'SelectedPlayers',
     'PlayerFactory',
-    'Storage',
-    function($location, SavedPlayers, SelectedPlayers, PlayerFactory, Storage) {
+    'Match',
+    function($location, SavedPlayers, SelectedPlayers, PlayerFactory, Match) {
       var vm = this;
 
       // Exposes public methods
@@ -141,12 +141,7 @@ angular
        * Creates a new match. This will define a new initial round where all selected players have the initial score.
        */
       function start() {
-        // TODO should be done by a service
-        var round = {};
-        angular.forEach(vm.selectedPlayers.get(), function(player) {
-          round[player.id] = {missingPoint: 201};
-        });
-        Storage.save('rounds', [round]);
+        Match.reset();
         // TODO this should be done through a state.
         $location.path('summary');
       }

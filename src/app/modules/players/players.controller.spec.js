@@ -11,7 +11,7 @@ describe('Players controller', function() {
         'SavedPlayers': {},
         'SelectedPlayers': {},
         'PlayerFactory': {},
-        'Storage': {}
+        'Match': {}
       });
     };
   }));
