@@ -25,6 +25,20 @@ angular
 
       /**
        * @ngdoc method
+       * @name PlayersList#getItemOffset
+       * @kind function
+       * @methodOf app.service:PlayersList
+       * @param {Object} item Object to find in the storage
+       * @return {number} The item offset
+       * @description
+       * Returns the offset of the given item in the storage, otherwise -1.
+       */
+      function getItemOffset(item) {
+        return PlayersList.getItemOffset(storageKey, item);
+      }
+
+      /**
+       * @ngdoc method
        * @name SelectedPlayers#addItem
        * @kind function
        * @methodOf app.service:SelectedPlayers
@@ -89,9 +103,25 @@ angular
         PlayersList.save(storageKey, list);
       }
 
+      /**
+       * @ngdoc method
+       * @name SelectedPlayers#getById
+       * @kind function
+       * @methodOf app.service:SelectedPlayers
+       * @param {number} id Value of the item id
+       * @return {number} The item that matches the given id.
+       * @description
+       * Returns the item whose id matches the give one.
+       */
+      function getById(id) {
+        return PlayersList.getById(storageKey, id);
+      }
+
       return {
         addItem: addItem,
         get: get,
+        getById: getById,
+        getItemOffset: getItemOffset,
         isItemAdded: isItemAdded,
         removeItem: removeItem,
         save: save

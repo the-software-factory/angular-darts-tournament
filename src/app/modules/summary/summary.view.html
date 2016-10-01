@@ -31,5 +31,6 @@
   <!-- TODO this string needs to be translated -->
   <a class="btn btn-info btn-lg"
       role="button"
-      href="#!/round">prossimo giocatore</a>
+      href="#!/round/{{vm.roundID}}/player/{{vm.playerID}}">prossimo giocatore</a>
+  <h3 ng-bind="vm.match.getNextPlayer().name"></h3>
 </div>

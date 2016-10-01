@@ -9,7 +9,7 @@ angular
   .config([
     '$routeProvider',
     function($routeProvider) {
-      $routeProvider.when('/summary', {
+      $routeProvider.when('/summary/round/:roundID/player/:playerID', {
         templateUrl: 'app/modules/summary/summary.view.html',
         controller: 'SummaryController',
         controllerAs: 'vm'

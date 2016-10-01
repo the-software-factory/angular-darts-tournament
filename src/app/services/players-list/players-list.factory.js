@@ -17,7 +17,6 @@ angular
        * @ngdoc method
        * @name PlayersList#getItemOffset
        * @kind function
-       * @private
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
        * @param {Object} item Object to find in the storage
@@ -25,7 +24,7 @@ angular
        * @description
        * Returns the offset of the given item in the storage, otherwise -1.
        */
-      var getItemOffset = function(storageKey, item) {
+      function getItemOffset(storageKey, item) {
         var offset = -1;
         angular.forEach(get(storageKey), function(iteratedItem, index) {
           if (iteratedItem.id === item.id) {
@@ -33,7 +32,7 @@ angular
           }
         });
         return offset;
-      };
+      }
 
       /**
        * @ngdoc method
@@ -112,9 +111,32 @@ angular
         Storage.save(storageKey, list);
       }
 
+      /**
+       * @ngdoc method
+       * @name PlayersList#getById
+       * @kind function
+       * @methodOf app.service:PlayersList
+       * @param {string} storageKey Key used by storage to reference item
+       * @param {number} id Value of the item id
+       * @return {number} The item that matches the given id.
+       * @description
+       * Returns the item whose id matches the give one.
+       */
+      function getById(storageKey, id) {
+        var item = null;
+        angular.forEach(get(storageKey), function(iteratedItem) {
+          if (iteratedItem.id == id) {
+            item = iteratedItem;
+          }
+        });
+        return item;
+      }
+
       return {
         addItem: addItem,
         get: get,
+        getById: getById,
+        getItemOffset: getItemOffset,
         isItemAdded: isItemAdded,
         removeItem: removeItem,
         save: save

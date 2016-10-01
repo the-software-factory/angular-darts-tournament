@@ -9,10 +9,10 @@ angular
    * The controller for the summary page.
    */
   .controller('SummaryController', [
+    '$routeParams',
     'SelectedPlayers',
     'Match',
-    'Storage',
-    function(SelectedPlayers, Match, Storage) {
+    function($routeParams, SelectedPlayers, Match) {
       var vm = this;
 
       // Exposes public methods
@@ -26,6 +26,22 @@ angular
        * @propertyOf app.players.controller:SummaryController
        */
       vm.match = Match;
+
+      /**
+       * @ngdoc property
+       * @name SummaryController#playerID
+       * @type {number}
+       * @propertyOf app.players.controller:SummaryController
+       */
+      vm.playerID = $routeParams.playerID;
+
+      /**
+       * @ngdoc property
+       * @name SummaryController#round
+       * @type {number}
+       * @propertyOf app.players.controller:SummaryController
+       */
+      vm.roundID = $routeParams.roundID;
 
       /**
        * @ngdoc method

@@ -142,8 +142,7 @@ angular
        */
       function start() {
         Match.reset();
-        // TODO this should be done through a state.
-        $location.path('summary');
+        $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
       }
 
     }
