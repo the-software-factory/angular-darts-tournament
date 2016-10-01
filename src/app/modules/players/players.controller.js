@@ -9,9 +9,10 @@ angular
    * The controller for the players list.
    */
   .controller('PlayersController', [
-    'PlayersAdapter',
+    'SavedPlayers',
+    'SelectedPlayers',
     'PlayerFactory',
-    function(PlayersAdapter, PlayerFactory) {
+    function(SavedPlayers, SelectedPlayers, PlayerFactory) {
       var vm = this;
 
       // Exposes public methods
@@ -24,11 +25,19 @@ angular
 
       /**
        * @ngdoc property
-       * @name PlayersController#adapter
+       * @name PlayersController#savedPlayers
        * @type {Object}
        * @propertyOf app.players.controller:PlayersController
        */
-      vm.adapter = PlayersAdapter;
+      vm.savedPlayers = SavedPlayers;
+
+      /**
+       * @ngdoc property
+       * @name PlayersController#selectedPlayers
+       * @type {Object}
+       * @propertyOf app.players.controller:PlayersController
+       */
+      vm.selectedPlayers = SelectedPlayers;
 
       /**
        * @ngdoc method
@@ -41,13 +50,7 @@ angular
        * Determines if the give player has been already selected or not.
        */
       function isPlayerSelected(player) {
-        var isPlayerSelected = false;
-        angular.forEach(vm.adapter.getSelectedPlayers(), function(selectedPlayer) {
-          if (selectedPlayer.id === player.id) {
-            isPlayerSelected = true;
-          }
-        });
-        return isPlayerSelected;
+        return vm.selectedPlayers.isItemAdded(player);
       }
 
       /**
@@ -78,7 +81,7 @@ angular
        * Determines if user selected enough players to start match.
        */
       function areSelectedPlayersEnough() {
-        return vm.adapter.getSelectedPlayers().length >= 2;
+        return vm.selectedPlayers.get().length >= 2;
       }
 
       /**
@@ -91,10 +94,7 @@ angular
        * Remove the given player from the selected players list.
        */
       function deselectPlayer(player) {
-        var selectedPlayers = vm.adapter.getSelectedPlayers();
-        var offset = selectedPlayers.indexOf(player);
-        selectedPlayers.splice(offset, 1);
-        vm.adapter.persistSelectedPlayers(selectedPlayers);
+        vm.selectedPlayers.removeItem(player);
       }
 
       /**
@@ -107,9 +107,7 @@ angular
        * Add the given player into the selected players list.
        */
       function selectPlayer(player) {
-        var selectedPlayers = vm.adapter.getSelectedPlayers();
-        selectedPlayers.push(player);
-        vm.adapter.persistSelectedPlayers(selectedPlayers);
+        vm.selectedPlayers.addItem(player);
       }
 
       /**
@@ -126,12 +124,8 @@ angular
         if (vm.newPlayerName) {
           var newPlayer = PlayerFactory.create(vm.newPlayerName);
           vm.newPlayerName = null;
-
           vm.selectPlayer(newPlayer);
-
-          var savedPlayers = vm.adapter.getSavedPlayers();
-          savedPlayers.push(newPlayer);
-          vm.adapter.persistSavedPlayers(savedPlayers);
+          vm.savedPlayers.addItem(newPlayer);
         }
       }
 

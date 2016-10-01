@@ -4,9 +4,9 @@
 </div>
 
 <div class="container text-center">
-  <div ng-show="vm.adapter.getSavedPlayers().length">
+  <div ng-show="vm.savedPlayers.get().length">
     <!-- TODO this string needs to be translated -->
-    sono stati selezionati {{ vm.adapter.getSelectedPlayers().length }} giocatori
+    sono stati selezionati {{ vm.selectedPlayers.get().length }} giocatori
   </div>
 
   <div class="adt-card">
@@ -18,7 +18,7 @@
   </div>
 
   <div class="adt-card"
-      ng-repeat="player in vm.adapter.getSavedPlayers() track by player.id"
+      ng-repeat="player in vm.savedPlayers.get() track by player.id"
       ng-bind="player.name"
       ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
       ng-click="vm.togglePlayer(player)"></div>

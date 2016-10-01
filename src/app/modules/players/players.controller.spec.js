@@ -8,7 +8,8 @@ describe('Players controller', function() {
   beforeEach(inject(function($controller) {
     createCtrl = function() {
       return $controller('PlayersController', {
-        'PlayersAdapter': {},
+        'SavedPlayers': {},
+        'SelectedPlayers': {},
         'PlayerFactory': {}
       });
     };
