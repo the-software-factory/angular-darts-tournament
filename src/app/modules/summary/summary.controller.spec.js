@@ -8,9 +8,9 @@ describe('Summary controller', function() {
   beforeEach(inject(function($controller) {
     createCtrl = function() {
       return $controller('SummaryController', {
+        '$routeParams': {},
         'SelectedPlayers': {},
-        'Match': {},
-        'Storage': {}
+        'Match': {}
       });
     };
   }));

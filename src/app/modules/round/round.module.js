@@ -11,7 +11,7 @@ angular
     function($routeProvider) {
       $routeProvider.when('/round/:roundID/player/:playerID', {
         templateUrl: 'app/modules/round/round.view.html',
-        controller: 'roundCtrl',
+        controller: 'RoundController',
         controllerAs: 'vm'
       });
     }

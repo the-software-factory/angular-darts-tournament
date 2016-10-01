@@ -66,10 +66,10 @@ angular
        * Returns the missing points of the selected player after the given round.
        */
       function getMissingPoints(player, round) {
-        // FIXME of course it does not work but it's only a first step to see the points of the specific round.
-        if (round[player.id].points) {
-          return round[player.id].points;
+        if (vm.match.getRound(player, round)) {
+          return vm.match.getInitialPoints() - vm.match.getPoints(player, round);
         }
+        return;
       }
 
     }

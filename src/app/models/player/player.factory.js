@@ -35,9 +35,7 @@ angular
 
         return {
           name: name,
-          id: playerID,
-          // FIXME To remove. This should be a property that associates player and match.
-          totScore: 501
+          id: playerID
         };
       }
 
