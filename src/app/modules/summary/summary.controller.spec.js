@@ -1,26 +1,24 @@
 'use strict';
 
-describe('Players controller', function() {
+describe('Summary controller', function() {
   var createCtrl;
 
-  beforeEach(module('app.players'));
+  beforeEach(module('app.summary'));
 
   beforeEach(inject(function($controller) {
     createCtrl = function() {
-      return $controller('PlayersController', {
-        'SavedPlayers': {},
+      return $controller('SummaryController', {
         'SelectedPlayers': {},
-        'PlayerFactory': {},
         'Storage': {}
       });
     };
   }));
 
-  describe('should provide a "addNewPlayer" property that', function() {
+  describe('should provide a "getPlayers" property that', function() {
 
     it('should be a function', function() {
       var ctrl = createCtrl();
-      expect(angular.isFunction(ctrl.addNewPlayer)).toBe(true);
+      expect(angular.isFunction(ctrl.getPlayers)).toBe(true);
     });
 
   });

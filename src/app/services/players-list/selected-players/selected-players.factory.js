@@ -21,7 +21,7 @@ angular
        * @type {string}
        * @propertyOf app.service:SelectedPlayers
        */
-      var storageKey = 'selectedPlayers';
+      var storageKey = 'players';
 
       /**
        * @ngdoc method

@@ -9,10 +9,12 @@ angular
    * The controller for the players list.
    */
   .controller('PlayersController', [
+    '$location',
     'SavedPlayers',
     'SelectedPlayers',
     'PlayerFactory',
-    function(SavedPlayers, SelectedPlayers, PlayerFactory) {
+    'Storage',
+    function($location, SavedPlayers, SelectedPlayers, PlayerFactory, Storage) {
       var vm = this;
 
       // Exposes public methods
@@ -21,6 +23,7 @@ angular
       vm.deselectPlayer = deselectPlayer;
       vm.isPlayerSelected = isPlayerSelected;
       vm.selectPlayer = selectPlayer;
+      vm.start = start;
       vm.togglePlayer = togglePlayer;
 
       /**
@@ -127,6 +130,25 @@ angular
           vm.selectPlayer(newPlayer);
           vm.savedPlayers.addItem(newPlayer);
         }
+      }
+
+      /**
+       * @ngdoc method
+       * @name PlayersController#start
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @description
+       * Creates a new match. This will define a new initial round where all selected players have the initial score.
+       */
+      function start() {
+        // TODO should be done by a service
+        var round = {};
+        angular.forEach(vm.selectedPlayers.get(), function(player) {
+          round[player.id] = {missingPoint: 201};
+        });
+        Storage.save('rounds', [round]);
+        // TODO this should be done through a state.
+        $location.path('summary');
       }
 
     }
