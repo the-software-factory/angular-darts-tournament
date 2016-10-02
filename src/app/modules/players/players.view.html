@@ -1,33 +1,42 @@
-<div class="container text-center">
-  <!-- TODO this string needs to be translated -->
-  <h2>seleziona giocatori</h2>
-</div>
+<div class="container-fluid text-center">
 
-<div class="container text-center">
-  <div ng-show="vm.savedPlayers.get().length">
+  <div class="col-xs-12">
     <!-- TODO this string needs to be translated -->
-    sono stati selezionati {{ vm.selectedPlayers.get().length }} giocatori
+    <h2>seleziona giocatori</h2>
   </div>
 
-  <div class="adt-card">
-    <input type="text"
-        name="namePlayer"
-        ng-model="vm.newPlayerName">
-    <!-- TODO this string needs to be translated -->
-    <button ng-click="vm.addNewPlayer()">aggiungi</button>
+  <div class="col-xs-12">
+    <div ng-show="vm.savedPlayers.get().length">
+      <!-- TODO this string needs to be translated -->
+      sono stati selezionati {{ vm.selectedPlayers.get().length }} giocatori
+    </div>
   </div>
 
-  <div class="adt-card"
-      ng-repeat="player in vm.savedPlayers.get() track by player.id"
-      ng-bind="player.name"
-      ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
-      ng-click="vm.togglePlayer(player)"></div>
-</div>
+  <div class="col-xs-12">
+    <div class="adt-card">
+      <input type="text"
+          name="namePlayer"
+          ng-model="vm.newPlayerName">
+      <!-- TODO this string needs to be translated -->
+      <button ng-click="vm.addNewPlayer()">aggiungi</button>
+    </div>
 
-<div class="container text-center">
-  <!-- TODO this string needs to be translated -->
-  <a class="btn btn-info btn-lg"
-      role="button"
-      ng-click="vm.start()"
-      ng-show="vm.areSelectedPlayersEnough()">start</a>
+    <div class="adt-card"
+          ng-repeat="player in vm.savedPlayers.get() track by player.id"
+          ng-bind="player.name"
+          ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
+          ng-click="vm.togglePlayer(player)"></div>
+  </div>
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-click="vm.start()"
+        ng-show="vm.areSelectedPlayersEnough()">
+      start
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+
 </div>
