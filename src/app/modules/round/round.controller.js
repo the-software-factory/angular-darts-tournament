@@ -108,20 +108,20 @@ angular
       function cancel() {
         alert('to implement');
       }
-  
+
       // TODO Add docblock
       function isRoundCompleted() {
         return vm.shots.length == 3 && vm.button == null;
       }
-      
+
       // TODO Add docblock
       function confirm() {
         vm.blockCurrent = false;
         vm.button = null;
+        Match.addRound(vm.player, vm.round, vm.getRoundSum());
         if (vm.shots.length === 3) {
           return;
         }
-        Match.addRound(vm.player, vm.round, vm.getRoundSum());
         vm.shotIndex++;
         // TODO Enable all buttons
       }
@@ -129,9 +129,9 @@ angular
       // TODO Add docblock
       function getMissingPoints() {
         // FIXME It should calc the made points.
-        return Match.getInitialPoints() - vm.getRoundSum();
+        return Match.getInitialPoints() - Match.getPoints(vm.player, vm.round - 1) - vm.getRoundSum();
       }
-      
+
       // TODO Add docblock
       function getRoundSum() {
         var sum = 0;
