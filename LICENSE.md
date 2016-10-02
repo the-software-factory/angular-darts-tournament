@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2015 Vendini srl vendini@pec.it
+Copyright (c) 2016 Vendini srl vendini@pec.it
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

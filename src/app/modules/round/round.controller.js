@@ -2,7 +2,12 @@
 
 angular
   .module('app.round')
-  // TODO Add docblock
+  /**
+   * @ngdoc controller
+   * @name app.round.controller:RoundController
+   * @description
+   * The controller for the summary page.
+   */
   .controller('RoundController', [
     '$routeParams',
     '$location',
@@ -21,11 +26,23 @@ angular
       vm.init = init;
       vm.isButtonDisabled = isButtonDisabled;
       vm.isRoundCompleted = isRoundCompleted;
-      
-      // TODO Add docblock
-      vm.values = [];
 
-      // TODO Add docblock
+      /**
+       * @ngdoc property
+       * @name RoundController#numbers
+       * @type {Array}
+       * @propertyOf app.round.controller:RoundController
+       * @description The collection of allowed numbers on the circular dartboard.
+       */
+      vm.numbers = [];
+
+      /**
+       * @ngdoc property
+       * @name RoundController#player
+       * @type {Object}
+       * @propertyOf app.round.controller:RoundController
+       * @description The current player.
+       */
       vm.player = SelectedPlayers.getById($routeParams.playerID);
 
       // TODO Add docblock
@@ -37,20 +54,30 @@ angular
       // TODO Add docblock
       vm.shots = [];
 
-      vm.button = null;
-      vm.blockCurrent = false;
-  
-      vm.init();
-  
       // TODO Add docblock
+      vm.button = null;
+
+      // TODO Add docblock
+      vm.blockCurrent = false;
+
+      vm.init();
+
+      /**
+       * @ngdoc method
+       * @name RoundController#init
+       * @kind function
+       * @methodOf app.round.controller:RoundController
+       * @description
+       * Initialize the properties of the controller.
+       */
       function init() {
         for (var i = 0; i <= 20; i++) {
-          vm.values.push(i);
+          vm.numbers.push(i);
         }
-        vm.values.push(25);
+        vm.numbers.push(25);
         Match.setCurrentPlayer(vm.player);
       }
-  
+
       // TODO Add docblock
       function addPoint(value) {
         vm.button = value;
@@ -113,14 +140,14 @@ angular
         });
         return sum;
       }
-  
+
       // TODO Add docblock
       function go() {
         // NOTE: Object.keys returns "$$hashKey"
         var nextRound = Object.keys(Match.getRounds()[vm.round - 1]).length - 1 < SelectedPlayers.get().length ? vm.round : parseInt(vm.round) + 1;
         $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer().id);
       }
-  
+
       // TODO Add docblock
       function isButtonDisabled(value) {
         return vm.button != null && value != vm.button || (vm.blockCurrent && value == vm.button);
