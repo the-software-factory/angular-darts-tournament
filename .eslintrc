@@ -2,7 +2,7 @@
   "plugins": ["jasmine", "angular"],
   "rules": {
     "indent": [
-      "warn",
+      "error",
       2,
       {
         "SwitchCase": 1
@@ -20,8 +20,8 @@
       0,
       "array"
     ],
-    "no-undef" : ["warn"],
-    "no-mixed-spaces-and-tabs" : ["warn"],
+    "no-undef" : ["error"],
+    "no-mixed-spaces-and-tabs" : ["error"],
     "keyword-spacing": ["error"],
     "dot-notation": ["error"],
     "array-bracket-spacing": ["error", "never"],
