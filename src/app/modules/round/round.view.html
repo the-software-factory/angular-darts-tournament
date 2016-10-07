@@ -17,8 +17,8 @@
 
   <div class="col-xs-4" ng-repeat="i in [0, 1, 2]">
     <h4>tiro {{i + 1}}</h4>
-    <h3 ng-if="vm.shots[i]" ng-bind="vm.shots[i]"></h3>
-    <h3 ng-if="!vm.shots[i]" ng-class="{'blink': vm.shotIndex == i}">-</h3>
+    <h3 ng-if="vm.shots[i] >= 0" ng-bind="vm.shots[i]"></h3>
+    <h3 ng-if="!vm.shots[i] && vm.shots[i] != 0" ng-class="{'blink': vm.shotIndex == i}">-</h3>
   </div>
 
   <div class="col-xs-12">
