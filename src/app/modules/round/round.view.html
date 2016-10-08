@@ -35,19 +35,23 @@
         ng-bind="number"></button>
   </div>
 
-  <div class="col-xs-12">
-    <button class="btn btn-danger"
+  <div class="col-xs-6">
+    <button class="btn btn-danger btn-lg"
         disabled="disabled"
         ng-click="vm.cancel()">
       <span class="glyphicon glyphicon-remove"></span>
     </button>
+  </div>
 
-    <button class="btn btn-success"
+  <div class="col-xs-6">
+    <button class="btn btn-success btn-lg"
         ng-disabled="(!vm.number && vm.number != 0) || vm.isRoundCompleted()"
         ng-click="!vm.isRoundCompleted() && vm.confirm()">
       <span class="glyphicon glyphicon-ok"></span>
     </button>
+  </div>
 
+  <div class="col-xs-12">
     <!-- TODO this string needs to be translated -->
     <button class="btn btn-primary btn-lg btn-block"
         ng-if="vm.isRoundCompleted()"
