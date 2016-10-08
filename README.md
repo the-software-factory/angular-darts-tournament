@@ -64,3 +64,6 @@ Test suite can be run with the following command:
 ```sh
 npm test
 ```
+
+### Contributing
+Take a look at [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
