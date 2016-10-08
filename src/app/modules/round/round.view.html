@@ -43,7 +43,7 @@
     </button>
 
     <button class="btn btn-success"
-        ng-disabled="vm.isRoundCompleted()"
+        ng-disabled="(!vm.number && vm.number != 0) || vm.isRoundCompleted()"
         ng-click="!vm.isRoundCompleted() && vm.confirm()">
       <span class="glyphicon glyphicon-ok"></span>
     </button>
