@@ -32,8 +32,9 @@
   },
   "scripts": {
     "postinstall": "bower install",
+    "prepush": "npm test",
     "start": "gulp connect",
-    "prepush": "gulp test"
+    "test": "gulp test"
   },
   "bugs": {
     "url": "https://github.com/the-software-factory/angular-darts-tournament/issues"

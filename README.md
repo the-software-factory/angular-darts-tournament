@@ -57,3 +57,10 @@ Then run `npm start` to access the application at [http://localhost:8000/](http:
 ### Source
 The entire AngularJS source code is within the `src` folder.
 Click [here](src) for more details.
+
+### Tests
+Test suite can be run with the following command:
+
+```sh
+npm test
+```
