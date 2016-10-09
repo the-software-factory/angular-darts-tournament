@@ -9,9 +9,15 @@ var minifyCss = require('gulp-clean-css');
 var preprocess = require('gulp-preprocess');
 var copy = require('gulp-contrib-copy');
 var connect = require('gulp-connect');
+var watch = require('gulp-watch');
 
 var srcDir = 'src';
 var appDir = srcDir + '/app';
+
+var paths = {
+  sass: [appDir + '/style/**/*.scss'],
+  scripts: [appDir + '/**/*.module.js', appDir + '/**/*.js', '!' + appDir + '/**/*.spec.js', appDir + '/app.js']
+};
 
 gulp.task('html', function() {
   gulp.src(srcDir + '/index.html')
@@ -135,4 +141,9 @@ gulp.task('connect', function () {
   });
 });
 
-gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript']);
+gulp.task('watch', function() {
+  gulp.watch(paths.scripts, ['script']);
+  gulp.watch(paths.sass, ['sass']);
+});
+
+gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript', 'connect','watch']);
