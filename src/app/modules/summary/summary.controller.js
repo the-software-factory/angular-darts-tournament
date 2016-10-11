@@ -9,15 +9,17 @@ angular
    * The controller for the summary page.
    */
   .controller('SummaryController', [
+    '$location',
     '$routeParams',
     'SelectedPlayers',
     'Match',
-    function($routeParams, SelectedPlayers, Match) {
+    function($location, $routeParams, SelectedPlayers, Match) {
       var vm = this;
 
       // Exposes public methods
       vm.getPlayers = getPlayers;
       vm.getMissingPoints = getMissingPoints;
+      vm.goToRound = goToRound;
 
       /**
        * @ngdoc property
@@ -67,10 +69,22 @@ angular
        */
       function getMissingPoints(player, round) {
         // 0 (zero) is a defined value
-        if (angular.isDefined(vm.match.getRound(player, round))) {
+        if (angular.isNumber(vm.match.getRound(player, round))) {
           return vm.match.getInitialPoints() - vm.match.getPoints(player, round);
         }
         return;
+      }
+
+      /**
+       * @ngdoc method
+       * @name SummaryController#goToRound
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Go to the round view.
+       */
+      function goToRound() {
+        $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
       }
 
     }

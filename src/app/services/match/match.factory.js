@@ -119,7 +119,7 @@ angular
         var rounds = getRounds();
         if (!rounds[round - 1] ||
             // 0 (zero) is a defined value
-            !angular.isDefined(rounds[round - 1][player.id])) {
+            !angular.isNumber(rounds[round - 1][player.id])) {
           return;
         }
         return rounds[round - 1][player.id];

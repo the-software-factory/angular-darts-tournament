@@ -33,7 +33,7 @@
     <!-- TODO Move routing on the controller -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
-        href="#!/round/{{vm.roundID}}/player/{{vm.playerID}}">
+        ng-click="vm.goToRound()">
       turno {{vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>

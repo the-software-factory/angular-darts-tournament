@@ -23,7 +23,7 @@ angular
       vm.deselectPlayer = deselectPlayer;
       vm.isPlayerSelected = isPlayerSelected;
       vm.selectPlayer = selectPlayer;
-      vm.start = start;
+      vm.startMatch = startMatch;
       vm.togglePlayer = togglePlayer;
 
       /**
@@ -140,7 +140,7 @@ angular
        * @description
        * Creates a new match. This will define a new initial round where all selected players have the initial score.
        */
-      function start() {
+      function startMatch() {
         Match.reset();
         $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
       }
