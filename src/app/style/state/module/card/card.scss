@@ -1,9 +1,17 @@
-$adt-card-selected-bg-color: grey;
+$adt-card-selected-bg-color: #8e8e8e;
 
 .adt-card {
 
   &.is-adt-card-selected {
     background: $adt-card-selected-bg-color;
+
+    .glyphicon {
+
+      &.adt-card-check {
+        display: block !important;
+      }
+
+    }
   }
 
 }
