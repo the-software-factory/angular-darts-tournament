@@ -19,7 +19,7 @@ angular
       // Exposes public methods
       vm.getPlayers = getPlayers;
       vm.getMissingPoints = getMissingPoints;
-      vm.goToRound = goToRound;
+      vm.nextRound = nextRound;
 
       /**
        * @ngdoc property
@@ -55,7 +55,7 @@ angular
        * Returns all selected players.
        */
       function getPlayers() {
-        return SelectedPlayers.get();
+        return SelectedPlayers.getAll();
       }
 
       /**
@@ -68,22 +68,23 @@ angular
        * Returns the missing points of the selected player after the given round.
        */
       function getMissingPoints(player, round) {
-        // 0 (zero) is a defined value
+        // 0 (zero) is a defined value.
+        // If player played that round then a number exists
         if (angular.isNumber(vm.match.getRound(player, round))) {
-          return vm.match.getInitialPoints() - vm.match.getPoints(player, round);
+          return vm.match.getInitialPoints() - vm.match.getPointsUntilRound(player, round);
         }
         return;
       }
 
       /**
        * @ngdoc method
-       * @name SummaryController#goToRound
+       * @name SummaryController#nextRound
        * @kind function
        * @methodOf app.summary.controller:SummaryController
        * @description
        * Go to the round view.
        */
-      function goToRound() {
+      function nextRound() {
         $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
       }
 

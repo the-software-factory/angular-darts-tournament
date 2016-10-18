@@ -1,0 +1,19 @@
+.adt-table {
+  border: 0;
+
+  th,
+  td {
+    padding: 5px 15px;
+    text-align: center;
+
+    &.is-adt-table-cell-no-border {
+      border-right: 0 !important;
+    }
+  }
+
+  tr {
+    &.is-adt-table-row-highlighted {
+      background-color: #8ab4f0;
+    }
+  }
+}

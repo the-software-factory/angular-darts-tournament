@@ -6,17 +6,29 @@
   </div>
 
   <div class="col-xs-12">
-    <table border="1" align="center">
+    <table align="center" class="adt-table">
       <thead>
         <tr>
-          <th ng-repeat="player in vm.getPlayers()" ng-bind="player.name"></th>
+          <th class="is-adt-table-cell-no-border"></th>
+          <th ng-repeat="player in vm.getPlayers()" class="is-adt-table-cell-no-border">
+            <span class="glyphicon glyphicon-user adt-badge"></span>
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+          <th ng-repeat="player in vm.getPlayers()" ng-bind="player.name | initials" class="text-uppercase"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr ng-class="{'is-adt-table-row-highlighted': !vm.match.getRounds().length}">
+          <!-- TODO this string needs to be translated -->
+          <td class="text-capitalize">start</td>
           <td ng-repeat="player in vm.getPlayers()" ng-bind="vm.match.getInitialPoints()"></td>
         </tr>
-        <tr ng-repeat="round in vm.match.getRounds()">
+        <tr ng-repeat="round in vm.match.getRounds()"
+            ng-class="{'is-adt-table-row-highlighted': vm.match.getRounds().length == $index + 1}">
+          <!-- TODO this string needs to be translated -->
+          <td class="text-capitalize">round {{$index + 1}}</td>
           <td ng-repeat="player in vm.getPlayers()">
             <span ng-bind="vm.getMissingPoints(player, $parent.$index + 1)"></span>
           </td>
@@ -25,6 +37,7 @@
     </table>
   </div>
 
+  <!-- TODO Next player or winner -->
   <div class="col-xs-12">
     <!-- TODO this string needs to be translated -->
     <h4>prossimo giocatore</h4>
@@ -33,7 +46,7 @@
     <!-- TODO Move routing on the controller -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
-        ng-click="vm.goToRound()">
+        ng-click="vm.nextRound()">
       turno {{vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
