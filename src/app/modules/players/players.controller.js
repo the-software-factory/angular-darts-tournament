@@ -53,7 +53,7 @@ angular
        * Determines if the give player has been already selected or not.
        */
       function isPlayerSelected(player) {
-        return vm.selectedPlayers.isItemAdded(player);
+        return vm.selectedPlayers.isAdded(player);
       }
 
       /**
@@ -84,7 +84,7 @@ angular
        * Determines if user selected enough players to start match.
        */
       function areSelectedPlayersEnough() {
-        return vm.selectedPlayers.get().length >= 2;
+        return vm.selectedPlayers.getAll().length >= Match.getMinimumNumberOfPlayers();
       }
 
       /**
@@ -97,7 +97,7 @@ angular
        * Remove the given player from the selected players list.
        */
       function deselectPlayer(player) {
-        vm.selectedPlayers.removeItem(player);
+        vm.selectedPlayers.remove(player);
       }
 
       /**
@@ -110,7 +110,7 @@ angular
        * Add the given player into the selected players list.
        */
       function selectPlayer(player) {
-        vm.selectedPlayers.addItem(player);
+        vm.selectedPlayers.add(player);
       }
 
       /**
@@ -125,10 +125,14 @@ angular
        */
       function addNewPlayer() {
         if (vm.newPlayerName) {
-          var newPlayer = PlayerFactory.create(vm.newPlayerName);
+          var newPlayer = PlayerFactory.create(vm.newPlayerName, vm.savedPlayers.getAll());
           vm.newPlayerName = null;
           vm.selectPlayer(newPlayer);
-          vm.savedPlayers.addItem(newPlayer);
+          vm.savedPlayers.add(newPlayer);
+        }
+        else {
+          // TODO This method is not testable. Please replace $
+          // $('input').focus();
         }
       }
 

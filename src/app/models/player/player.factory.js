@@ -10,8 +10,7 @@ angular
    * Generates new players objects.
    */
   .factory('PlayerFactory', [
-    'Storage',
-    function(Storage) {
+    function() {
 
       /**
        * @ngdoc method
@@ -19,15 +18,14 @@ angular
        * @kind function
        * @methodOf app.service:PlayerFactory
        * @param {string} name The name of the new player
+       * @param {Array} players The list of available players
        * @description
        * Creates a new player given his/her name.
        */
-      function create(name) {
-        var savedPlayers = Storage.get('savedPlayers') || [];
-
+      function create(name, players) {
         var playerID = 1;
-        // Gets the max playerID between the saved players and increments it by 1
-        angular.forEach(savedPlayers, function(player) {
+        // Gets the max playerID between the available players and increments it by 1
+        angular.forEach(players, function(player) {
           if (player.id >= playerID) {
             playerID = player.id + 1;
           }

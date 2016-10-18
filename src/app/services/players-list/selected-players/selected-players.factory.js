@@ -39,15 +39,15 @@ angular
 
       /**
        * @ngdoc method
-       * @name SelectedPlayers#addItem
+       * @name SelectedPlayers#add
        * @kind function
        * @methodOf app.service:SelectedPlayers
        * @param {Object} item Object to add in the storage
        * @description
        * Add given item in the storage.
        */
-      function addItem(item) {
-        PlayersList.addItem(storageKey, item);
+      function add(item) {
+        PlayersList.add(storageKey, item);
       }
 
       /**
@@ -59,35 +59,35 @@ angular
        * @description
        * Returns the entire list referenced by give storageKey
        */
-      function get() {
-        return PlayersList.get(storageKey);
+      function getAll() {
+        return PlayersList.getAll(storageKey);
       }
 
       /**
        * @ngdoc method
        * @name SelectedPlayers#get
        * @kind function
-       * @methodOf app.service:isItemAdded
+       * @methodOf app.service:isAdded
        * @param {Object} item Object to add in the storage
        * @return {boolean} True if the given item has been already added.
        * @description
        * Determines if the given item is stored in the list.
        */
-      function isItemAdded(item) {
-        return PlayersList.isItemAdded(storageKey, item);
+      function isAdded(item) {
+        return PlayersList.isAdded(storageKey, item);
       }
 
       /**
        * @ngdoc method
-       * @name SelectedPlayers#removeItem
+       * @name SelectedPlayers#remove
        * @kind function
        * @methodOf app.service:SelectedPlayers
        * @param {Object} item Object to remove from the storage
        * @description
        * Remove the give item from the storage.
        */
-      function removeItem(item) {
-        PlayersList.removeItem(storageKey, item);
+      function remove(item) {
+        PlayersList.remove(storageKey, item);
       }
 
       /**
@@ -118,12 +118,12 @@ angular
       }
 
       return {
-        addItem: addItem,
-        get: get,
+        add: add,
+        getAll: getAll,
         getById: getById,
         getItemOffset: getItemOffset,
-        isItemAdded: isItemAdded,
-        removeItem: removeItem,
+        isAdded: isAdded,
+        remove: remove,
         save: save
       };
 

@@ -29,10 +29,10 @@
 
   <div class="col-xs-12">
     <button class="btn btn-default btn-info adt-btn"
-        ng-repeat="number in vm.numbers"
-        ng-click="!vm.isButtonDisabled(number) && vm.addPoint(number)"
-        ng-disabled="vm.isButtonDisabled(number)"
-        ng-bind="number"></button>
+        ng-repeat="point in vm.points"
+        ng-click="!vm.isButtonDisabled(point) && vm.addPoint(point)"
+        ng-disabled="vm.isButtonDisabled(point)"
+        ng-bind="point.number"></button>
   </div>
 
   <!-- TODO To implement
@@ -57,7 +57,7 @@
     <!-- TODO this string needs to be translated -->
     <button class="btn btn-primary btn-lg btn-block"
         ng-if="vm.isRoundCompleted()"
-        ng-click="vm.isRoundCompleted() && vm.goToSummary()">
+        ng-click="vm.isRoundCompleted() && vm.viewSummary()">
       summary
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </button>

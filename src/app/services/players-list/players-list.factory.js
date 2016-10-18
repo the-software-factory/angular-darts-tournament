@@ -26,7 +26,7 @@ angular
        */
       function getItemOffset(storageKey, item) {
         var offset = -1;
-        angular.forEach(get(storageKey), function(iteratedItem, index) {
+        angular.forEach(getAll(storageKey), function(iteratedItem, index) {
           if (iteratedItem.id === item.id) {
             offset = index;
           }
@@ -36,7 +36,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersList#addItem
+       * @name PlayersList#add
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -44,9 +44,9 @@ angular
        * @description
        * Add given item in the storage.
        */
-      function addItem(storageKey, item) {
-        if (!isItemAdded(storageKey, item)) {
-          var storage = get(storageKey);
+      function add(storageKey, item) {
+        if (!isAdded(storageKey, item)) {
+          var storage = getAll(storageKey);
           storage.push(item);
           save(storageKey, storage);
         }
@@ -54,7 +54,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersList#get
+       * @name PlayersList#getAll
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -62,13 +62,13 @@ angular
        * @description
        * Returns the entire list referenced by give storageKey
        */
-      function get(storageKey) {
+      function getAll(storageKey) {
         return Storage.get(storageKey) || [];
       }
 
       /**
        * @ngdoc method
-       * @name PlayersList#isItemAdded
+       * @name PlayersList#isAdded
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -77,13 +77,13 @@ angular
        * @description
        * Determines if the given item is stored in the list.
        */
-      function isItemAdded(storageKey, item) {
+      function isAdded(storageKey, item) {
         return getItemOffset(storageKey, item) >= 0;
       }
 
       /**
        * @ngdoc method
-       * @name PlayersList#removeItem
+       * @name PlayersList#remove
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -91,8 +91,8 @@ angular
        * @description
        * Remove the give item from the storage.
        */
-      function removeItem(storageKey, item) {
-        var storage = get(storageKey);
+      function remove(storageKey, item) {
+        var storage = getAll(storageKey);
         storage.splice(getItemOffset(storageKey, item), 1);
         save(storageKey, storage);
       }
@@ -124,7 +124,7 @@ angular
        */
       function getById(storageKey, id) {
         var item = null;
-        angular.forEach(get(storageKey), function(iteratedItem) {
+        angular.forEach(getAll(storageKey), function(iteratedItem) {
           if (iteratedItem.id == id) {
             item = iteratedItem;
           }
@@ -133,12 +133,12 @@ angular
       }
 
       return {
-        addItem: addItem,
-        get: get,
+        add: add,
+        getAll: getAll,
         getById: getById,
         getItemOffset: getItemOffset,
-        isItemAdded: isItemAdded,
-        removeItem: removeItem,
+        isAdded: isAdded,
+        remove: remove,
         save: save
       };
 

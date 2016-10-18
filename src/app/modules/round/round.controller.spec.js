@@ -15,7 +15,11 @@ describe('Summary controller', function() {
         },
         'Match': {
           'setCurrentPlayer': angular.noop
-        }
+        },
+        'PointFactory': {
+          create: angular.noop
+        },
+        'RULES': {}
       });
     };
   }));

@@ -11,9 +11,12 @@ angular
   .controller('RoundController', [
     '$routeParams',
     '$location',
+    '$filter',
     'SelectedPlayers',
     'Match',
-    function($routeParams, $location, SelectedPlayers, Match) {
+    'PointFactory',
+    'RULES',
+    function($routeParams, $location, $filter, SelectedPlayers, Match, PointFactory, RULES) {
       var vm = this;
 
       // Exposes public methods
@@ -23,7 +26,6 @@ angular
       vm.getMissingPoints = getMissingPoints;
       vm.getRoundSum = getRoundSum;
       vm.getShot = getShot;
-      vm.goToSummary = goToSummary;
       vm.init = init;
       vm.isButtonDisabled = isButtonDisabled;
       vm.isButtonTapped = isButtonTapped;
@@ -31,6 +33,7 @@ angular
       vm.isOutOfRange = isOutOfRange;
       vm.isRoundCompleted = isRoundCompleted;
       vm.isShotMade = isShotMade;
+      vm.viewSummary = viewSummary;
 
       /**
        * @ngdoc property
@@ -52,12 +55,12 @@ angular
 
       /**
        * @ngdoc property
-       * @name RoundController#numbers
+       * @name RoundController#points
        * @type {Array}
        * @propertyOf app.round.controller:RoundController
-       * @description The collection of allowed numbers on the circular dartboard.
+       * @description The collection of allowed points on the circular dartboard.
        */
-      vm.numbers = [];
+      vm.points = [];
 
       /**
        * @ngdoc property
@@ -74,7 +77,7 @@ angular
        * @type {number}
        * @propertyOf app.round.controller:RoundController
        */
-      vm.round = $routeParams.roundID;
+      vm.round = parseInt($routeParams.roundID);
 
       /**
        * @ngdoc property
@@ -104,9 +107,9 @@ angular
        */
       function init() {
         for (var i = 0; i <= 20; i++) {
-          vm.numbers.push(i);
+          vm.points.push(PointFactory.create(i));
         }
-        vm.numbers.push(25);
+        vm.points.push(PointFactory.create(25));
         Match.setCurrentPlayer(vm.player);
       }
 
@@ -185,36 +188,24 @@ angular
        * @name RoundController#addPoint
        * @kind function
        * @methodOf app.round.controller:RoundController
+       * @param {Object} number An instance of Number
        * @description
        * Stores the given point and blocks the button if it can no longer be clicked.
        */
-      function addPoint(value) {
-        vm.number = parseInt(value);
+      function addPoint(point) {
+        vm.number = point.number;
         // Update current round shots
         vm.shots[vm.shotIndex] = vm.getShot(vm.shotIndex) ? vm.getShot(vm.shotIndex) + vm.number : vm.number;
 
-        switch (vm.number) {
-          case 0:
-            vm.isTappedNumberDisabled = true;
-            break;
-          case 25:
-            // 25 has a double value that is 50 (the center)
-            if (vm.getShot(vm.shotIndex) == vm.number * 2) {
-              vm.isTappedNumberDisabled = true;
-            }
-            break;
-          default:
-            // Any other number has a double (the border of the dartboard) or a triple value
-            if (vm.getShot(vm.shotIndex) == vm.number * 3) {
-              vm.isTappedNumberDisabled = true;
-            }
-            break;
+        // Disable current button if it cannot be pressed again
+        if (vm.getShot(vm.shotIndex) == vm.number * point.allowedRepetitions) {
+          vm.isTappedNumberDisabled = true;
         }
       }
 
       // TODO Add docblock
       function cancel() {
-        // TODO To implement
+        // TODO implement
         alert('to implement');
       }
 
@@ -228,7 +219,12 @@ angular
        * Determines if the round is completed.
        */
       function isRoundCompleted() {
-        return (vm.shots.length == 3 || vm.isOutOfRange()) && vm.number == null;
+        // To complete the round the last shot needs to be confirmed
+        return !vm.isButtonTapped() &&
+            // - User made all shots
+            // - User went out of range
+            // - User won
+            (vm.shots.length == RULES.SHOTS_BY_ROUND || vm.isOutOfRange() || vm.getMissingPoints() === 0);
       }
 
       /**
@@ -243,9 +239,10 @@ angular
         vm.isTappedNumberDisabled = false;
         vm.number = null;
 
-        Match.addRound(vm.player, vm.round, vm.isOutOfRange() ? 0 : vm.getRoundSum());
+        var currentRoundPoints = vm.isOutOfRange() ? 0 : vm.getRoundSum();
+        Match.addRound(vm.player, vm.round, currentRoundPoints);
 
-        if (vm.shots.length < 3) {
+        if (vm.shots.length < RULES.SHOTS_BY_ROUND) {
           vm.shotIndex++;
         }
       }
@@ -262,7 +259,7 @@ angular
       function getMissingPoints() {
         var missingPoints = Match.getInitialPoints() - vm.getRoundSum();
         if (vm.round > 1) {
-          missingPoints -= Match.getPoints(vm.player, vm.round - 1);
+          missingPoints -= Match.getPointsUntilRound(vm.player, vm.round - 1);
         }
         return missingPoints;
       }
@@ -277,24 +274,21 @@ angular
        * Returns the sum of points of the current round.
        */
       function getRoundSum() {
-        var sum = 0;
-        angular.forEach(vm.shots, function(value) {
-          sum += value;
-        });
-        return sum;
+        return $filter('arraySum')(vm.shots);
       }
 
       /**
        * @ngdoc method
-       * @name RoundController#goToSummary
+       * @name RoundController#viewSummary
        * @kind function
        * @methodOf app.round.controller:RoundController
        * @description
        * Go to the summary view with the info of the next player.
        */
-      function goToSummary() {
-        // NOTE: Object.keys returns "$$hashKey"
-        var nextRound = Object.keys(Match.getRounds()[vm.round - 1]).length - 1 < SelectedPlayers.get().length ? vm.round : parseInt(vm.round) + 1;
+      function viewSummary() {
+        // You have to determine if all players played the current round or not.
+        var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
+        var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
         $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer().id);
       }
 
@@ -303,15 +297,16 @@ angular
        * @name RoundController#isButtonDisabled
        * @kind function
        * @methodOf app.round.controller:RoundController
+       * @param {Object} point An instance of point model.
        * @return {boolean} True if the button is disabled.
        * @description
        * Determines if the given button is disabled or not.
        */
-      function isButtonDisabled(value) {
+      function isButtonDisabled(point) {
         // The button has not be pressed
-        return (vm.isButtonTapped() && value != vm.number) ||
+        return (vm.isButtonTapped() && point.number != vm.number) ||
           // The given value is the one of the pressed button and it can no longer be pressed
-          (vm.isTappedNumberDisabled && value == vm.number) ||
+          (vm.isTappedNumberDisabled && point.number == vm.number) ||
           // Round is completed so any button will be disabled
           vm.isRoundCompleted();
       }

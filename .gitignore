@@ -11,6 +11,9 @@ bower_components
 # A hidden file created by MacOS
 .DS_Store
 
+# Folder for the tests coverage
+coverage/
+
 # Distribution folder is not added in source control
 dist/
 

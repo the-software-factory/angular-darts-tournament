@@ -9,10 +9,10 @@ describe('PlayersList factory', function() {
     PlayersListService = _PlayersList_;
   }));
 
-  describe('should provide a "addItem" property that', function() {
+  describe('should provide a "add" property that', function() {
 
     it('should be a function', function() {
-      expect(angular.isFunction(PlayersListService.addItem)).toBe(true);
+      expect(angular.isFunction(PlayersListService.add)).toBe(true);
     });
 
   });

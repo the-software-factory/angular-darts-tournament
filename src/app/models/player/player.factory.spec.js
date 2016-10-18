@@ -15,6 +15,14 @@ describe('Players factory', function() {
       expect(angular.isFunction(PlayerFactoryService.create)).toBe(true);
     });
 
+    it('should return an object', function() {
+      expect(PlayerFactoryService.create('test', [])).toEqual({name: 'test', id: 1});
+    });
+
+    it('should return a new player with the max ID', function() {
+      expect(PlayerFactoryService.create('test', [{id: 1}, {id: 5}, {id: 3}])).toEqual({name: 'test', id: 6});
+    });
+
   });
 
 });

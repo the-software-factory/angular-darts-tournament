@@ -12,7 +12,8 @@ angular
   .factory('Match', [
     'SelectedPlayers',
     'Storage',
-    function(SelectedPlayers, Storage) {
+    'RULES',
+    function(SelectedPlayers, Storage, RULES) {
   
       /**
        * @ngdoc property
@@ -43,6 +44,7 @@ angular
        */
       function reset() {
         saveRounds([]);
+        currentPlayer = null;
       }
 
       /**
@@ -55,7 +57,20 @@ angular
        * Returns the initial points of each player.
        */
       function getInitialPoints() {
-        return 201;
+        return RULES.INITIAL_POINTS;
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#getMinimumNumberOfPlayers
+       * @kind function
+       * @methodOf app.service:Match
+       * @return {number} The minimum number of players to start a match.
+       * @description
+       * Returns the minimum number of players to start a match.
+       */
+      function getMinimumNumberOfPlayers() {
+        return RULES.MINIMUM_PLAYERS_NUMBER;
       }
 
       /**
@@ -150,16 +165,16 @@ angular
       function getNextPlayer() {
         if (getCurrentPlayer()) {
           var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
-          if (offset < SelectedPlayers.get().length - 1) {
-            return SelectedPlayers.get()[offset + 1];
+          if (offset < SelectedPlayers.getAll().length - 1) {
+            return SelectedPlayers.getAll()[offset + 1];
           }
         }
-        return SelectedPlayers.get()[0];
+        return SelectedPlayers.getAll()[0];
       }
   
       /**
        * @ngdoc method
-       * @name Match#getPoints
+       * @name Match#getPointsUntilRound
        * @kind function
        * @methodOf app.service:Match
        * @param {Object} player A player
@@ -168,7 +183,7 @@ angular
        * @description
        * Returns the sum of points of the selected player until given round.
        */
-      function getPoints(player, roundLimit) {
+      function getPointsUntilRound(player, roundLimit) {
         if (!roundLimit) {
           roundLimit = getRounds().length;
         }
@@ -189,8 +204,9 @@ angular
         addRound: addRound,
         getCurrentPlayer: getCurrentPlayer,
         getInitialPoints: getInitialPoints,
+        getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
         getNextPlayer: getNextPlayer,
-        getPoints: getPoints,
+        getPointsUntilRound: getPointsUntilRound,
         getRound: getRound,
         getRounds: getRounds,
         reset: reset,

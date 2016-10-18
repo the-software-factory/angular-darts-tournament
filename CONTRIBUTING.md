@@ -38,5 +38,5 @@ or they were already working on it. This happens, so our recommendation is to ta
 forth and pull request again – or create your own open source project.
 
 ## Documentation
-* [This project's README and source code](./)
+* [This project's README and source code](https://github.com/the-software-factory/angular-darts-tournament/)
 * [AngularJS](https://angularjs.org/)
