@@ -3,7 +3,8 @@
 angular
   .module('app.home', [
     'ngRoute',
-    'ngStorage'
+    'ngStorage',
+    'pascalprecht.translate'
   ])
 
   .config([

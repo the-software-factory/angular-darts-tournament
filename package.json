@@ -8,6 +8,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "angular-translate": "^2.12.1",
+    "angular-translate-loader-static-files": "^2.12.1",
     "bower": "^1.7.9",
     "eslint": "^3.0.1",
     "eslint-plugin-angular": "^1.4.0",

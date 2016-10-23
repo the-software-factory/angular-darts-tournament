@@ -1,20 +1,17 @@
 <div class="container-fluid text-center">
 
   <div class="col-xs-12">
-    <!-- TODO this string needs to be translated -->
-    <h2>seleziona giocatori</h2>
+    <h2 translate="players.SELECT_PLAYERS"></h2>
   </div>
 
   <div class="col-xs-12">
-    <div ng-show="vm.savedPlayers.getAll().length">
-      <!-- TODO this string needs to be translated -->
-      sono stati selezionati {{ vm.selectedPlayers.getAll().length }} giocatori
+    <div ng-show="vm.savedPlayers.get().length" translate="players.SELECTED_PLAYERS">
+      {{ vm.selectedPlayers.get().length }}
     </div>
   </div>
 
   <div class="col-xs-12">
     <div class="adt-card">
-      <!-- TODO this string needs to be translated -->
       <form name="createForm" ng-submit="vm.addNewPlayer()">
         <button type=submit" class="glyphicon glyphicon-plus adt-button"></button>
         <input type="text" class="text-center"
@@ -35,12 +32,11 @@
   </div>
 
   <div class="col-xs-12">
-    <!-- TODO this string needs to be translated -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
         ng-click="vm.startMatch()"
-        ng-show="vm.areSelectedPlayersEnough()">
-      start
+        ng-show="vm.areSelectedPlayersEnough()"
+        translate="players.button.START">
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
   </div>

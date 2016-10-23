@@ -1,8 +1,7 @@
 <div class="container text-center">
 
   <div class="col-xs-12">
-    <!-- TODO this string needs to be translated -->
-    <h2>riepilogo</h2>
+    <h2 translate="summary.SUMMARY"></h2>
   </div>
 
   <div class="col-xs-12">
@@ -39,15 +38,14 @@
 
   <!-- TODO Next player or winner -->
   <div class="col-xs-12">
-    <!-- TODO this string needs to be translated -->
-    <h4>prossimo giocatore</h4>
+    <h4 translate="summary.NEXT_PLAYER"></h4>
     <h3 ng-bind="vm.match.getNextPlayer().name"></h3>
-    <!-- TODO this string needs to be translated -->
     <!-- TODO Move routing on the controller -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
+        translate="summary.button.ROUND"
         ng-click="vm.nextRound()">
-      turno {{vm.roundID}}
+        {{vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
   </div>
