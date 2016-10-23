@@ -84,7 +84,7 @@ angular
        * Determines if user selected enough players to start match.
        */
       function areSelectedPlayersEnough() {
-        return vm.selectedPlayers.getAll().length >= Match.getMinimumNumberOfPlayers();
+        return vm.selectedPlayers.getAll().length < Match.getMinimumNumberOfPlayers();
       }
 
       /**
@@ -145,8 +145,13 @@ angular
        * Creates a new match. This will define a new initial round where all selected players have the initial score.
        */
       function startMatch() {
-        Match.reset();
-        $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
+        if (vm.areSelectedPlayersEnough()) {
+          return;
+        }
+        else {
+          Match.reset();
+          $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
+        }
       }
 
     }
