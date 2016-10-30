@@ -5,8 +5,9 @@
   </div>
 
   <div class="col-xs-12">
-    <div ng-show="vm.savedPlayers.get().length" translate="players.SELECTED_PLAYERS">
-      {{ vm.selectedPlayers.get().length }}
+    <div ng-show="vm.savedPlayers.getAll().length">
+      <h4 translate="players.SELECTED_PLAYERS"></h4>
+      {{ vm.selectedPlayers.getAll().length }}
     </div>
   </div>
 
