@@ -84,7 +84,7 @@ angular
        * Determines if user selected enough players to start match.
        */
       function areSelectedPlayersEnough() {
-        return vm.selectedPlayers.getAll().length < Match.getMinimumNumberOfPlayers();
+        return vm.selectedPlayers.getAll().length >= Match.getMinimumNumberOfPlayers();
       }
 
       /**
@@ -146,9 +146,6 @@ angular
        */
       function startMatch() {
         if (vm.areSelectedPlayersEnough()) {
-          return;
-        }
-        else {
           Match.reset();
           $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
         }

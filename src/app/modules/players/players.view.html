@@ -38,7 +38,7 @@
     <!-- TODO this string needs to be translated -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
-        ng-disabled="vm.areSelectedPlayersEnough()"
+        ng-disabled="!vm.areSelectedPlayersEnough()"
         ng-click="vm.startMatch()">
       start
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
