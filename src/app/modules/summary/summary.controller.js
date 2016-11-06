@@ -20,6 +20,7 @@ angular
       vm.getPlayers = getPlayers;
       vm.getMissingPoints = getMissingPoints;
       vm.nextRound = nextRound;
+      vm.prizegiving = prizegiving;
 
       /**
        * @ngdoc property
@@ -86,6 +87,18 @@ angular
        */
       function nextRound() {
         $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
+      }
+
+      /**
+       * @ngdoc method
+       * @name SummaryController#prizegiving
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Go to the prizegiving view.
+       */
+      function prizegiving() {
+        $location.path('prizegiving');
       }
 
     }

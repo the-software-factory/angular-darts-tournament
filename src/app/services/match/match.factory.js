@@ -200,6 +200,25 @@ angular
         return points;
       }
 
+      /**
+       * @ngdoc method
+       * @name Match#getWinner
+       * @kind function
+       * @methodOf app.service:Match
+       * @return {Object} Returns the player won the match otherwise null
+       * @description
+       * Returns the player won the match otherwise null
+       */
+      function getWinner() {
+        var winner = null;
+        angular.forEach(SelectedPlayers.getAll(), function(player) {
+          if (RULES.INITIAL_POINTS - getPointsUntilRound(player) === 0) {
+            winner = player;
+          }
+        });
+        return winner;
+      }
+
       return {
         addRound: addRound,
         getCurrentPlayer: getCurrentPlayer,
@@ -207,6 +226,7 @@ angular
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
         getNextPlayer: getNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
+        getWinner: getWinner,
         getRound: getRound,
         getRounds: getRounds,
         reset: reset,
