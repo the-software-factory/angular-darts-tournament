@@ -20,14 +20,13 @@
       </thead>
       <tbody>
         <tr ng-class="{'is-adt-table-row-highlighted': !vm.match.getRounds().length}">
-          <!-- TODO this string needs to be translated -->
-          <td class="text-capitalize">start</td>
+          <td class="text-capitalize" translate="summary.START"></td>
           <td ng-repeat="player in vm.getPlayers()" ng-bind="vm.match.getInitialPoints()"></td>
         </tr>
         <tr ng-repeat="round in vm.match.getRounds()"
             ng-class="{'is-adt-table-row-highlighted': vm.match.getRounds().length == $index + 1}">
           <!-- TODO this string needs to be translated -->
-          <td class="text-capitalize">round {{$index + 1}}</td>
+          <td class="text-capitalize">{{'summary.ROUND' | translate}} {{$index + 1}}</td>
           <td ng-repeat="player in vm.getPlayers()">
             <span ng-bind="vm.getMissingPoints(player, $parent.$index + 1)"></span>
           </td>
@@ -43,9 +42,8 @@
     <!-- TODO Move routing on the controller -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
-        translate="summary.button.ROUND"
         ng-click="vm.nextRound()">
-        {{vm.roundID}}
+        {{'summary.button.ROUND' | translate}} {{vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
   </div>

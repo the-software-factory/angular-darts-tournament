@@ -23,6 +23,8 @@
     }
   },
   "summary": {
+    "ROUND": "round",
+    "START": "start",
     "SUMMARY": "summary",
     "NEXT_PLAYER": "next player",
     "button": {

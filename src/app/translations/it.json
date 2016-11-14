@@ -23,6 +23,8 @@
     }
   },
   "summary": {
+    "ROUND": "round",
+    "START": "inizia",
     "SUMMARY": "riepilogo",
     "NEXT_PLAYER": "prossimo giocatore",
     "button": {

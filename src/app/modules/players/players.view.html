@@ -6,8 +6,7 @@
 
   <div class="col-xs-12">
     <div ng-show="vm.savedPlayers.getAll().length">
-      <h4 translate="players.SELECTED_PLAYERS"></h4>
-      {{ vm.selectedPlayers.getAll().length }}
+      <h4>{{'players.SELECTED_PLAYERS' | translate}}: {{vm.selectedPlayers.getAll().length}}</h4>
     </div>
   </div>
 
@@ -36,8 +35,8 @@
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
         ng-click="vm.startMatch()"
-        ng-show="vm.areSelectedPlayersEnough()"
-        translate="players.button.START">
+        ng-show="vm.areSelectedPlayersEnough()">
+        {{"players.button.START" | translate}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
   </div>
