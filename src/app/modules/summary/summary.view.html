@@ -31,6 +31,7 @@
           <td class="text-capitalize">round {{$index + 1}}</td>
           <td ng-repeat="player in vm.getPlayers()">
             <span ng-bind="vm.getMissingPoints(player, $parent.$index + 1)"></span>
+            <span ng-if="::vm.isShutout(player, $parent.$index + 1)" class="glyphicon glyphicon-flash"></span>
           </td>
         </tr>
       </tbody>

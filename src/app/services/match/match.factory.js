@@ -132,10 +132,10 @@ angular
         rounds[round - 1][player.id] = points;
         saveRounds(rounds);
       }
-  
+
       /**
        * @ngdoc method
-       * @name Match#getRound
+       * @name Match#getRoundPointsByPlayer
        * @kind function
        * @methodOf app.service:Match
        * @param {Object} player
@@ -144,7 +144,7 @@ angular
        * @description
        * Returns the points of the player on the selected round.
        */
-      function getRound(player, round) {
+      function getRoundPointsByPlayer(player, round) {
         var rounds = getRounds();
         if (!rounds[round - 1] ||
             // 0 (zero) is a defined value
@@ -152,6 +152,27 @@ angular
           return;
         }
         return rounds[round - 1][player.id];
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#getMaxPointsByRound
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {number} round
+       * @return {number} The max number of points of the round
+       * @description
+       * Returns the maximum number of points made in the given round
+       */
+      function getMaxPointsByRound(round) {
+        var rounds = getRounds();
+        var maxPoints = 0;
+        angular.forEach(rounds[round - 1], function(playerRound) {
+          if (playerRound > maxPoints) {
+            maxPoints = playerRound;
+          }
+        });
+        return maxPoints;
       }
 
       /**
@@ -213,12 +234,12 @@ angular
         }
         var points = 0;
 
-        if (!getRound(player, roundLimit)) {
+        if (!angular.isNumber(getRoundPointsByPlayer(player, roundLimit))) {
           roundLimit--;
         }
-  
+
         for (var i = 1; i <= roundLimit; i++) {
-          points += getRound(player, i);
+          points += getRoundPointsByPlayer(player, i);
         }
 
         return points;
@@ -247,12 +268,14 @@ angular
         addRound: addRound,
         getCurrentPlayer: getCurrentPlayer,
         getInitialPoints: getInitialPoints,
+        getMaxPointsByRound: getMaxPointsByRound,
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
         getNextPlayer: getNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
         getWinner: getWinner,
-        getRound: getRound,
+        getRoundPointsByPlayer: getRoundPointsByPlayer,
         getRounds: getRounds,
+        isRoundStarted: isRoundStarted,
         reset: reset,
         setCurrentPlayer: setCurrentPlayer
       };
