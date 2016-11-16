@@ -289,7 +289,7 @@ angular
         // You have to determine if all players played the current round or not.
         var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
         var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
-        $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer().id);
+        $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer(nextRound).id);
       }
 
       /**

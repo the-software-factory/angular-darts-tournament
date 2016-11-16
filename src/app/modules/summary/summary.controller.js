@@ -71,7 +71,7 @@ angular
       function getMissingPoints(player, round) {
         // 0 (zero) is a defined value.
         // If player played that round then a number exists
-        if (angular.isNumber(vm.match.getRound(player, round))) {
+        if (angular.isNumber(vm.match.getRoundPointsByPlayer(player, round))) {
           return vm.match.getInitialPoints() - vm.match.getPointsUntilRound(player, round);
         }
         return;

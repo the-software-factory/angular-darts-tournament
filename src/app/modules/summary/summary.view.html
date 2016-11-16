@@ -40,7 +40,7 @@
   <div class="col-xs-12" ng-if="!vm.match.getWinner()">
     <!-- TODO this string needs to be translated -->
     <h4>prossimo giocatore</h4>
-    <h3 ng-bind="vm.match.getNextPlayer().name"></h3>
+    <h3 ng-bind="vm.match.getNextPlayer(vm.roundID).name"></h3>
     <!-- TODO this string needs to be translated -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"

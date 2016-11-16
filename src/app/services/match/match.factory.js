@@ -14,7 +14,7 @@ angular
     'Storage',
     'RULES',
     function(SelectedPlayers, Storage, RULES) {
-  
+
       /**
        * @ngdoc property
        * @name Match#currentPlayer
@@ -23,7 +23,7 @@ angular
        * @propertyOf app.service:Match
        */
       var currentPlayer = null;
-  
+
       /**
        * @ngdoc method
        * @private
@@ -88,6 +88,20 @@ angular
 
       /**
        * @ngdoc method
+       * @name Match#isRoundStarted
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {number} round The number of the round
+       * @return {boolean} True if at least a player completed own round
+       * @description
+       * Determines if the rount started since at least one player played.
+       */
+      function isRoundStarted(round) {
+        return !!getRounds()[round - 1];
+      }
+
+      /**
+       * @ngdoc method
        * @name Match#getCurrentPlayer
        * @kind function
        * @methodOf app.service:Match
@@ -98,7 +112,7 @@ angular
       function getCurrentPlayer() {
         return currentPlayer;
       }
-  
+
       /**
        * @ngdoc method
        * @name Match#addRound
@@ -158,12 +172,22 @@ angular
        * @name Match#getNextPlayer
        * @kind function
        * @methodOf app.service:Match
+       * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
        * Returns the next player.
        */
-      function getNextPlayer() {
+      function getNextPlayer(round) {
         if (getCurrentPlayer()) {
+          // Returns the current player if:
+          // - he/she didn't play yet
+          // - he/she is the first selected player
+          if (!angular.isNumber(getRoundPointsByPlayer(getCurrentPlayer(), round)) &&
+              (isRoundStarted(round) ||
+              angular.equals(getCurrentPlayer(), SelectedPlayers.getAll()[0]))) {
+            return getCurrentPlayer();
+          }
+
           var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
           if (offset < SelectedPlayers.getAll().length - 1) {
             return SelectedPlayers.getAll()[offset + 1];
@@ -171,7 +195,7 @@ angular
         }
         return SelectedPlayers.getAll()[0];
       }
-  
+
       /**
        * @ngdoc method
        * @name Match#getPointsUntilRound

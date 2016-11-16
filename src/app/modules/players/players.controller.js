@@ -146,7 +146,7 @@ angular
        */
       function startMatch() {
         Match.reset();
-        $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
+        $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
       }
 
     }
