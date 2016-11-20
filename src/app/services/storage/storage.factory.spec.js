@@ -33,10 +33,10 @@ describe('Storage factory', function() {
 
   });
 
-  describe('should provide a "save" property that', function() {
+  describe('should provide a "set" property that', function() {
 
     it('should add a new value', function() {
-      StorageService.save('test', 'value');
+      StorageService.set('test', 'value');
       expect(StorageService.get('test')).toBe('value');
     });
 

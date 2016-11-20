@@ -108,7 +108,7 @@ angular
        * Replace the old list with the new one.
        */
       function save(storageKey, list) {
-        Storage.save(storageKey, list);
+        Storage.set(storageKey, list);
       }
 
       /**
