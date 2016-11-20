@@ -9,8 +9,14 @@
   </div>
 
   <div class="col-xs-12">
-    <h4 translate="round.SCORE_REMAINING"></h4>
-    <h3 ng-bind="vm.getMissingPoints()"></h3>
+    <div ng-class="vm.isShutoutRisk() ? 'col-xs-6' : ''">
+      <h4 translate="round.SCORE_REMAINING"></h4>
+      <h3 ng-bind="vm.getMissingPoints()"></h3>
+    </div>
+    <div class="col-xs-6" ng-if="vm.isShutoutRisk()">
+      <h4 translate="round.SALVATION_SCORES"></h4>
+      <h3 ng-bind="vm.getMissingRedemptionPoints()"></h3>
+    </div>
   </div>
 
   <div class="col-xs-4" ng-repeat="i in [0, 1, 2]">

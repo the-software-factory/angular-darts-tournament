@@ -8,9 +8,11 @@ describe('Summary controller', function() {
   beforeEach(inject(function($controller) {
     createCtrl = function() {
       return $controller('SummaryController', {
+        '$location': {},
         '$routeParams': {},
         'SelectedPlayers': {},
-        'Match': {}
+        'Match': {},
+        'RULES': {}
       });
     };
   }));

@@ -5,5 +5,6 @@ angular
   .constant('RULES', {
     "INITIAL_POINTS": 201,
     "MINIMUM_PLAYERS_NUMBER": 2,
-    "SHOTS_BY_ROUND": 3
+    "SHOTS_BY_ROUND": 3,
+    "SHUTOUT_POINTS": 60
   });

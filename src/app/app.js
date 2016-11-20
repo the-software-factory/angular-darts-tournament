@@ -8,6 +8,7 @@ angular
     'pascalprecht.translate',
     'app.home',
     'app.players',
+    'app.prizegiving',
     'app.round',
     'app.summary'
   ])

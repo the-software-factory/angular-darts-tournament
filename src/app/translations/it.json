@@ -18,6 +18,7 @@
     "SCORE_REMAINING": "punti rimanenti",
     "SHOT": "tiro",
     "TOTAL_ROUND": "totale round",
+    "SALVATION_SCORES": "punteggio per la salvezza",
     "button": {
       "SUMMARY": "riepilogo"
     }
@@ -28,6 +29,7 @@
     "SUMMARY": "riepilogo",
     "NEXT_PLAYER": "prossimo giocatore",
     "button": {
+      "PRIZEGIVING": "premiazione",
       "ROUND": "turno"
     }
   }

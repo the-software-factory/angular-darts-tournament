@@ -18,6 +18,7 @@
     "SCORE_REMAINING": "scores remaining",
     "SHOT": "shot",
     "TOTAL_ROUND": "total round",
+    "SALVATION_SCORES": "salvation scores",
     "button": {
       "SUMMARY": "summary"
     }
@@ -28,6 +29,7 @@
     "SUMMARY": "summary",
     "NEXT_PLAYER": "next player",
     "button": {
+      "PRIZEGIVING": "prizegiving",
       "ROUND": "round"
     }
   }
