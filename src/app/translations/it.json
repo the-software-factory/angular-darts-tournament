@@ -1,0 +1,36 @@
+{
+  "home": {
+    "DARTINI":"dartini",
+    "button": {
+      "PLAY": "gioca"
+    }
+  },
+  "players": {
+    "SELECT_PLAYERS": "seleziona giocatori",
+    "SELECTED_PLAYERS": "giocatori selezionati",
+    "button": {
+      "ADD": "aggiungi",
+      "START": "inizia"
+    }
+  },
+  "round": {
+    "ROUND": "turno",
+    "SCORE_REMAINING": "punti rimanenti",
+    "SHOT": "tiro",
+    "TOTAL_ROUND": "totale round",
+    "SALVATION_SCORES": "punteggio per la salvezza",
+    "button": {
+      "SUMMARY": "riepilogo"
+    }
+  },
+  "summary": {
+    "ROUND": "round",
+    "START": "inizia",
+    "SUMMARY": "riepilogo",
+    "NEXT_PLAYER": "prossimo giocatore",
+    "button": {
+      "PRIZEGIVING": "premiazione",
+      "ROUND": "turno"
+    }
+  }
+}

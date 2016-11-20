@@ -5,11 +5,24 @@ angular
   .module('app', [
     'ngRoute',
     'ngStorage',
+    'pascalprecht.translate',
     'app.home',
     'app.players',
     'app.prizegiving',
     'app.round',
     'app.summary'
+  ])
+
+  .config([
+    '$translateProvider',
+    function($translateProvider) {
+      $translateProvider.useStaticFilesLoader({
+        prefix: 'app/translations/',
+        suffix: '.json'
+      });
+
+      $translateProvider.preferredLanguage('it');
+    }
   ])
 
   .config([

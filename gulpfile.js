@@ -31,7 +31,8 @@ gulp.task('html', function() {
 gulp.task('copy', function() {
   gulp.src([
     appDir + '/**/*.html',
-    appDir + '/**/*.jpg'
+    appDir + '/**/*.jpg',
+    appDir + '/**/*.json'
   ])
     .pipe(copy())
     .pipe(gulp.dest('dist/production/app/'))
@@ -101,7 +102,9 @@ gulp.task('vendorScript', function() {
       'bower_components/angular-route/angular-route.js',
       'bower_components/jquery/dist/jquery.js',
       'bower_components/ngstorage/ngStorage.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js'
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular-translate/angular-translate.js',
+      'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js'
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./dist/development/app/'));
@@ -111,7 +114,9 @@ gulp.task('vendorScript', function() {
     'bower_components/angular-route/angular-route.min.js',
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
-    'bower_components/ngstorage/ngStorage.min.js'
+    'bower_components/ngstorage/ngStorage.min.js',
+    'bower_components/angular-translate/angular-translate.min.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())

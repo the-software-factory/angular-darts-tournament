@@ -1,0 +1,36 @@
+{
+  "home": {
+    "DARTINI":"dartini",
+    "button": {
+      "PLAY": "play"
+    }
+  },
+  "players": {
+    "SELECT_PLAYERS": "select players",
+    "SELECTED_PLAYERS": "selected players",
+    "button": {
+      "ADD": "add",
+      "START": "start"
+    }
+  },
+  "round": {
+    "ROUND": "round",
+    "SCORE_REMAINING": "scores remaining",
+    "SHOT": "shot",
+    "TOTAL_ROUND": "total round",
+    "SALVATION_SCORES": "salvation scores",
+    "button": {
+      "SUMMARY": "summary"
+    }
+  },
+  "summary": {
+    "ROUND": "round",
+    "START": "start",
+    "SUMMARY": "summary",
+    "NEXT_PLAYER": "next player",
+    "button": {
+      "PRIZEGIVING": "prizegiving",
+      "ROUND": "round"
+    }
+  }
+}

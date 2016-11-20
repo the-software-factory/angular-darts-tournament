@@ -3,7 +3,8 @@
 angular
   .module('app.players', [
     'ngRoute',
-    'ngStorage'
+    'ngStorage',
+    'pascalprecht.translate'
   ])
 
   .config([
