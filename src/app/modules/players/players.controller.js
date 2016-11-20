@@ -145,10 +145,8 @@ angular
        * Creates a new match. This will define a new initial round where all selected players have the initial score.
        */
       function startMatch() {
-        if (vm.areSelectedPlayersEnough()) {
-          Match.reset();
-          $location.path('summary/round/1/player/' + Match.getNextPlayer().id);
-        }
+        Match.reset();
+        $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
       }
 
     }

@@ -7,6 +7,7 @@ angular
     'ngStorage',
     'app.home',
     'app.players',
+    'app.prizegiving',
     'app.round',
     'app.summary'
   ])

@@ -1,0 +1,23 @@
+<div class="container-fluid text-center">
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <h3>e il vincitore è</h3>
+  </div>
+
+  <div class="col-xs-12">
+    <span class="glyphicon glyphicon-user adt-badge"></span>
+    <h2 ng-bind="::vm.match.getWinner().name"></h2>
+  </div>
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-click="vm.newMatch()">
+      nuova partita
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+
+</div>

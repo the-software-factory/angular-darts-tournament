@@ -24,6 +24,7 @@ angular
       vm.cancel = cancel;
       vm.confirm = confirm;
       vm.getMissingPoints = getMissingPoints;
+      vm.getMissingRedemptionPoints = getMissingRedemptionPoints;
       vm.getRoundSum = getRoundSum;
       vm.getShot = getShot;
       vm.init = init;
@@ -33,6 +34,7 @@ angular
       vm.isOutOfRange = isOutOfRange;
       vm.isRoundCompleted = isRoundCompleted;
       vm.isShotMade = isShotMade;
+      vm.isShutoutRisk = isShutoutRisk;
       vm.viewSummary = viewSummary;
 
       /**
@@ -289,7 +291,7 @@ angular
         // You have to determine if all players played the current round or not.
         var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
         var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
-        $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer().id);
+        $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer(nextRound).id);
       }
 
       /**
@@ -309,6 +311,34 @@ angular
           (vm.isTappedNumberDisabled && point.number == vm.number) ||
           // Round is completed so any button will be disabled
           vm.isRoundCompleted();
+      }
+
+      /**
+       * @ngdoc method
+       * @name RoundController#isShutoutRisk
+       * @kind function
+       * @methodOf app.round.controller:RoundController
+       * @return {boolean} True if the user risks to lose out a shutout
+       * @description
+       * Determines if the user risks to lose out a shutout
+       */
+      function isShutoutRisk() {
+        return Match.getMaxPointsByRound(vm.round) >= RULES.SHUTOUT_POINTS;
+      }
+
+      /**
+       * @ngdoc method
+       * @name RoundController#getMissingRedemptionPoints
+       * @kind function
+       * @methodOf app.round.controller:RoundController
+       * @return {number} The redemption points or zero
+       * @description
+       * Returns the redemption points if the user risks to lose out a shutout otherwise zero (0).
+       */
+      function getMissingRedemptionPoints() {
+        // Player needs one point more.
+        var redemptionPoints = Match.getMaxPointsByRound(vm.round) - RULES.SHUTOUT_POINTS + 1 - vm.getRoundSum();
+        return redemptionPoints > 0 ? redemptionPoints : 0;
       }
 
     }

@@ -14,7 +14,7 @@ angular
     'Storage',
     'RULES',
     function(SelectedPlayers, Storage, RULES) {
-  
+
       /**
        * @ngdoc property
        * @name Match#currentPlayer
@@ -23,7 +23,7 @@ angular
        * @propertyOf app.service:Match
        */
       var currentPlayer = null;
-  
+
       /**
        * @ngdoc method
        * @private
@@ -88,6 +88,20 @@ angular
 
       /**
        * @ngdoc method
+       * @name Match#isRoundStarted
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {number} round The number of the round
+       * @return {boolean} True if at least a player completed own round
+       * @description
+       * Determines if the rount started since at least one player played.
+       */
+      function isRoundStarted(round) {
+        return !!getRounds()[round - 1];
+      }
+
+      /**
+       * @ngdoc method
        * @name Match#getCurrentPlayer
        * @kind function
        * @methodOf app.service:Match
@@ -98,7 +112,7 @@ angular
       function getCurrentPlayer() {
         return currentPlayer;
       }
-  
+
       /**
        * @ngdoc method
        * @name Match#addRound
@@ -118,10 +132,10 @@ angular
         rounds[round - 1][player.id] = points;
         saveRounds(rounds);
       }
-  
+
       /**
        * @ngdoc method
-       * @name Match#getRound
+       * @name Match#getRoundPointsByPlayer
        * @kind function
        * @methodOf app.service:Match
        * @param {Object} player
@@ -130,7 +144,7 @@ angular
        * @description
        * Returns the points of the player on the selected round.
        */
-      function getRound(player, round) {
+      function getRoundPointsByPlayer(player, round) {
         var rounds = getRounds();
         if (!rounds[round - 1] ||
             // 0 (zero) is a defined value
@@ -138,6 +152,27 @@ angular
           return;
         }
         return rounds[round - 1][player.id];
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#getMaxPointsByRound
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {number} round
+       * @return {number} The max number of points of the round
+       * @description
+       * Returns the maximum number of points made in the given round
+       */
+      function getMaxPointsByRound(round) {
+        var rounds = getRounds();
+        var maxPoints = 0;
+        angular.forEach(rounds[round - 1], function(playerRound) {
+          if (playerRound > maxPoints) {
+            maxPoints = playerRound;
+          }
+        });
+        return maxPoints;
       }
 
       /**
@@ -158,12 +193,22 @@ angular
        * @name Match#getNextPlayer
        * @kind function
        * @methodOf app.service:Match
+       * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
        * Returns the next player.
        */
-      function getNextPlayer() {
+      function getNextPlayer(round) {
         if (getCurrentPlayer()) {
+          // Returns the current player if:
+          // - he/she didn't play yet
+          // - he/she is the first selected player
+          if (!angular.isNumber(getRoundPointsByPlayer(getCurrentPlayer(), round)) &&
+              (isRoundStarted(round) ||
+              angular.equals(getCurrentPlayer(), SelectedPlayers.getAll()[0]))) {
+            return getCurrentPlayer();
+          }
+
           var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
           if (offset < SelectedPlayers.getAll().length - 1) {
             return SelectedPlayers.getAll()[offset + 1];
@@ -171,7 +216,7 @@ angular
         }
         return SelectedPlayers.getAll()[0];
       }
-  
+
       /**
        * @ngdoc method
        * @name Match#getPointsUntilRound
@@ -189,26 +234,48 @@ angular
         }
         var points = 0;
 
-        if (!getRound(player, roundLimit)) {
+        if (!angular.isNumber(getRoundPointsByPlayer(player, roundLimit))) {
           roundLimit--;
         }
-  
+
         for (var i = 1; i <= roundLimit; i++) {
-          points += getRound(player, i);
+          points += getRoundPointsByPlayer(player, i);
         }
 
         return points;
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#getWinner
+       * @kind function
+       * @methodOf app.service:Match
+       * @return {Object} Returns the player won the match otherwise null
+       * @description
+       * Returns the player won the match otherwise null
+       */
+      function getWinner() {
+        var winner = null;
+        angular.forEach(SelectedPlayers.getAll(), function(player) {
+          if (RULES.INITIAL_POINTS - getPointsUntilRound(player) === 0) {
+            winner = player;
+          }
+        });
+        return winner;
       }
 
       return {
         addRound: addRound,
         getCurrentPlayer: getCurrentPlayer,
         getInitialPoints: getInitialPoints,
+        getMaxPointsByRound: getMaxPointsByRound,
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
         getNextPlayer: getNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
-        getRound: getRound,
+        getWinner: getWinner,
+        getRoundPointsByPlayer: getRoundPointsByPlayer,
         getRounds: getRounds,
+        isRoundStarted: isRoundStarted,
         reset: reset,
         setCurrentPlayer: setCurrentPlayer
       };
