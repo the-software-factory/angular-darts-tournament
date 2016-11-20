@@ -12,9 +12,9 @@ angular
     '$location',
     'SavedPlayers',
     'SelectedPlayers',
-    'PlayerFactory',
+    'PlayersFactory',
     'Match',
-    function($location, SavedPlayers, SelectedPlayers, PlayerFactory, Match) {
+    function($location, SavedPlayers, SelectedPlayers, PlayersFactory, Match) {
       var vm = this;
 
       // Exposes public methods
@@ -125,7 +125,7 @@ angular
        */
       function addNewPlayer() {
         if (vm.newPlayerName) {
-          var newPlayer = PlayerFactory.create(vm.newPlayerName, vm.savedPlayers.getAll());
+          var newPlayer = PlayersFactory.create(vm.newPlayerName, vm.savedPlayers.getAll());
           vm.newPlayerName = null;
           vm.selectPlayer(newPlayer);
           vm.savedPlayers.add(newPlayer);

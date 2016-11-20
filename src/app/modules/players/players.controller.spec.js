@@ -10,7 +10,7 @@ describe('Players controller', function() {
       return $controller('PlayersController', {
         'SavedPlayers': {},
         'SelectedPlayers': {},
-        'PlayerFactory': {},
+        'PlayersFactory': {},
         'Match': {}
       });
     };

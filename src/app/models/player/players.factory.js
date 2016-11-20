@@ -4,19 +4,19 @@ angular
   .module('app')
   /**
    * @ngdoc service
-   * @name app.service:PlayerFactory
+   * @name app.service:PlayersFactory
    * @kind function
    * @description
    * Generates new players objects.
    */
-  .factory('PlayerFactory', [
+  .factory('PlayersFactory', [
     function() {
 
       /**
        * @ngdoc method
-       * @name PlayerFactory#create
+       * @name PlayersFactory#create
        * @kind function
-       * @methodOf app.service:PlayerFactory
+       * @methodOf app.service:PlayersFactory
        * @param {string} name The name of the new player
        * @param {Array} players The list of available players
        * @description
