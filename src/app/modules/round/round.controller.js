@@ -203,10 +203,41 @@ angular
         }
       }
 
-      // TODO Add docblock
+      /**
+       * @ngdoc method
+       * @name RoundController#_resetShot
+       * @kind function
+       * @methodOf app.round.controller:_resetShot
+       * @description
+       * Reset the value of the last shot and pressed number.
+       */
+      function _resetShot() {
+        vm.shots[vm.shotIndex] = null;
+        vm.isTappedNumberDisabled = false;
+        vm.number = null;
+      }
+
+      /**
+       * @ngdoc method
+       * @name RoundController#cancel
+       * @kind function
+       * @methodOf app.round.controller:cancel
+       * @description
+       * Cancel the last shot.
+       */
       function cancel() {
-        // TODO implement
-        alert('to implement');
+        if (vm.shotIndex == 2 && vm.shots.length == 3) {
+          _resetShot();
+          vm.shots.length--;
+        }
+        else if (vm.shotIndex > 0 && vm.shotIndex == vm.shots.length) {
+          vm.shotIndex--;
+          vm.shots.length--;
+          _resetShot();
+        }
+        else {
+          _resetShot();
+        }
       }
 
       /**
