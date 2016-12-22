@@ -31,7 +31,7 @@ angular
        * @propertyOf app.service:Match
        */
       var saveRounds = function(rounds) {
-        Storage.save('rounds', rounds);
+        Storage.set('rounds', rounds);
       };
 
       /**
