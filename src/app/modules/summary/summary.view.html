@@ -28,7 +28,7 @@
         <tr ng-repeat="round in vm.match.getRounds()"
             ng-class="{'is-adt-table-row-highlighted': vm.match.getRounds().length == $index + 1}">
           <!-- TODO this string needs to be translated -->
-          <td class="text-capitalize">round {{$index + 1}}</td>
+          <td class="text-capitalize">round {{::$index + 1}}</td>
           <td ng-repeat="player in vm.getPlayers()">
             <span ng-bind="vm.getMissingPoints(player, $parent.$index + 1)"></span>
             <span ng-if="::vm.isShutout(player, $parent.$index + 1)" class="glyphicon glyphicon-flash"></span>
@@ -46,7 +46,7 @@
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
         ng-click="vm.nextRound()">
-      turno {{vm.roundID}}
+      turno {{::vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>
   </div>
