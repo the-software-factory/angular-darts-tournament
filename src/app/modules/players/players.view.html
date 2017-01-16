@@ -17,7 +17,7 @@
       <!-- TODO this string needs to be translated -->
       <form name="createForm" ng-submit="vm.addNewPlayer()">
         <button type=submit" class="glyphicon glyphicon-plus adt-button"></button>
-        <input type="text" class="text-center"
+        <input type="text" class="text-center font-size"
             name="namePlayer"
             placeholder="add player"
             ng-model="vm.newPlayerName">
@@ -29,7 +29,7 @@
           ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
           ng-click="vm.togglePlayer(player)">
       <div class="glyphicon glyphicon-user"></div>
-      <div class="adt-ellipsis-inline" ng-bind="player.name | lowercase"></div>
+      <div class="adt-ellipsis-inline font-size" ng-bind="player.name | lowercase"></div>
       <div class="glyphicon glyphicon-ok adt-card-check"></div>
     </div>
   </div>
