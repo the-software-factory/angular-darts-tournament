@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+# This file should be located at .git/hooks/commit-msg
+
+# cd project_dir
+# cp hooks/commit-msg .git/hooks/commit-msg
+# chmod u+x .git/hooks/commit-msg
+
+message_file = ARGV[0]
+message = File.read(message_file)
+
+$regex = /([resolved|fixed]) #([0-9])* ([A-Z])\w+/
+
+if !$regex.match(message)
+  puts "[POLICY] Your message is not formatted correctly! \n"
+  puts "Message format must be like:"
+  puts "[resolved|fixed] #123 Title of the issue (first letter must be capitalized)"
+  exit 1
+end
