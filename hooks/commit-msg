@@ -13,11 +13,11 @@ $regex = /([resolved|fixed]) #([0-9])* ([A-Z])\w+/
 
 if !$regex.match(message)
   puts "[POLICY] Your message is not formatted correctly!"
-  puts " "
+  puts "\n"
   puts "Message format must be like:"
   puts "resolved #123 Case title (for features)"
   puts "fixed #123 Case title    (for bugs)"
-  puts " "
+  puts "\n"
   puts "First letter of 'Case title' must be capitalized!"
   exit 1
 end
