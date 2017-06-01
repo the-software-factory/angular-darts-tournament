@@ -2,36 +2,38 @@
 
   <div class="col-xs-12">
     <!-- TODO this string needs to be translated -->
-    <h2>seleziona giocatori</h2>
+    <h2>choose players</h2>
   </div>
 
   <div class="col-xs-12">
     <div ng-show="vm.savedPlayers.getAll().length">
       <!-- TODO this string needs to be translated -->
-      sono stati selezionati {{ vm.selectedPlayers.getAll().length }} giocatori
+      You have selected {{ vm.selectedPlayers.getAll().length }} player{{ vm.selectedPlayers.getAll().length != 1 ? "s" : "" }}
     </div>
   </div>
 
   <div class="col-xs-12">
-    <div class="adt-card">
-      <!-- TODO this string needs to be translated -->
-      <form name="createForm" ng-submit="vm.addNewPlayer()">
-        <button type=submit" class="glyphicon glyphicon-plus adt-button"></button>
-        <input type="text" class="text-center"
-            name="namePlayer"
-            placeholder="add player"
-            ng-model="vm.newPlayerName">
-      </form>
-    </div>
 
-    <div class="adt-card"
-          ng-repeat="player in vm.savedPlayers.getAll() track by player.id"
+  <div class="adt-card"
+          ng-repeat="player in vm.savedPlayers.getAll() | orderBy: 'name' as ordered_players track by player.id"
           ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
           ng-click="vm.togglePlayer(player)">
       <div class="glyphicon glyphicon-user"></div>
       <div class="adt-ellipsis-inline" ng-bind="player.name | lowercase"></div>
       <div class="glyphicon glyphicon-ok adt-card-check"></div>
     </div>
+
+    <div class="adt-card">
+      <!-- TODO this string needs to be translated -->
+      <form name="createForm" ng-submit="vm.addNewPlayer()">
+        <button type="submit" class="glyphicon glyphicon-plus adt-button"></button>
+        <input type="text" class="text-center"
+            name="namePlayer"
+            placeholder="add player"
+            ng-model="vm.newPlayerName">
+      </form>
+    </div>
+    
   </div>
 
   <div class="col-xs-12">
