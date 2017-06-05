@@ -19,6 +19,7 @@ angular
 
       // Exposes public methods
       vm.startMatch = startMatch;
+      vm.areSelectedPlayersEnough = areSelectedPlayersEnough;
 
       /*
        * @ngdoc property
