@@ -14,25 +14,7 @@
 
   <div class="col-xs-12">
 
-  <div class="adt-card"
-          ng-repeat="player in vm.savedPlayers.getAll() | orderBy: 'name' as ordered_players track by player.id"
-          ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
-          ng-click="vm.togglePlayer(player)">
-      <div class="glyphicon glyphicon-user"></div>
-      <div class="adt-ellipsis-inline" ng-bind="player.name | lowercase"></div>
-      <div class="glyphicon glyphicon-ok adt-card-check"></div>
-    </div>
-
-    <div class="adt-card">
-      <!-- TODO this string needs to be translated -->
-      <form name="createForm" ng-submit="vm.addNewPlayer()">
-        <button type="submit" class="glyphicon glyphicon-plus adt-button"></button>
-        <input type="text" class="text-center"
-            name="namePlayer"
-            placeholder="add player"
-            ng-model="vm.newPlayerName">
-      </form>
-    </div>
+  <show-players />
     
   </div>
 
