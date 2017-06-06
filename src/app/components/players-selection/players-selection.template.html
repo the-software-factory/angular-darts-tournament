@@ -1,5 +1,5 @@
 <div class="adt-card"
-        ng-repeat="player in $ctrl.savedPlayers.getAll() | orderBy: 'name' as ordered_players track by player.id"
+        ng-repeat="player in $ctrl.savedPlayers.getAll() | orderBy: 'name' as orderedPlayers track by player.id"
         ng-class="{'is-adt-card-selected': $ctrl.isPlayerSelected(player)}"
         ng-click="$ctrl.togglePlayer(player)">
     <div class="glyphicon glyphicon-user"></div>
@@ -9,11 +9,5 @@
 
 <div class="adt-card">
     <!-- TODO this string needs to be translated -->
-    <form name="createForm" ng-submit="$ctrl.addNewPlayer()">
-    <button type="submit" class="glyphicon glyphicon-plus adt-button"></button>
-    <input type="text" class="text-center"
-        name="namePlayer"
-        placeholder="add player"
-        ng-model="$ctrl.newPlayerName">
-    </form>
+    <button class="glyphicon glyphicon-plus adt-button" ng-click="$ctrl.addNewPlayer()"></button>
 </div>

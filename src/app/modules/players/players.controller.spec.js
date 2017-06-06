@@ -1,30 +1,31 @@
 'use strict';
 
 describe('Players controller', function() {
-//  var createCtrl;
+  var createCtrl;
 
   beforeEach(module('app.players'));
 
-/*  beforeEach(inject(function($controller) {
+  beforeEach(inject(function($controller) {
     createCtrl = function() {
       return $controller('PlayersController', {
+        '$scope': {},
+        '$location': {},
         'SavedPlayers': {},
         'SelectedPlayers': {},
-        'PlayersFactory': {},
         'Match': {}
       });
     };
   }));
 
-  describe('should provide a "addNewPlayer" property that', function() {
+  describe('should provide a "startMatch" property that', function() {
 
     it('should be a function', function() {
       var ctrl = createCtrl();
-      expect(angular.isFunction(ctrl.addNewPlayer)).toBe(true);
+      expect(angular.isFunction(ctrl.startMatch)).toBe(true);
     });
 
-  });*/
+  });
 
-  // TODO This test needs to be completed
+// TODO This test needs to be completed
 
 });

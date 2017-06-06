@@ -21,7 +21,7 @@ angular
       vm.startMatch = startMatch;
       vm.areSelectedPlayersEnough = areSelectedPlayersEnough;
 
-      /*
+      /**
        * @ngdoc property
        * @name PlayersController#savedPlayers
        * @type {Object}
@@ -29,7 +29,7 @@ angular
        */
       vm.savedPlayers = SavedPlayers;
 
-      /*
+      /**
        * @ngdoc property
        * @name PlayersController#selectedPlayers
        * @type {Object}
@@ -52,7 +52,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersController#start
+       * @name PlayersController#startMatch
        * @kind function
        * @methodOf app.players.controller:PlayersController
        * @description
