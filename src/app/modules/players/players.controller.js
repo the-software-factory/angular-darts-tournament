@@ -9,22 +9,17 @@ angular
    * The controller for the players list.
    */
   .controller('PlayersController', [
+    '$scope',
     '$location',
     'SavedPlayers',
     'SelectedPlayers',
-    'PlayersFactory',
     'Match',
-    function($location, SavedPlayers, SelectedPlayers, PlayersFactory, Match) {
+    function($scope, $location, SavedPlayers, SelectedPlayers, Match) {
       var vm = this;
 
       // Exposes public methods
-      vm.addNewPlayer = addNewPlayer;
-      vm.areSelectedPlayersEnough = areSelectedPlayersEnough;
-      vm.deselectPlayer = deselectPlayer;
-      vm.isPlayerSelected = isPlayerSelected;
-      vm.selectPlayer = selectPlayer;
       vm.startMatch = startMatch;
-      vm.togglePlayer = togglePlayer;
+      vm.areSelectedPlayersEnough = areSelectedPlayersEnough;
 
       /**
        * @ngdoc property
@@ -44,38 +39,6 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersController#isPlayerSelected
-       * @kind function
-       * @methodOf app.players.controller:PlayersController
-       * @param {Object} player The given player
-       * @return {boolean} True if the given player has been already selected.
-       * @description
-       * Determines if the give player has been already selected or not.
-       */
-      function isPlayerSelected(player) {
-        return vm.selectedPlayers.isAdded(player);
-      }
-
-      /**
-       * @ngdoc method
-       * @name PlayersController#togglePlayer
-       * @kind function
-       * @methodOf app.players.controller:PlayersController
-       * @param {Object} player The given player
-       * @description
-       * Add/remove selection from the give player.
-       */
-      function togglePlayer(player) {
-        if (vm.isPlayerSelected(player)) {
-          vm.deselectPlayer(player);
-        }
-        else {
-          vm.selectPlayer(player);
-        }
-      }
-
-      /**
-       * @ngdoc method
        * @name PlayersController#areSelectedPlayersEnough
        * @kind function
        * @methodOf app.players.controller:PlayersController
@@ -89,56 +52,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersController#deselectPlayer
-       * @kind function
-       * @methodOf app.players.controller:PlayersController
-       * @param {Object} player The player to remove from the selected players list.
-       * @description
-       * Remove the given player from the selected players list.
-       */
-      function deselectPlayer(player) {
-        vm.selectedPlayers.remove(player);
-      }
-
-      /**
-       * @ngdoc method
-       * @name PlayersController#selectPlayer
-       * @kind function
-       * @methodOf app.players.controller:PlayersController
-       * @param {Object} player The player to add into the selected players list.
-       * @description
-       * Add the given player into the selected players list.
-       */
-      function selectPlayer(player) {
-        vm.selectedPlayers.add(player);
-      }
-
-      /**
-       * @ngdoc method
-       * @name PlayersController#addNewPlayer
-       * @kind function
-       * @methodOf app.players.controller:PlayersController
-       * @description
-       * Creates a new player and adds it into:
-       * - selected players list
-       * - saved players list
-       */
-      function addNewPlayer() {
-        if (vm.newPlayerName) {
-          var newPlayer = PlayersFactory.create(vm.newPlayerName, vm.savedPlayers.getAll());
-          vm.newPlayerName = null;
-          vm.selectPlayer(newPlayer);
-          vm.savedPlayers.add(newPlayer);
-        }
-        else {
-          // TODO This method is not testable. Please replace $
-          // $('input').focus();
-        }
-      }
-
-      /**
-       * @ngdoc method
-       * @name PlayersController#start
+       * @name PlayersController#startMatch
        * @kind function
        * @methodOf app.players.controller:PlayersController
        * @description
