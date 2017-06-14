@@ -1,0 +1,64 @@
+<div class="container text-center" style="overflow-y: auto">
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <h2>riepilogo</h2>
+  </div>
+
+  <div class="col-xs-12">
+    <table align="center" class="adt-table">
+      <thead>
+        <tr>
+          <th class="is-adt-table-cell-no-border"></th>
+          <th ng-repeat="player in vm.getPlayers()" class="is-adt-table-cell-no-border">
+            <span class="glyphicon glyphicon-user adt-badge"></span>
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+          <th ng-repeat="player in vm.getPlayers()" ng-bind="player.name | initials" class="text-uppercase"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-class="{'is-adt-table-row-highlighted': !vm.match.getRounds().length}">
+          <!-- TODO this string needs to be translated -->
+          <td class="text-capitalize">start</td>
+          <td ng-repeat="player in vm.getPlayers()" ng-bind="vm.match.getInitialPoints()"></td>
+        </tr>
+        <tr ng-repeat="round in vm.match.getRounds()"
+            ng-class="{'is-adt-table-row-highlighted': vm.match.getRounds().length == $index + 1}">
+          <!-- TODO this string needs to be translated -->
+          <td class="text-capitalize">round {{::$index + 1}}</td>
+          <td ng-repeat="player in vm.getPlayers()">
+            <span ng-bind="vm.getMissingPoints(player, $parent.$index + 1)"></span>
+            <span ng-if="::vm.isShutout(player, $parent.$index + 1)" class="glyphicon glyphicon-flash"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-xs-12" ng-if="!vm.match.getWinner()">
+    <!-- TODO this string needs to be translated -->
+    <h4>prossimo giocatore</h4>
+    <h3 ng-bind="vm.match.getNextPlayer(vm.roundID).name"></h3>
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-click="vm.nextRound()">
+      turno {{::vm.roundID}}
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+
+  <div class="col-xs-12" ng-if="vm.match.getWinner()">
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+       role="button"
+       ng-click="vm.prizegiving()">
+      premiazione
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+
+</div>

@@ -1,0 +1,72 @@
+<div class="container text-center" style="overflow-y: auto">
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <h4>turno {{::vm.round}}</h4>
+  </div>
+
+  <div class="col-xs-12">
+    <h2 ng-bind="vm.player.name"></h2>
+  </div>
+
+  <div class="col-xs-12">
+    <div ng-class="vm.isShutoutRisk() ? 'col-xs-6' : ''">
+      <!-- TODO this string needs to be translated -->
+      <h4>punti rimanenti</h4>
+      <h3 ng-bind="vm.getMissingPoints()"></h3>
+    </div>
+    <div class="col-xs-6" ng-if="vm.isShutoutRisk()">
+      <h4>punti per la salvezza</h4>
+      <h3 ng-bind="vm.getMissingRedemptionPoints()"></h3>
+    </div>
+  </div>
+
+  <div class="col-xs-4" ng-repeat="index in [0, 1, 2]">
+    <h4>tiro {{::index + 1}}</h4>
+    <h3 ng-if="vm.isShotMade(index)" ng-bind="vm.getShot(index)"></h3>
+    <h3 ng-if="!vm.isShotMade(index)" ng-class="{'blink': vm.isCurrentShot(index)}">-</h3>
+  </div>
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <h4>totale round</h4>
+    <h3 ng-bind="vm.getRoundSum()"></h3>
+  </div>
+
+  <div class="col-xs-12">
+    <button class="btn btn-default btn-info adt-btn"
+        ng-repeat="point in vm.points"
+        ng-click="!vm.isButtonDisabled(point) && vm.addPoint(point)"
+        ng-disabled="vm.isButtonDisabled(point)"
+        ng-bind="point.number"></button>
+  </div>
+
+  <!-- TODO To implement
+  <div class="col-xs-6">
+    <button class="btn btn-danger btn-lg"
+        disabled="disabled"
+        ng-click="vm.cancel()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </button>
+  </div>
+  -->
+
+  <div class="col-xs-6">
+    <button class="btn btn-success btn-lg"
+        ng-disabled="!vm.isButtonTapped() || vm.isRoundCompleted()"
+        ng-click="!vm.isRoundCompleted() && vm.confirm()">
+      <span class="glyphicon glyphicon-ok"></span>
+    </button>
+  </div>
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <button class="btn btn-primary btn-lg btn-block"
+        ng-if="vm.isRoundCompleted()"
+        ng-click="vm.isRoundCompleted() && vm.viewSummary()">
+      summary
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </button>
+  </div>
+
+</div>

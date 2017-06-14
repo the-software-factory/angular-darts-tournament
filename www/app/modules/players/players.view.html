@@ -1,0 +1,32 @@
+<div class="container-fluid text-center" style="overflow-y: auto">
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <h2>choose players</h2>
+  </div>
+
+  <div class="col-xs-12">
+    <div ng-show="vm.savedPlayers.getAll().length">
+      <!-- TODO this string needs to be translated -->
+      You have selected {{ vm.selectedPlayers.getAll().length }} player{{ vm.selectedPlayers.getAll().length != 1 ? "s" : "" }}
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+
+    <players-selection />
+
+  </div>
+
+  <div class="col-xs-12">
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-disabled="!vm.areSelectedPlayersEnough()"
+        ng-click="vm.startMatch()">
+      start
+      <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
+
+</div>
