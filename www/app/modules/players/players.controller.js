@@ -1,7 +1,8 @@
 'use strict';
 
 angular
-  .module('app.players')
+//  .module('app.players')
+  .module('app')
   /**
    * @ngdoc controller
    * @name app.players.controller:PlayersController

@@ -7,15 +7,25 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
+
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
+var wwwDir = 'www';
+var appDir = wwwDir + '/app';
+var bootstrapDir = wwwDir + '/lib/bootstrap';
+
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
+  gulp.src([
+    './scss/ionic.app.scss',
+    appDir + '/style/**/*.scss',
+    bootstrapDir + '/dist/css/bootstrap.css'
+    ])
+    .pipe(concat('ionic.app.scss'))
+    .pipe(sass({outputStyle: 'expanded'}))
     .on('error', sass.logError)
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({

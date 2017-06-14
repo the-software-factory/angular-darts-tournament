@@ -1,7 +1,8 @@
 'use strict';
 
 angular
-  .module('app.prizegiving')
+//  .module('app.prizegiving')
+  .module('app')
   /**
    * @ngdoc controller
    * @name app.prizegiving.controller:PrizegivingController

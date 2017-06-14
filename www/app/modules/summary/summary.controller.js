@@ -1,7 +1,8 @@
 'use strict';
 
 angular
-  .module('app.summary')
+//  .module('app.summary')
+  .module('app')
   /**
    * @ngdoc controller
    * @name app.summary.controller:SummaryController
@@ -10,11 +11,11 @@ angular
    */
   .controller('SummaryController', [
     '$location',
-    '$routeParams',
+    '$stateParams',
     'SelectedPlayers',
     'Match',
     'RULES',
-    function($location, $routeParams, SelectedPlayers, Match, RULES) {
+    function($location, $stateParams, SelectedPlayers, Match, RULES) {
       var vm = this;
 
       // Exposes public methods
@@ -38,7 +39,7 @@ angular
        * @type {number}
        * @propertyOf app.summary.controller:SummaryController
        */
-      vm.playerID = $routeParams.playerID;
+      vm.playerID = $stateParams.playerID;
 
       /**
        * @ngdoc property
@@ -46,7 +47,7 @@ angular
        * @type {number}
        * @propertyOf app.summary.controller:SummaryController
        */
-      vm.roundID = $routeParams.roundID;
+      vm.roundID = $stateParams.roundID;
 
       /**
        * @ngdoc method
