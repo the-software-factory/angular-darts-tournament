@@ -19,3 +19,6 @@ dist/
 
 # Ignore any kind of logs
 *.log
+
+# Ionic libraries
+www/lib/
