@@ -140,7 +140,7 @@ angular
        * Determines if the nth shot has been made or not.
        */
       function isShotMade(index) {
-        return angular.isNumber(vm.getShot(index));
+        return {angular.isNumber(vm.getShot(index)) && vm.getShot(index) != 0};
       }
 
       /**
@@ -205,10 +205,21 @@ angular
         }
       }
 
-      // TODO Add docblock
+      /**
+       * @ngdoc method
+       * @name RoundController#cancel
+       * @kind function
+       * @methodOf app.round.controller:cancel
+       * @description
+       * Cancel the last action until the shot is reset
+       */
       function cancel() {
-        // TODO implement
-        alert('to implement');
+        vm.shots[vm.shotIndex] -= vm.number;
+
+        if(!vm.getShot(vm.shotIndex)){
+          vm.isTappedNumberDisabled = false;
+          vm.number = null;
+        }
       }
 
       /**
