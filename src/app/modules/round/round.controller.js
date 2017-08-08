@@ -138,9 +138,10 @@ angular
        * @return {boolean} True if the nth shot has been made.
        * @description
        * Determines if the nth shot has been made or not.
+       * NOTE: Keep in mind that 0 is a valid shot.
        */
       function isShotMade(index) {
-        return {angular.isNumber(vm.getShot(index)) && vm.getShot(index) != 0};
+        return angular.isNumber(vm.getShot(index));
       }
 
       /**
@@ -211,15 +212,20 @@ angular
        * @kind function
        * @methodOf app.round.controller:cancel
        * @description
-       * Cancel the last action until the shot is reset
+       * Undo the last shot
        */
       function cancel() {
-        vm.shots[vm.shotIndex] -= vm.number;
+        vm.isTappedNumberDisabled = false;
+        vm.number = null;
 
-        if(!vm.getShot(vm.shotIndex)){
-          vm.isTappedNumberDisabled = false;
-          vm.number = null;
+        if (!vm.shots[vm.shotIndex]) {
+          vm.shotIndex --;
+          vm.shots[vm.shotIndex] = null;
         }
+        else {
+          vm.shots[vm.shotIndex] = null;
+        }
+        vm.shots.length --;
       }
 
       /**

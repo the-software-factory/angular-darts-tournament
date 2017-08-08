@@ -43,9 +43,9 @@
 
   <div class="col-xs-6">
     <button class="btn btn-danger btn-lg"
-        ng-disabled="!vm.isButtonTapped() || vm.isRoundCompleted()"
+        ng-disabled="!vm.isShotMade(0)"
         ng-click="vm.cancel()">
-      <span class="glyphicon glyphicon-remove"></span>
+      <span class="glyphicon glyphicon-arrow-left"></span>
     </button>
   </div>
 
