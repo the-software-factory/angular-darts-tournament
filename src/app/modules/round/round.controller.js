@@ -21,7 +21,7 @@ angular
 
       // Exposes public methods
       vm.addPoint = addPoint;
-      vm.cancel = cancel;
+      vm.undo = undo;
       vm.confirm = confirm;
       vm.getMissingPoints = getMissingPoints;
       vm.getMissingRedemptionPoints = getMissingRedemptionPoints;
@@ -208,23 +208,20 @@ angular
 
       /**
        * @ngdoc method
-       * @name RoundController#cancel
+       * @name RoundController#undo
        * @kind function
-       * @methodOf app.round.controller:cancel
+       * @methodOf app.round.controller:undo
        * @description
        * Undo the last shot
        */
-      function cancel() {
+      function undo() {
         vm.isTappedNumberDisabled = false;
         vm.number = null;
 
-        if (!vm.shots[vm.shotIndex]) {
+        if (!isShotMade(vm.shotIndex)) {
           vm.shotIndex --;
-          vm.shots[vm.shotIndex] = null;
         }
-        else {
-          vm.shots[vm.shotIndex] = null;
-        }
+        vm.shots[vm.shotIndex] = null;
         vm.shots.length --;
       }
 
