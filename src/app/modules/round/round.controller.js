@@ -221,8 +221,8 @@ angular
         if (!isShotMade(vm.shotIndex)) {
           vm.shotIndex --;
         }
-        vm.shots[vm.shotIndex] = null;
-        vm.shots.length --;
+
+        vm.shots.splice(vm.shotIndex, 1);
       }
 
       /**
