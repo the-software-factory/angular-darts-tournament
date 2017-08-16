@@ -21,7 +21,7 @@ angular
 
       // Exposes public methods
       vm.addPoint = addPoint;
-      vm.cancel = cancel;
+      vm.undo = undo;
       vm.confirm = confirm;
       vm.getMissingPoints = getMissingPoints;
       vm.getMissingRedemptionPoints = getMissingRedemptionPoints;
@@ -138,6 +138,7 @@ angular
        * @return {boolean} True if the nth shot has been made.
        * @description
        * Determines if the nth shot has been made or not.
+       * NOTE: Keep in mind that 0 is a valid shot.
        */
       function isShotMade(index) {
         return angular.isNumber(vm.getShot(index));
@@ -205,10 +206,24 @@ angular
         }
       }
 
-      // TODO Add docblock
-      function cancel() {
-        // TODO implement
-        alert('to implement');
+      /**
+       * @ngdoc method
+       * @name RoundController#undo
+       * @kind function
+       * @methodOf app.round.controller:undo
+       * @description
+       * Undo the last shot
+       */
+      function undo() {
+        vm.isTappedNumberDisabled = false;
+        vm.number = null;
+
+        // If the current shot has not been made, undo the previous one
+        if (!isShotMade(vm.shotIndex)) {
+          vm.shotIndex --;
+        }
+
+        vm.shots.splice(vm.shotIndex, 1);
       }
 
       /**
