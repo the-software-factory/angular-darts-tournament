@@ -16,8 +16,7 @@ var appDir = srcDir + '/app';
 
 var paths = {
   sass: [appDir + '/style/**/*.scss'],
-  scripts: [appDir + '/**/*.module.js', appDir + '/**/*.js', '!' + appDir + '/**/*.spec.js', appDir + '/app.js'],
-  html: [appDir + '/**/*.html']
+  scripts: [appDir + '/**/*.module.js', appDir + '/**/*.js', '!' + appDir + '/**/*.spec.js', appDir + '/app.js']
 };
 
 gulp.task('html', function() {
@@ -145,7 +144,6 @@ gulp.task('connect', function () {
 gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['script']);
   gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.html, ['copy']);
 });
 
 gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript', 'connect','watch']);
