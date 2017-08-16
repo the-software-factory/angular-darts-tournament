@@ -218,6 +218,7 @@ angular
         vm.isTappedNumberDisabled = false;
         vm.number = null;
 
+        // If the current shot has not been made, undo the previous one
         if (!isShotMade(vm.shotIndex)) {
           vm.shotIndex --;
         }
