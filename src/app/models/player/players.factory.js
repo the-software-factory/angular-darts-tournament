@@ -33,7 +33,12 @@ angular
 
         return {
           name: name,
-          id: playerID
+          id: playerID,
+          playedGames: 0,
+          wins: 0,
+          bestRoundScore: 0,
+          bestRoundDate: null,
+          shutouts: 0
         };
       }
 

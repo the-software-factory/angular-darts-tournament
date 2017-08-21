@@ -15,8 +15,9 @@ angular
     'SelectedPlayers',
     'Match',
     'PointFactory',
+    'PlayerStats',
     'RULES',
-    function($routeParams, $location, $filter, SelectedPlayers, Match, PointFactory, RULES) {
+    function($routeParams, $location, $filter, SelectedPlayers, Match, PointFactory, PlayerStats, RULES) {
       var vm = this;
 
       // Exposes public methods
@@ -290,6 +291,10 @@ angular
       function viewSummary() {
         // You have to determine if all players played the current round or not.
         var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
+        var playerScore = Match.getRoundPointsByPlayer(vm.player, vm.round);
+        if (vm.player.bestRoundScore < playerScore) {
+          PlayerStats.updateBestRound(vm.player, playerScore);
+        }
         var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
         $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer(nextRound).id);
       }

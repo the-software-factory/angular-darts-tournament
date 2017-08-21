@@ -11,7 +11,9 @@ angular
   .controller('PrizegivingController', [
     '$location',
     'Match',
-    function($location, Match) {
+    'SelectedPlayers',
+    'PlayerStats',
+    function($location, Match, SelectedPlayers, PlayerStats) {
       var vm = this;
 
       // Exposes public methods
@@ -24,6 +26,10 @@ angular
        * @propertyOf app.summary.controller:SummaryController
        */
       vm.match = Match;
+
+      vm.selectedPlayers = SelectedPlayers;
+
+      vm.playerStats = PlayerStats;
 
       /**
        * @ngdoc method
