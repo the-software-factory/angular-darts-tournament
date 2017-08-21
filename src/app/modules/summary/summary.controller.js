@@ -118,14 +118,16 @@ angular
        * Go to the prizegiving view.
        */
       function prizegiving() {
-        angular.forEach(Match.getRounds(), function (round) {
-          angular.forEach(getPlayers(), function (player) {
-            if (isShutout(player, Match.getRounds().indexOf(round))) {
+        var rounds = Match.getRounds();
+        angular.forEach(rounds, function(round) {
+          angular.forEach(getPlayers(), function(player) {
+            if (isShutout(player, rounds.indexOf(round))) {
               PlayerStats.addShutout(player);
             }
           });
         });
         PlayerStats.updatePlayersGames();
+        PlayerStats.savePlayers();
         $location.path('prizegiving');
       }
 

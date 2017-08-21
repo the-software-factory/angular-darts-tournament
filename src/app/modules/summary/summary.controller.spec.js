@@ -12,6 +12,7 @@ describe('Summary controller', function() {
         '$routeParams': {},
         'SelectedPlayers': {},
         'Match': {},
+        'PlayerStats': {},
         'RULES': {}
       });
     };

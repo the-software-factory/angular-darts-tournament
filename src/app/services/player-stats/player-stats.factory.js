@@ -4,11 +4,12 @@ angular
   .module('app')
   .factory('PlayerStats', [
     'SelectedPlayers',
+    'SavedPlayers',
     'Match',
-    function (SelectedPlayers, Match) {
+    function(SelectedPlayers, SavedPlayers, Match) {
 
       function addShutout(player) {
-        player.shutouts+=1;
+        player.shutouts += 1;
         SelectedPlayers.save(SelectedPlayers.getAll());
       }
 
@@ -17,7 +18,7 @@ angular
        * @returns {string}
        */
       function getWinsPercentage(player) {
-        return ((player.wins / player.playedGames) * 100) + '%';
+        return player.playedGames ? ((player.wins / player.playedGames) * 100) + '%' : '0%';
       }
 
       /**
@@ -47,11 +48,19 @@ angular
       }
 
       function updatePlayersGames() {
-        Match.getWinner().wins+=1;
+        Match.getWinner().wins += 1;
         angular.forEach(SelectedPlayers.getAll(), function(player) {
-          player.playedGames+=1;
+          player.playedGames += 1;
         });
         SelectedPlayers.save(SelectedPlayers.getAll());
+      }
+
+      function savePlayers() {
+        angular.forEach(SelectedPlayers.getAll(), function(player) {
+          SavedPlayers.remove(player);
+          SavedPlayers.add(player);
+        });
+        SavedPlayers.save(SavedPlayers.getAll());
       }
 
       return {
@@ -62,7 +71,8 @@ angular
         getBestRoundDate: getBestRoundDate,
         setBestRoundDate: setBestRoundDate,
         updateBestRound: updateBestRound,
-        updatePlayersGames: updatePlayersGames
+        updatePlayersGames: updatePlayersGames,
+        savePlayers: savePlayers
       };
 
     }

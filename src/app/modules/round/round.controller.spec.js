@@ -10,6 +10,7 @@ describe('Summary controller', function() {
       return $controller('RoundController', {
         '$routeParams': {},
         '$location': {},
+        '$filter': {},
         'SelectedPlayers': {
           'getById': angular.noop
         },
@@ -19,6 +20,7 @@ describe('Summary controller', function() {
         'PointFactory': {
           create: angular.noop
         },
+        'PlayerStats': {},
         'RULES': {}
       });
     };
