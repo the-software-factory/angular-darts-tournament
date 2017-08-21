@@ -21,6 +21,7 @@ angular
       vm.addNewPlayer = addNewPlayer;
       vm.areSelectedPlayersEnough = areSelectedPlayersEnough;
       vm.deselectPlayer = deselectPlayer;
+      vm.goToSettings = goToSettings;
       vm.isPlayerSelected = isPlayerSelected;
       vm.selectPlayer = selectPlayer;
       vm.startMatch = startMatch;
@@ -147,6 +148,18 @@ angular
       function startMatch() {
         Match.reset();
         $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
+      }
+
+      /**
+       * @ngdoc method
+       * @name PlayersController#goToSettings
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @description
+       * Redirect to the settings view
+       */
+      function goToSettings() {
+        $location.path('settings');
       }
 
     }

@@ -1,0 +1,25 @@
+<div class="container-fluid text-center">
+
+  <div class="col-xs-12 ">
+    <!-- TODO this string needs to be translated -->
+    <h2>settings</h2>
+  </div>
+
+  <div class="col-xs-12 text-left">
+    end match at the end of the turn
+    <!-- TODO add classes -->
+    <input type="checkbox"
+            class=""
+            ng-model="vm.setEndMatch"/>
+  </div>
+
+  <div class="col-xs-12">
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-click="vm.goBack()">
+      done
+      <span class="glyphicon glyphicon-ok-circle"></span>
+    </a>
+  </div>
+
+</div>

@@ -20,6 +20,7 @@ angular
       // Exposes public methods
       vm.getPlayers = getPlayers;
       vm.getMissingPoints = getMissingPoints;
+      vm.isMatchOver = isMatchOver;
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
       vm.prizegiving = prizegiving;
@@ -118,6 +119,18 @@ angular
        */
       function prizegiving() {
         $location.path('prizegiving');
+      }
+
+      /**
+      * @ngdoc method
+      * @name SummaryController#isMatchOver
+      * @kind function
+      * @methodOf app.summary.controller:SummaryController
+      * @description
+      * Defines if the match is over
+      */
+      function isMatchOver() {
+        return vm.match.isMatchOver(vm.roundID - 1);
       }
 
     }
