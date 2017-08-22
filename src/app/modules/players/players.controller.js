@@ -25,6 +25,7 @@ angular
       vm.selectPlayer = selectPlayer;
       vm.startMatch = startMatch;
       vm.togglePlayer = togglePlayer;
+      vm.viewStatistics = viewStatistics;
 
       /**
        * @ngdoc property
@@ -147,6 +148,10 @@ angular
       function startMatch() {
         Match.reset();
         $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
+      }
+
+      function viewStatistics() {
+        $location.path('statistics');
       }
 
     }
