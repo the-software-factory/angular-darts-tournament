@@ -266,7 +266,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name Match#isRoundOver
+       * @name Match#isRoundOverForAllPlayers
        * @kind function
        * @methodOf app.service:Match
        * @param {string} roundID
@@ -274,13 +274,10 @@ angular
        * @description
        * Returns true if the last player shot, otherwise false
        */
-      function isRoundOver(round) {
+      function isRoundOverForAllPlayers(round) {
         var rounds = getRounds();
         //If the next round has not been created yet, it means that the last one has just finished
-        if (typeof rounds[round] === 'undefined') {
-          return true;
-        }
-        return false;
+        return (typeof rounds[round] === 'undefined');
       }
 
       /**
@@ -294,10 +291,10 @@ angular
        * Returns true if the match is over also considering the settings
        */
       function isMatchOver(round) {
-        var temp = Storage.get('s1');
+        var matchSetting = Storage.get('setting1');
 
-        if (temp) {
-          if (isRoundOver(round) && getWinners().length) {
+        if (matchSetting) {
+          if (isRoundOverForAllPlayers(round) && getWinners().length) {
             return true;
           }
           return false;
@@ -320,7 +317,7 @@ angular
         getRoundPointsByPlayer: getRoundPointsByPlayer,
         getRounds: getRounds,
         isRoundStarted: isRoundStarted,
-        isRoundOver: isRoundOver,
+        isRoundOverForAllPlayers: isRoundOverForAllPlayers,
         isMatchOver: isMatchOver,
         reset: reset,
         setCurrentPlayer: setCurrentPlayer

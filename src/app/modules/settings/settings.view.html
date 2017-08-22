@@ -7,10 +7,9 @@
 
   <div class="col-xs-12 text-left">
     end match at the end of the turn
-    <!-- TODO add classes -->
     <input type="checkbox"
-            class=""
-            ng-model="vm.setEndMatch"/>
+            ng-model="vm.setEndMatch"
+            ng-change="vm.storeSetting()"/>
   </div>
 
   <div class="col-xs-12">

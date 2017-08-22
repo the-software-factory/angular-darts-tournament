@@ -18,7 +18,6 @@ angular
        vm.goBack = goBack;
        vm.getStoredSetting = getStoredSetting;
        vm.storeSetting = storeSetting;
-       vm.initialize = initialize;
 
        /**
         * @ngdoc property
@@ -26,9 +25,7 @@ angular
         * @type {boolean}
         * @propertyOf app.settings.controller:SettingsController
         */
-       vm.setEndMatch = null;
-
-       initialize();
+       vm.setEndMatch = getStoredSetting();
 
        /**
         * @ngdoc method
@@ -39,20 +36,7 @@ angular
         * Stores the settings and go back to the players view
         */
        function goBack() {
-         vm.storeSetting();
          $location.path('players');
-       }
-
-       /**
-        * @ngdoc method
-        * @name SettingsController#initialize
-        * @kind function
-        * @methodOf app.settings.controller:SettingsController
-        * @description
-        * Recover the sotred setting
-        */
-       function initialize() {
-         vm.setEndMatch = getStoredSetting();
        }
 
        /**
@@ -64,7 +48,7 @@ angular
         * Return the value of the setting
         */
        function getStoredSetting() {
-         return Storage.get('s1');
+         return Storage.get('setting1');
        }
 
        /**
@@ -76,7 +60,7 @@ angular
         * Stores the setting
         */
        function storeSetting() {
-         Storage.set('s1', vm.setEndMatch);
+         Storage.set('setting1', vm.setEndMatch);
        }
 
      }
