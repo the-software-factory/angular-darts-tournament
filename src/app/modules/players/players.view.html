@@ -25,7 +25,7 @@
     </div>
 
     <div class="adt-card"
-          ng-repeat="player in vm.savedPlayers.getAll() track by player.id"
+          ng-repeat="player in vm.savedPlayers.getAll() | orderBy: 'name' track by player.id"
           ng-class="{'is-adt-card-selected': vm.isPlayerSelected(player)}"
           ng-click="vm.togglePlayer(player)">
       <div class="glyphicon glyphicon-user"></div>
