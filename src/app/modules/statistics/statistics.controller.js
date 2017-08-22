@@ -11,6 +11,7 @@ angular
       var vm = this;
 
       vm.savedPlayers = SavedPlayers;
+
       vm.playerStats = PlayerStats;
 
       // Exposes public methods

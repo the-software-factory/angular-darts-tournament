@@ -291,6 +291,7 @@ angular
       function viewSummary() {
         // You have to determine if all players played the current round or not.
         var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
+        // Updates the best round score of the player if the player makes an higher one
         var playerScore = Match.getRoundPointsByPlayer(vm.player, vm.round);
         if (vm.player.bestRoundScore < playerScore) {
           PlayerStats.updateBestRound(vm.player, playerScore);
