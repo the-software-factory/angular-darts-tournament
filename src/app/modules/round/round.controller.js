@@ -15,13 +15,14 @@ angular
     'SelectedPlayers',
     'Match',
     'PointFactory',
+    'PlayerStats',
     'RULES',
-    function($routeParams, $location, $filter, SelectedPlayers, Match, PointFactory, RULES) {
+    function($routeParams, $location, $filter, SelectedPlayers, Match, PointFactory, PlayerStats, RULES) {
       var vm = this;
 
       // Exposes public methods
       vm.addPoint = addPoint;
-      vm.cancel = cancel;
+      vm.undo = undo;
       vm.confirm = confirm;
       vm.getMissingPoints = getMissingPoints;
       vm.getMissingRedemptionPoints = getMissingRedemptionPoints;
@@ -138,6 +139,7 @@ angular
        * @return {boolean} True if the nth shot has been made.
        * @description
        * Determines if the nth shot has been made or not.
+       * NOTE: Keep in mind that 0 is a valid shot.
        */
       function isShotMade(index) {
         return angular.isNumber(vm.getShot(index));
@@ -205,10 +207,24 @@ angular
         }
       }
 
-      // TODO Add docblock
-      function cancel() {
-        // TODO implement
-        alert('to implement');
+      /**
+       * @ngdoc method
+       * @name RoundController#undo
+       * @kind function
+       * @methodOf app.round.controller:undo
+       * @description
+       * Undo the last shot
+       */
+      function undo() {
+        vm.isTappedNumberDisabled = false;
+        vm.number = null;
+
+        // If the current shot has not been made, undo the previous one
+        if (!isShotMade(vm.shotIndex)) {
+          vm.shotIndex --;
+        }
+
+        vm.shots.splice(vm.shotIndex, 1);
       }
 
       /**
@@ -290,6 +306,11 @@ angular
       function viewSummary() {
         // You have to determine if all players played the current round or not.
         var currentRoundPlayedID = $filter('objectKeys')(Match.getRounds()[vm.round - 1]);
+        // Updates the best round score of the player if the player makes an higher one
+        var playerScore = Match.getRoundPointsByPlayer(vm.player, vm.round);
+        if (playerScore > vm.player.bestRoundScore) {
+          PlayerStats.updateBestRound(vm.player, playerScore);
+        }
         var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
         $location.path('summary/round/' + nextRound + '/player/' + Match.getNextPlayer(nextRound).id);
       }

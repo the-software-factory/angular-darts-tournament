@@ -13,8 +13,9 @@ angular
     '$routeParams',
     'SelectedPlayers',
     'Match',
+    'PlayerStats',
     'RULES',
-    function($location, $routeParams, SelectedPlayers, Match, RULES) {
+    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES) {
       var vm = this;
 
       // Exposes public methods
@@ -117,6 +118,18 @@ angular
        * Go to the prizegiving view.
        */
       function prizegiving() {
+        // Checks if a shutout has occurred during the match
+        var rounds = Match.getRounds();
+        angular.forEach(rounds, function(round) {
+          angular.forEach(getPlayers(), function(player) {
+            if (isShutout(player, rounds.indexOf(round))) {
+              PlayerStats.addShutout(player);
+            }
+          });
+        });
+        // Updates games and wins properties of the players
+        PlayerStats.updatePlayersGames();
+        PlayerStats.savePlayers();
         $location.path('prizegiving');
       }
 

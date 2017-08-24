@@ -9,7 +9,9 @@ describe('Prizegiving controller', function() {
     createCtrl = function() {
       return $controller('PrizegivingController', {
         '$location': {},
-        'Match': {}
+        'Match': {},
+        'SelectedPlayers': {},
+        'PlayerStats': {}
       });
     };
   }));
