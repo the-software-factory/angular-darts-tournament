@@ -6,7 +6,7 @@
   </div>
 
   <div class="col-xs-12">
-    <div ng-repeat="winner in vm.match.getWinners()">
+    <div ng-repeat="::winner in vm.match.getWinners()">
       <span class="glyphicon glyphicon-user adt-badge"></span>
       <h2 ng-bind="::winner.name"></h2>
     </div>
