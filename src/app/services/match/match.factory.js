@@ -294,15 +294,9 @@ angular
         var matchSetting = Storage.get('setting1');
 
         if (matchSetting) {
-          if (isRoundOverForAllPlayers(round) && getWinners().length) {
-            return true;
-          }
-          return false;
+          return (isRoundOverForAllPlayers(round) && getWinners().length);
         }
-        if (getWinners().length) {
-          return true;
-        }
-        return false;
+        return Boolean(getWinners().length);
       }
 
       return {
