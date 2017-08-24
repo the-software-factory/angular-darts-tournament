@@ -11,17 +11,21 @@ angular
   .controller('PrizegivingController', [
     '$location',
     'Match',
+    'SelectedPlayers',
+    'PlayerStats',
     function($location, Match) {
+
       var vm = this;
 
       // Exposes public methods
       vm.newMatch = newMatch;
+      vm.viewStats = viewStats;
 
       /**
        * @ngdoc property
-       * @name SummaryController#match
+       * @name PrizegivingController#match
        * @type {Object}
-       * @propertyOf app.summary.controller:SummaryController
+       * @propertyOf app.prizegiving.controller:PrizegivingController
        */
       vm.match = Match;
 
@@ -35,6 +39,18 @@ angular
        */
       function newMatch() {
         $location.path('players');
+      }
+
+      /**
+       * @ngdoc method
+       * @name PrizegivingController#viewStats
+       * @kind function
+       * @methodOf app.prizegiving.controller:PrizegivingController
+       * @description
+       * Redirects user to the stats page
+       */
+      function viewStats() {
+        $location.path('stats');
       }
 
     }

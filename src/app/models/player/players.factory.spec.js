@@ -16,11 +16,11 @@ describe('Players factory', function() {
     });
 
     it('should return an object', function() {
-      expect(PlayersFactoryService.create('test', [])).toEqual({name: 'test', id: 1});
+      expect(PlayersFactoryService.create('test', [])).toEqual({name: 'test', id: 1, games: 0, wins: 0, bestRoundScore: 0, bestRoundDate: null, shutouts: 0});
     });
 
     it('should return a new player with the max ID', function() {
-      expect(PlayersFactoryService.create('test', [{id: 1}, {id: 5}, {id: 3}])).toEqual({name: 'test', id: 6});
+      expect(PlayersFactoryService.create('test', [{id: 1}, {id: 5}, {id: 3}])).toEqual({name: 'test', id: 6, games: 0, wins: 0, bestRoundScore: 0, bestRoundDate: null, shutouts: 0});
     });
 
   });

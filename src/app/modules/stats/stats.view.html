@@ -1,0 +1,39 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Wins percentage</th>
+      <th>Best Round Score</th>
+      <th>Best Round Date</th>
+      <th>Shutouts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="player in ::vm.savedPlayers.getAll() track by player.id">
+      <td>
+        <span ng-bind="player.name"></span>
+      </td>
+      <td>
+        <span ng-bind="vm.playerStats.getWinsPercentage(player)"></span><span>%</span>
+      </td>
+      <td>
+        <span ng-bind="player.bestRoundScore"></span>
+      </td>
+      <td>
+        <span ng-bind="player.bestRoundDate"></span>
+      </td>
+      <td>
+        <span ng-bind="player.shutouts"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="col-xs-12">
+  <!-- TODO this string needs to be translated -->
+  <a class="btn btn-primary btn-lg btn-block"
+     role="button"
+     ng-click="vm.viewPlayers()">
+    players
+  </a>
+</div>
