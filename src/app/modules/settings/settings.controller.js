@@ -48,7 +48,7 @@ angular
         * Return the value of the setting
         */
        function getStoredSetting() {
-         return Storage.get('setting1');
+         return Storage.get('settings');
        }
 
        /**
@@ -60,7 +60,7 @@ angular
         * Stores the setting
         */
        function storeSetting() {
-         Storage.set('setting1', vm.setEndMatch);
+         Storage.set('settings', vm.setEndMatch);
        }
 
      }

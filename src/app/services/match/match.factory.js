@@ -291,7 +291,7 @@ angular
        * Returns true if the match is over also considering the settings
        */
       function isMatchOver(round) {
-        var matchSetting = Storage.get('setting1');
+        var matchSetting = Storage.get('settings');
 
         if (matchSetting) {
           return (isRoundOverForAllPlayers(round) && getWinners().length);
