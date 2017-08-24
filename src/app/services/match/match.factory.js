@@ -94,7 +94,7 @@ angular
        * @param {number} round The number of the round
        * @return {boolean} True if at least a player completed own round
        * @description
-       * Determines if the rount started since at least one player played.
+       * Determines if the round started since at least one player played.
        */
       function isRoundStarted(round) {
         return !!getRounds()[round - 1];
