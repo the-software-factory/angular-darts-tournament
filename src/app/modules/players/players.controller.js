@@ -26,6 +26,7 @@ angular
       vm.selectPlayer = selectPlayer;
       vm.startMatch = startMatch;
       vm.togglePlayer = togglePlayer;
+      vm.viewStats = viewStats;
 
       /**
        * @ngdoc property
@@ -160,6 +161,9 @@ angular
        */
       function goToSettings() {
         $location.path('settings');
+
+      function viewStats() {
+        $location.path('stats');
       }
 
     }

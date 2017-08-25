@@ -10,7 +10,8 @@ angular
     'app.prizegiving',
     'app.round',
     'app.summary',
-    'app.settings'
+    'app.settings',
+    'app.stats'
   ])
 
   .config([
