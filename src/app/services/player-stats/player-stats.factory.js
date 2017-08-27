@@ -38,7 +38,40 @@ angular
        * Return the ratio between wins and games of a player.
        */
       function getWinsPercentage(player) {
-        return player.games ? ((player.wins / player.games) * 100) : 0;
+        return player.games ? ((player.wins / player.games) * 100).toFixed(2) : 0;
+      }
+
+      /**
+       * @ngdoc method
+       * @name PlayerStats#getShutoutsIndex
+       * @kind function
+       * @methodOf app.service:PlayerStats
+       * @return {number|undefined}
+       * @description
+       * Return the ratio between shutouts and games of a player.
+       */
+      function getShutoutsIndex(player) {
+        var shutoutsIndex = (player.shutouts / player.games);
+        return shutoutsIndex ? shutoutsIndex.toFixed(2) : 0;
+      }
+
+      /**
+       * @ngdoc method
+       * @name PlayerStats#getFormattedBestRoundDate
+       * @kind function
+       * @methodOf app.service:PlayerStats
+       * @return {string}
+       * @description
+       * Return the date of the best round score of the player in the format dd/mm/yyyy.
+       */
+      function getFormattedBestRoundDate(player) {
+        var day = new Date(getBestRoundDate(player)).getDate();
+        var month = new Date(getBestRoundDate(player)).getMonth() + 1;
+        var year = new Date(getBestRoundDate(player)).getFullYear();
+
+        var formattedDate = day + '/' + month + '/' + year;
+
+        return getBestRoundDate(player) ? formattedDate : 'Never played a game';
       }
 
       /**
@@ -134,6 +167,8 @@ angular
       return {
         addShutout: addShutout,
         getWinsPercentage: getWinsPercentage,
+        getShutoutsIndex: getShutoutsIndex,
+        getFormattedBestRoundDate: getFormattedBestRoundDate,
         getBestRoundScore: getBestRoundScore,
         setBestRoundScore: setBestRoundScore,
         getBestRoundDate: getBestRoundDate,
