@@ -11,7 +11,7 @@ var copy = require('gulp-contrib-copy');
 var connect = require('gulp-connect');
 var watch = require('gulp-watch');
 
-var srcDir = 'src';
+var srcDir = 'www';
 var appDir = srcDir + '/app';
 
 var paths = {
@@ -53,7 +53,7 @@ gulp.task('script', function() {
     appDir + '/**/*.js',
     '!' + appDir + '/**/*.spec.js',
     appDir + '/app.js'
-    ])
+  ])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('./dist/development/app/'));
 
@@ -102,7 +102,8 @@ gulp.task('vendorScript', function() {
     'bower_components/angular-route/angular-route.js',
     'bower_components/jquery/dist/jquery.js',
     'bower_components/ngstorage/ngStorage.js',
-    'bower_components/bootstrap/dist/js/bootstrap.js'
+    'bower_components/bootstrap/dist/js/bootstrap.js',
+    'bower_components/ionic/js/ionic.bundle.js'
   ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./dist/development/app/'));
@@ -112,7 +113,8 @@ gulp.task('vendorScript', function() {
     'bower_components/angular-route/angular-route.min.js',
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
-    'bower_components/ngstorage/ngStorage.min.js'
+    'bower_components/ngstorage/ngStorage.min.js',
+    'bower_components/ionic/js/ionic.bundle.min.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
@@ -121,9 +123,9 @@ gulp.task('vendorScript', function() {
 
 gulp.task('lint', function() {
   return gulp.src(appDir + '/**/*.js')
-  .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failOnError());
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
 });
 
 gulp.task('test', ['lint'], function (done) {
@@ -137,7 +139,7 @@ gulp.task('connect', function () {
   connect.server({
     name: 'Dev App',
     root: ['dist/development'],
-    port: 8000,
+    port: 8100,
     livereload: true
   });
 });
@@ -148,4 +150,5 @@ gulp.task('watch', function() {
   gulp.watch(paths.html, ['copy']);
 });
 
-gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript', 'connect','watch']);
+gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript', 'connect', 'watch']);
+gulp.task('ionic:watch:before', ['default']);

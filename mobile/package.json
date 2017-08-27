@@ -1,0 +1,45 @@
+{
+  "name": "angular-darts-tournament",
+  "version": "0.1.0",
+  "description": "Play darts with your co-workers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-software-factory/angular-darts-tournament.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "eslint": "^3.0.1",
+    "eslint-plugin-angular": "^1.4.0",
+    "eslint-plugin-jasmine": "^1.8.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-contrib-copy": "^0.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.4",
+    "gulp-watch": "^4.3.10",
+    "husky": "^0.11.8",
+    "jasmine-core": "~2.4.1",
+    "karma": "^1.0.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "~1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "phantomjs-prebuilt": "^2.1.7"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prepush": "npm test",
+    "start": "gulp connect",
+    "test": "gulp test"
+  },
+  "bugs": {
+    "url": "https://github.com/the-software-factory/angular-darts-tournament/issues"
+  },
+  "homepage": "https://github.com/the-software-factory/angular-darts-tournament#readme"
+}
