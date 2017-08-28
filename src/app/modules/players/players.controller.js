@@ -161,6 +161,7 @@ angular
        */
       function goToSettings() {
         $location.path('settings');
+      }
 
       function viewStats() {
         $location.path('stats');
