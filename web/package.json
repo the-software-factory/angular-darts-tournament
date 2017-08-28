@@ -34,8 +34,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "prepush": "npm test",
-    "start": "gulp connect",
+    "start": "gulp connect watch",
     "test": "gulp test"
   },
   "bugs": {
