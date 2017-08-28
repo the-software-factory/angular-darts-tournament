@@ -17,6 +17,14 @@ Take a look at the [CHANGELOG.md](CHANGELOG.md) to verify if a case has been inc
 It contains the list of commits grouped by tag.
 <!-- TODO Add plugin for the changelog -->
 
+## Project Structure
+
+```
+core/ // Contains the common AngularJS code
+mobile/ // It's the ionic project
+web/ // The web application project
+```
+
 ## Development
 Project requires:
 - [node](https://nodejs.org/)
@@ -40,9 +48,7 @@ After all of these steps the project structure should match the following one:
 
 ```
 bower_components/ // Hosts all bower dependencies
-dist/ // Contains builds
 node_modules/ Hosts all npm dependencies
-src/ // The source folder
 	...
 ...
 bower.json
@@ -53,10 +59,6 @@ package.json
 ```
 
 Then run `npm start` to access the application at [http://localhost:8000/](http://localhost:8000/)
-
-### Source
-The entire AngularJS source code is within the `src` folder.
-Click [here](src) for more details.
 
 ### Tests
 Test suite can be run with the following command:

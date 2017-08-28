@@ -21,6 +21,21 @@ $ bower install
 
 Then run `gulp`, this will create a `www` directory that is the one containing the code that ionic will effectively run.
 
+After all of these steps the project structure should match the following one:
+
+```
+bower_components/ // Hosts all bower dependencies
+www/ // Contains build
+node_modules/ Hosts all npm dependencies
+src/ // The source folder
+	...
+...
+bower.json
+gulpfile.js
+package.json
+...
+```
+
 ## Run app in browser
 
 Simply run `ionic serve`, this will open your default browser with the app running.

@@ -33,9 +33,7 @@
     "phantomjs-prebuilt": "^2.1.7"
   },
   "scripts": {
-    "postinstall": "bower install",
     "prepush": "npm test",
-    "start": "gulp connect",
     "test": "gulp test"
   },
   "bugs": {
