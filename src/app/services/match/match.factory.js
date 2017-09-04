@@ -247,21 +247,56 @@ angular
 
       /**
        * @ngdoc method
-       * @name Match#getWinner
+       * @name Match#getWinners
        * @kind function
        * @methodOf app.service:Match
-       * @return {Object} Returns the player won the match otherwise null
+       * @return {Array} Returns the players who won the match otherwise an empty array
        * @description
-       * Returns the player won the match otherwise null
+       * Returns an array with the players who won the match otherwise an empty array
        */
-      function getWinner() {
-        var winner = null;
+      function getWinners() {
+        var winners = [];
         angular.forEach(SelectedPlayers.getAll(), function(player) {
           if (RULES.INITIAL_POINTS - getPointsUntilRound(player) === 0) {
-            winner = player;
+            winners.push(player);
           }
         });
-        return winner;
+        return winners;
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#isRoundOverForAllPlayers
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {string} roundID
+       * @return {boolean} true if the last player shot
+       * @description
+       * Returns true if the last player shot, otherwise false
+       */
+      function isRoundOverForAllPlayers(round) {
+        var rounds = getRounds();
+        //If the next round has not been created yet, it means that the last one has just finished
+        return (typeof rounds[round] === 'undefined');
+      }
+
+      /**
+       * @ngdoc method
+       * @name Match#isMatchOver
+       * @kind function
+       * @methodOf app.service:Match
+       * @param {string} roundID
+       * @return {boolean} true if the match is over
+       * @description
+       * Returns true if the match is over also considering the settings
+       */
+      function isMatchOver(round) {
+        var matchSetting = Storage.get('settings');
+
+        if (matchSetting) {
+          return (isRoundOverForAllPlayers(round) && getWinners().length);
+        }
+        return Boolean(getWinners().length);
       }
 
       return {
@@ -272,10 +307,12 @@ angular
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
         getNextPlayer: getNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
-        getWinner: getWinner,
+        getWinners: getWinners,
         getRoundPointsByPlayer: getRoundPointsByPlayer,
         getRounds: getRounds,
         isRoundStarted: isRoundStarted,
+        isRoundOverForAllPlayers: isRoundOverForAllPlayers,
+        isMatchOver: isMatchOver,
         reset: reset,
         setCurrentPlayer: setCurrentPlayer
       };

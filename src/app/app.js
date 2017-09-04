@@ -10,6 +10,7 @@ angular
     'app.prizegiving',
     'app.round',
     'app.summary',
+    'app.settings',
     'app.stats'
   ])
 

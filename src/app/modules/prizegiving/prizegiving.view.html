@@ -2,12 +2,14 @@
 
   <div class="col-xs-12">
     <!-- TODO this string needs to be translated -->
-    <h3>e il vincitore è</h3>
+    <h3>{{::vm.match.getWinners().length == 1 ? "e il vincitore è" : "e i vincitori sono"}}</h3>
   </div>
 
   <div class="col-xs-12">
-    <span class="glyphicon glyphicon-user adt-badge"></span>
-    <h2 ng-bind="::vm.match.getWinner().name"></h2>
+    <div ng-repeat="winner in ::vm.match.getWinners()">
+      <span class="glyphicon glyphicon-user adt-badge"></span>
+      <h2 ng-bind="::winner.name"></h2>
+    </div>
   </div>
 
   <div class="col-xs-12">
