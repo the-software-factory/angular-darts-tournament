@@ -15,7 +15,8 @@ angular
     'Match',
     'PlayerStats',
     'RULES',
-    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES) {
+    'slack',
+    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES, slack) {
       var vm = this;
 
       // Exposes public methods
@@ -125,12 +126,15 @@ angular
           angular.forEach(getPlayers(), function(player) {
             if (isShutout(player, rounds.indexOf(round))) {
               PlayerStats.addShutout(player);
+              Slack.postShotout(player); // TODO maybe modify
             }
           });
         });
         // Updates games and wins properties of the players
         PlayerStats.updatePlayersGames();
         PlayerStats.savePlayers();
+        // Send messages in Slack
+        Slack.postWinner(); // TODO maybe modify
         $location.path('prizegiving');
       }
 
