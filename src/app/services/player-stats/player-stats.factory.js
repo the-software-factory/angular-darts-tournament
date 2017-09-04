@@ -114,7 +114,9 @@ angular
        * Updates the games and wins of the players and saves those in the storage
        */
       function updatePlayersGames() {
-        Match.getWinner().wins += 1;
+        angular.forEach(Match.getWinners(), function(player) {
+          player.wins += 1;
+        });
         angular.forEach(SelectedPlayers.getAll(), function(player) {
           player.games += 1;
         });
