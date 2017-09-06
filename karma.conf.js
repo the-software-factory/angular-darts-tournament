@@ -9,6 +9,7 @@ module.exports = function (config) {
       'bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/ngstorage/ngStorage.min.js',
+      'bower_components/angular-translate/angular-translate.min.js',
 
       // Application build and unit tests
       'src/app/app.js',

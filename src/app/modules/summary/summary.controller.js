@@ -15,8 +15,8 @@ angular
     'Match',
     'PlayerStats',
     'RULES',
-    'slack',
-    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES, slack) {
+    'Slack',
+    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES, Slack) {
       var vm = this;
 
       // Exposes public methods
@@ -26,6 +26,8 @@ angular
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
       vm.prizegiving = prizegiving;
+
+      vm.slack = Slack;
 
       /**
        * @ngdoc property
@@ -117,7 +119,7 @@ angular
        * @kind function
        * @methodOf app.summary.controller:SummaryController
        * @description
-       * Go to the prizegiving view.
+       * Go to the prizegiving view, update the stats and send messages in Slack's chat.
        */
       function prizegiving() {
         // Checks if a shutout has occurred during the match
@@ -126,15 +128,14 @@ angular
           angular.forEach(getPlayers(), function(player) {
             if (isShutout(player, rounds.indexOf(round))) {
               PlayerStats.addShutout(player);
-              Slack.postShotout(player); // TODO maybe modify
+              vm.slack.postShoutout(player);
             }
           });
         });
         // Updates games and wins properties of the players
         PlayerStats.updatePlayersGames();
         PlayerStats.savePlayers();
-        // Send messages in Slack
-        Slack.postWinner(); // TODO maybe modify
+        vm.slack.postWinner();
         $location.path('prizegiving');
       }
 

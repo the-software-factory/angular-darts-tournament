@@ -12,7 +12,9 @@ angular
   .factory('Slack', [
     '$http',
     'Match',
-    function($http, Match) {
+    'Storage',
+    '$filter',
+    function($http, Match, Storage, $filter) {
 
       /**
        * @ngdoc property
@@ -20,7 +22,7 @@ angular
        * @type {String}
        * @propertyOf app.service:Slack
        */
-      var url = ""; //Storage.get('slackUrl')
+      var url = Storage.get('slackUrl');
 
       /**
        * @ngdoc method
@@ -35,6 +37,7 @@ angular
         $http({
           url: url,
           method: "POST",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: 'payload= ' + JSON.stringify({
             "username" : "Darts Tournament",
             "icon_emoji": ":dart:",
@@ -59,10 +62,11 @@ angular
        * Posts a message with the winner(s) of the match
        */
       function postWinner() {
-        var winners = Match.getWinner(); // TODO Match.getWinners();
+        var winnersText = getWinnersText();
         $http({
           url: url,
           method: "POST",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: 'payload=' + JSON.stringify({
             "username" : "Darts Tournament",
             "icon_emoji": ":dart:",
@@ -71,16 +75,38 @@ angular
                 "mrkdwn_in": ["text"],
                 "color": "0AEB12",
                 "pretext": "Congratulazioni!",
-                "text": "*" + winners.name + "* è il vincitore della partita!"
+                "text": winnersText
               }
             ]
           })
         });
       }
 
+      /**
+       * @ngdoc method
+       * @name Slack#getWinnersText
+       * @kind function
+       * @methodOf app.service:Slack
+       * @description
+       * Provide the text for the winners' message
+       */
+      function getWinnersText() {
+        var winners = Match.getWinners();
+
+        if (winners.length == 1) {
+          return '*' + winners[0].name + '*' + $filter('translate')('ONEWINNER');
+        }
+
+        var string = winners[0].name;
+        for (var i = 1; i < winners.length; i++) {
+          string += ' ' + winners[i].name;
+        }
+        return  '*' + string + '*' + $filter('translate')('MOREWINNERS');
+      }
+
       return {
         postWinner: postWinner,
-        postShotout: postShotout
+        postShoutout: postShoutout
       };
     }
   ]);

@@ -102,7 +102,8 @@ gulp.task('vendorScript', function() {
       'bower_components/angular-route/angular-route.js',
       'bower_components/jquery/dist/jquery.js',
       'bower_components/ngstorage/ngStorage.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js'
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular-translate/angular-translate.js'
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./dist/development/app/'));
@@ -112,7 +113,8 @@ gulp.task('vendorScript', function() {
     'bower_components/angular-route/angular-route.min.js',
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
-    'bower_components/ngstorage/ngStorage.min.js'
+    'bower_components/ngstorage/ngStorage.min.js',
+    'bower_components/angular-translate/angular-translate.min.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
