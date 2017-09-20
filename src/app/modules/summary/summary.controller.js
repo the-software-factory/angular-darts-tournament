@@ -14,8 +14,9 @@ angular
     'SelectedPlayers',
     'Match',
     'PlayerStats',
+    'PlayersList',
     'RULES',
-    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES) {
+    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, PlayersList, RULES) {
       var vm = this;
 
       // Exposes public methods
@@ -33,6 +34,14 @@ angular
        * @propertyOf app.summary.controller:SummaryController
        */
       vm.match = Match;
+
+      /**
+       * @ngdoc property
+       * @name SummaryController#playersList
+       * @type {Object}
+       * @propertyOf app.summary.controller:SummaryController
+       */
+      vm.playersList = PlayersList;
 
       /**
        * @ngdoc property
@@ -119,18 +128,21 @@ angular
        * Go to the prizegiving view.
        */
       function prizegiving() {
-        // Checks if a shutout has occurred during the match
-        var rounds = Match.getRounds();
-        angular.forEach(rounds, function(round) {
-          angular.forEach(getPlayers(), function(player) {
-            if (isShutout(player, rounds.indexOf(round))) {
-              PlayerStats.addShutout(player);
-            }
+        // Check if the stats were already updated
+        if (!vm.playersList.wereStatsUpdated()) {
+          // Checks if a shutout has occurred during the match
+          var rounds = Match.getRounds();
+          angular.forEach(rounds, function(round) {
+            angular.forEach(getPlayers(), function(player) {
+              if (isShutout(player, rounds.indexOf(round))) {
+                PlayerStats.addShutout(player);
+              }
+            });
           });
-        });
-        // Updates games and wins properties of the players
-        PlayerStats.updatePlayersGames();
-        PlayerStats.savePlayers();
+          // Updates games and wins properties of the players
+          PlayerStats.updatePlayersGames();
+          PlayerStats.savePlayers();
+        }
         $location.path('prizegiving');
       }
 

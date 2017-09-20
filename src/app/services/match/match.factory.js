@@ -11,9 +11,10 @@ angular
    */
   .factory('Match', [
     'SelectedPlayers',
+    'PlayersList',
     'Storage',
     'RULES',
-    function(SelectedPlayers, Storage, RULES) {
+    function(SelectedPlayers, PlayersList, Storage, RULES) {
 
       /**
        * @ngdoc property
@@ -45,6 +46,7 @@ angular
       function reset() {
         saveRounds([]);
         currentPlayer = null;
+        PlayersList.updateMatchId();
       }
 
       /**

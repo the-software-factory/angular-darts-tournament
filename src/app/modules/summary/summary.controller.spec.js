@@ -13,7 +13,8 @@ describe('Summary controller', function() {
         'SelectedPlayers': {},
         'Match': {},
         'PlayerStats': {},
-        'RULES': {}
+        'RULES': {},
+        'PlayersList': {}
       });
     };
   }));

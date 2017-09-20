@@ -14,6 +14,15 @@ angular
     function(Storage) {
 
       /**
+       * @ngdoc property
+       * @name PlayersList#matchId
+       * @private
+       * @type {Object}
+       * @propertyOf app.service:Match
+       */
+      var matchId;
+
+      /**
        * @ngdoc method
        * @name PlayersList#getItemOffset
        * @kind function
@@ -108,6 +117,7 @@ angular
        * Replace the old list with the new one.
        */
       function save(storageKey, list) {
+        Storage.set('matchId', matchId);
         Storage.set(storageKey, list);
       }
 
@@ -132,6 +142,32 @@ angular
         return item;
       }
 
+      /**
+       * @ngdoc method
+       * @name PlayersList#updateMatchId
+       * @kind function
+       * @methodOf app.service:PlayersList
+       * @description
+       * Update the matchId with a fresh one.
+       */
+      function updateMatchId() {
+        matchId = new Date;
+      }
+
+      /**
+       * @ngdoc method
+       * @name PlayersList#updateMatchId
+       * @kind function
+       * @methodOf app.service:PlayersList
+       * @return {boolean}
+       * @description
+       * Return true if the stats were already updated.
+       */
+      function wereStatsUpdated() {
+        var oldMatchId = Storage.get('matchId');
+        return matchId == oldMatchId;
+      }
+
       return {
         add: add,
         getAll: getAll,
@@ -139,7 +175,9 @@ angular
         getItemOffset: getItemOffset,
         isAdded: isAdded,
         remove: remove,
-        save: save
+        save: save,
+        updateMatchId: updateMatchId,
+        wereStatsUpdated: wereStatsUpdated
       };
 
     }
