@@ -9,7 +9,14 @@
     end match at the end of the turn
     <input type="checkbox"
             ng-model="vm.setEndMatch"
-            ng-change="vm.storeSetting()"/>
+            ng-change="vm.storeSettings()"/>
+  </div>
+  <div class="col-xs-12 text-left">
+    Slack URL:
+    <input type="text" class="form-control"
+            placeholder="Insert your Slack URL here"
+            ng-model="vm.slackUrl"
+            ng-change="vm.storeSettings()"/>
   </div>
 
   <div class="col-xs-12">
