@@ -11,10 +11,9 @@ angular
    */
   .factory('Slack', [
     '$http',
-    'Match',
     'Storage',
-    '$filter',
-    function($http, Match, Storage, $filter) {
+    '$translate',
+    function($http, Storage, $translate) {
 
       /**
        * @ngdoc property
@@ -61,8 +60,11 @@ angular
        * @description
        * Posts a message with the winner(s) of the match
        */
-      function postWinner() {
-        var winnersText = getWinnersText();
+      function postWinners(winners) {
+        var winnersList = winners.map(function(player) {
+          return player.name;
+        }).join(", ");
+
         $http({
           url: url,
           method: "POST",
@@ -75,37 +77,15 @@ angular
                 "mrkdwn_in": ["text"],
                 "color": "0AEB12",
                 "pretext": "Congratulazioni!",
-                "text": winnersText
+                "text": "*" + winnersList + $translate.instant('WINNERS_TEXT', {WINNERS: winners.length})
               }
             ]
           })
         });
       }
 
-      /**
-       * @ngdoc method
-       * @name Slack#getWinnersText
-       * @kind function
-       * @methodOf app.service:Slack
-       * @description
-       * Provide the text for the winners' message
-       */
-      function getWinnersText() {
-        var winners = Match.getWinners();
-
-        if (winners.length == 1) {
-          return '*' + winners[0].name + '*' + $filter('translate')('ONEWINNER');
-        }
-
-        var string = winners[0].name;
-        for (var i = 1; i < winners.length; i++) {
-          string += ' ' + winners[i].name;
-        }
-        return  '*' + string + '*' + $filter('translate')('MOREWINNERS');
-      }
-
       return {
-        postWinner: postWinner,
+        postWinners: postWinners,
         postShoutout: postShoutout
       };
     }

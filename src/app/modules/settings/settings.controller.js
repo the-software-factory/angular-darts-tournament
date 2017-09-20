@@ -19,6 +19,12 @@ angular
        vm.getStoredSettings = getStoredSettings;
        vm.storeSettings = storeSettings;
 
+       /**
+        * @ngdoc property
+        * @name SettingsController#slackUrl
+        * @type {string}
+        * @propertyOf app.settings.controller:SettingsController
+        */
        vm.slackUrl = Storage.get('slackUrl');
 
        /**

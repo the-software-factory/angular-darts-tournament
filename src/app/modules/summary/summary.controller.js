@@ -27,6 +27,12 @@ angular
       vm.nextRound = nextRound;
       vm.prizegiving = prizegiving;
 
+      /**
+       * @ngdoc property
+       * @name SummaryController#slack
+       * @type {Object}
+       * @propertyOf app.summary.controller:SummaryController
+       */
       vm.slack = Slack;
 
       /**
@@ -135,7 +141,7 @@ angular
         // Updates games and wins properties of the players
         PlayerStats.updatePlayersGames();
         PlayerStats.savePlayers();
-        vm.slack.postWinner();
+        vm.slack.postWinners(vm.match.getWinners());
         $location.path('prizegiving');
       }
 

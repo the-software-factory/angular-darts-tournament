@@ -17,7 +17,8 @@ var appDir = srcDir + '/app';
 var paths = {
   sass: [appDir + '/style/**/*.scss'],
   scripts: [appDir + '/**/*.module.js', appDir + '/**/*.js', '!' + appDir + '/**/*.spec.js', appDir + '/app.js'],
-  html: [appDir + '/**/*.html']
+  html: [appDir + '/**/*.html'],
+  json: [appDir + '/**/*.json']
 };
 
 gulp.task('html', function() {
@@ -33,6 +34,13 @@ gulp.task('copy', function() {
   gulp.src([
     appDir + '/**/*.html',
     appDir + '/**/*.jpg'
+  ])
+    .pipe(copy())
+    .pipe(gulp.dest('dist/production/app/'))
+    .pipe(gulp.dest('dist/development/app/'));
+
+  gulp.src([
+    appDir + '/**/*.json'
   ])
     .pipe(copy())
     .pipe(gulp.dest('dist/production/app/'))
@@ -98,13 +106,16 @@ gulp.task('vendorStyle', ['sass'], function () {
 
 gulp.task('vendorScript', function() {
   gulp.src([
-      'bower_components/angular/angular.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/ngstorage/ngStorage.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/angular-translate/angular-translate.js'
-    ])
+    'bower_components/angular/angular.js',
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/jquery/dist/jquery.js',
+    'bower_components/ngstorage/ngStorage.js',
+    'bower_components/bootstrap/dist/js/bootstrap.js',
+    'bower_components/angular-translate/angular-translate.js',
+    'bower_components/messageformat/messageformat.js',
+    'bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js'
+  ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./dist/development/app/'));
 
@@ -114,7 +125,10 @@ gulp.task('vendorScript', function() {
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
     'bower_components/ngstorage/ngStorage.min.js',
-    'bower_components/angular-translate/angular-translate.min.js'
+    'bower_components/angular-translate/angular-translate.min.js',
+    'bower_components/messageformat/messageformat.min.js',
+    'bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.min.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
@@ -148,6 +162,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['script']);
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.html, ['copy']);
+  gulp.watch(paths.json, ['copy']);
 });
 
 gulp.task('default', ['html', 'copy', 'script', 'vendorStyle', 'vendorScript', 'connect','watch']);

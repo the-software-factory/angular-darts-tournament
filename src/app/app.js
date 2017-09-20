@@ -1,9 +1,5 @@
 'use strict';
 
-var winnersString = {
-  "ONEWINNER": " è il vincitore della partita!",
-  "MOREWINNERS": " sono i vincitori della partita!"
-};
 // Declare app level module which depends on views, and components
 angular
   .module('app', [
@@ -27,7 +23,11 @@ angular
       $locationProvider.hashPrefix('!');
       // Redirects user to the main page if the selected one does not exist
       $routeProvider.otherwise({redirectTo: '/'});
-
-      $translateProvider.translations('default', winnersString).preferredLanguage('default');
+      $translateProvider.useStaticFilesLoader({
+        prefix: '/app/translations/',
+        suffix: '.json'
+      });
+      $translateProvider.useMessageFormatInterpolation();
+      $translateProvider.preferredLanguage('it');
     }
   ]);
