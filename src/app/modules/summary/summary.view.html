@@ -40,13 +40,20 @@
   <div class="col-xs-12" ng-if="!vm.isMatchOver()">
     <!-- TODO this string needs to be translated -->
     <h4>prossimo giocatore</h4>
-    <h3 ng-bind="vm.match.getNextPlayer(vm.roundID).name"></h3>
+    <h3 ng-bind="vm.selectedPlayers.getById(vm.playerID).name"></h3>
     <!-- TODO this string needs to be translated -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
         ng-click="vm.nextRound()">
       turno {{::vm.roundID}}
       <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+    <!-- TODO this string needs to be translated -->
+    <a class="btn btn-primary btn-lg btn-block"
+        role="button"
+        ng-click="vm.skipRound()">
+      skip
+      <span class="glyphicon glyphicon-forward"></span>
     </a>
   </div>
 

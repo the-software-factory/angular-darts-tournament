@@ -25,6 +25,7 @@ angular
       vm.isMatchOver = isMatchOver;
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
+      vm.skipRound = skipRound;
       vm.prizegiving = prizegiving;
 
       /**
@@ -117,6 +118,27 @@ angular
        */
       function nextRound() {
         $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
+      }
+
+      /**
+       * @ngdoc method
+       * @name SummaryController#skipRound
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Temporarily skip the current player
+       */
+      function skipRound() {
+        vm.playerID = parseInt(vm.playerID) + 1;
+        if (vm.playerID > SelectedPlayers .getAll().length) {
+          vm.playerID = 1;
+        }
+        if (!Match.getRounds()[vm.roundID - 1][vm.playerID]) {
+          $location.path('summary/round/' + vm.roundID + '/player/' + vm.playerID);
+        }
+        else {
+          skipRound();
+        }
       }
 
       /**
