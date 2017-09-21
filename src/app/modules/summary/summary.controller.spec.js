@@ -14,7 +14,8 @@ describe('Summary controller', function() {
         'Match': {},
         'PlayerStats': {},
         'RULES': {},
-        'PlayersList': {}
+        'PlayersList': {},
+        'Slack': {}
       });
     };
   }));

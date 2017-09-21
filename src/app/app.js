@@ -11,15 +11,23 @@ angular
     'app.round',
     'app.summary',
     'app.settings',
-    'app.stats'
+    'app.stats',
+    'pascalprecht.translate'
   ])
 
   .config([
     '$locationProvider',
     '$routeProvider',
-    function($locationProvider, $routeProvider) {
+    '$translateProvider',
+    function($locationProvider, $routeProvider, $translateProvider) {
       $locationProvider.hashPrefix('!');
       // Redirects user to the main page if the selected one does not exist
       $routeProvider.otherwise({redirectTo: '/'});
+      $translateProvider.useStaticFilesLoader({
+        prefix: '/app/translations/',
+        suffix: '.json'
+      });
+      $translateProvider.useMessageFormatInterpolation();
+      $translateProvider.preferredLanguage('it');
     }
   ]);

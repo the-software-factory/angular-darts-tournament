@@ -16,8 +16,16 @@ angular
 
        //Exposes public methods
        vm.goBack = goBack;
-       vm.getStoredSetting = getStoredSetting;
-       vm.storeSetting = storeSetting;
+       vm.getStoredSettings = getStoredSettings;
+       vm.storeSettings = storeSettings;
+
+       /**
+        * @ngdoc property
+        * @name SettingsController#slackUrl
+        * @type {string}
+        * @propertyOf app.settings.controller:SettingsController
+        */
+       vm.slackUrl = Storage.get('slackUrl');
 
        /**
         * @ngdoc property
@@ -25,7 +33,7 @@ angular
         * @type {boolean}
         * @propertyOf app.settings.controller:SettingsController
         */
-       vm.setEndMatch = getStoredSetting();
+       vm.setEndMatch = getStoredSettings();
 
        /**
         * @ngdoc method
@@ -41,26 +49,27 @@ angular
 
        /**
         * @ngdoc method
-        * @name SettingsController#getStoredSetting
+        * @name SettingsController#getStoredSettings
         * @kind function
         * @methodOf app.settings.controller:SettingsController
         * @description
         * Return the value of the setting
         */
-       function getStoredSetting() {
+       function getStoredSettings() {
          return Storage.get('settings');
        }
 
        /**
         * @ngdoc method
-        * @name SettingsController#storeSetting
+        * @name SettingsController#storeSettings
         * @kind function
         * @methodOf app.settings.controller:SettingsController
         * @description
         * Stores the setting
         */
-       function storeSetting() {
+       function storeSettings() {
          Storage.set('settings', vm.setEndMatch);
+         Storage.set('slackUrl', vm.slackUrl);
        }
 
      }
