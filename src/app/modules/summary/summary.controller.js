@@ -46,6 +46,14 @@ angular
 
       /**
        * @ngdoc property
+       * @name SummaryController#selectedPlayers
+       * @type {Object}
+       * @propertyOf app.summary.controller:SummaryController
+       */
+      vm.selectedPlayers = SelectedPlayers;
+
+      /**
+       * @ngdoc property
        * @name SummaryController#playerID
        * @type {number}
        * @propertyOf app.summary.controller:SummaryController
@@ -129,16 +137,7 @@ angular
        * Temporarily skip the current player
        */
       function skipRound() {
-        vm.playerID = parseInt(vm.playerID) + 1;
-        if (vm.playerID > SelectedPlayers .getAll().length) {
-          vm.playerID = 1;
-        }
-        if (!Match.getRounds()[vm.roundID - 1][vm.playerID]) {
-          $location.path('summary/round/' + vm.roundID + '/player/' + vm.playerID);
-        }
-        else {
-          skipRound();
-        }
+        $location.path('summary/round/' + vm.roundID + '/player/' + vm.match.selectNextPlayer(vm.roundID).id);
       }
 
       /**

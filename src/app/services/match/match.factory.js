@@ -190,31 +190,30 @@ angular
 
       /**
        * @ngdoc method
-       * @name Match#getNextPlayer
+       * @name Match#selectNextPlayer
        * @kind function
        * @methodOf app.service:Match
        * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
-       * Returns the next player.
+       * set the next player as current and return it.
        */
-      function getNextPlayer(round) {
+      function selectNextPlayer(round) {
+        var nextPlayer = SelectedPlayers.getAll()[0];
         if (getCurrentPlayer()) {
-          // Returns the current player if:
-          // - he/she didn't play yet
-          // - he/she is the first selected player
-          if (!angular.isNumber(getRoundPointsByPlayer(getCurrentPlayer(), round)) &&
-              (isRoundStarted(round) ||
-              angular.equals(getCurrentPlayer(), SelectedPlayers.getAll()[0]))) {
-            return getCurrentPlayer();
+          // seek for the next player tha has NOT played yet this round.
+          do {
+            var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
+            if (offset < SelectedPlayers.getAll().length - 1) {
+              nextPlayer = SelectedPlayers.getAll()[offset + 1];
+            }
+            setCurrentPlayer(nextPlayer);
           }
-
-          var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
-          if (offset < SelectedPlayers.getAll().length - 1) {
-            return SelectedPlayers.getAll()[offset + 1];
-          }
+          while (angular.isNumber(getRoundPointsByPlayer(nextPlayer, round)));
+          return nextPlayer;
         }
-        return SelectedPlayers.getAll()[0];
+        setCurrentPlayer(nextPlayer);
+        return nextPlayer;
       }
 
       /**
@@ -305,7 +304,7 @@ angular
         getInitialPoints: getInitialPoints,
         getMaxPointsByRound: getMaxPointsByRound,
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
-        getNextPlayer: getNextPlayer,
+        selectNextPlayer: selectNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
         getWinners: getWinners,
         getRoundPointsByPlayer: getRoundPointsByPlayer,
