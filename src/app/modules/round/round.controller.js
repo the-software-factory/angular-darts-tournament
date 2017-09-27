@@ -72,7 +72,7 @@ angular
        * @propertyOf app.round.controller:RoundController
        * @description The current player.
        */
-      vm.player = SelectedPlayers.getById($routeParams.playerID);
+      vm.player = SelectedPlayers.getByID($routeParams.playerID);
 
       /**
        * @ngdoc property

@@ -15,12 +15,12 @@ angular
 
       /**
        * @ngdoc property
-       * @name PlayersList#matchId
+       * @name PlayersList#currentMatchID
        * @private
        * @type {Object}
        * @propertyOf app.service:Match
        */
-      var matchId;
+      var currentMatchID;
 
       /**
        * @ngdoc method
@@ -117,13 +117,15 @@ angular
        * Replace the old list with the new one.
        */
       function save(storageKey, list) {
-        Storage.set('matchId', matchId);
+        var matchList = Storage.get('matchList');
+        matchList.push(currentMatchID);
+        Storage.set('matchList', matchList);
         Storage.set(storageKey, list);
       }
 
       /**
        * @ngdoc method
-       * @name PlayersList#getById
+       * @name PlayersList#getByID
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -132,7 +134,7 @@ angular
        * @description
        * Returns the item whose id matches the give one.
        */
-      function getById(storageKey, id) {
+      function getByID(storageKey, id) {
         var item = null;
         angular.forEach(getAll(storageKey), function(iteratedItem) {
           if (iteratedItem.id == id) {
@@ -144,40 +146,26 @@ angular
 
       /**
        * @ngdoc method
-       * @name PlayersList#updateMatchId
+       * @name PlayersList#updateMatchID
        * @kind function
        * @methodOf app.service:PlayersList
        * @description
-       * Update the matchId with a fresh one.
+       * Update the matchID with a fresh one.
        */
-      function updateMatchId() {
-        matchId = new Date;
-      }
-
-      /**
-       * @ngdoc method
-       * @name PlayersList#updateMatchId
-       * @kind function
-       * @methodOf app.service:PlayersList
-       * @return {boolean}
-       * @description
-       * Return true if the stats were already updated.
-       */
-      function wereStatsUpdated() {
-        var oldMatchId = Storage.get('matchId');
-        return matchId == oldMatchId;
+      function updateMatchID() {
+        currentMatchID = new Date;
       }
 
       return {
         add: add,
         getAll: getAll,
-        getById: getById,
+        getByID: getByID,
         getItemOffset: getItemOffset,
         isAdded: isAdded,
         remove: remove,
         save: save,
-        updateMatchId: updateMatchId,
-        wereStatsUpdated: wereStatsUpdated
+        updateMatchID: updateMatchID,
+        currentMatchID: currentMatchID
       };
 
     }

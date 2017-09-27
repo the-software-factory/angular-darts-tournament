@@ -12,8 +12,10 @@ angular
   .factory('PlayerStats', [
     'SelectedPlayers',
     'SavedPlayers',
+    'PlayersList',
     'Match',
-    function(SelectedPlayers, SavedPlayers, Match) {
+    'Storage',
+    function(SelectedPlayers, SavedPlayers, PlayersList, Match, Storage) {
 
       /**
        * @ngdoc method
@@ -166,6 +168,25 @@ angular
         SavedPlayers.save(SavedPlayers.getAll());
       }
 
+        /**
+         * @ngdoc method
+         * @name PlayerStats#wereStatsUpdated
+         * @kind function
+         * @methodOf app.service:PlayerStats
+         * @return {boolean} true if the stats were updated
+         * @description
+         * Check the match list and return if the stats were arleady updated or not
+         */
+      function wereStatsUpdated() {
+        var matchList = Storage.get('matchList');
+        if (!matchList) {
+          matchList = [];
+          Storage.set('matchList', matchList);
+          return false;
+        }
+        return matchList.indexOf(PlayersList.currentMatchID) >= 0;
+      }
+
       return {
         addShutout: addShutout,
         getWinsPercentage: getWinsPercentage,
@@ -177,7 +198,8 @@ angular
         setBestRoundDate: setBestRoundDate,
         updateBestRound: updateBestRound,
         updatePlayersGames: updatePlayersGames,
-        savePlayers: savePlayers
+        savePlayers: savePlayers,
+        wereStatsUpdated: wereStatsUpdated
       };
 
     }

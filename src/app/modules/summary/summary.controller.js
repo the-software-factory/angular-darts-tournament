@@ -14,10 +14,9 @@ angular
     'SelectedPlayers',
     'Match',
     'PlayerStats',
-    'PlayersList',
     'RULES',
     'Slack',
-    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, PlayersList, RULES, Slack) {
+    function($location, $routeParams, SelectedPlayers, Match, PlayerStats, RULES, Slack) {
       var vm = this;
 
       // Exposes public methods
@@ -43,14 +42,6 @@ angular
        * @propertyOf app.summary.controller:SummaryController
        */
       vm.match = Match;
-
-      /**
-       * @ngdoc property
-       * @name SummaryController#playersList
-       * @type {Object}
-       * @propertyOf app.summary.controller:SummaryController
-       */
-      vm.playersList = PlayersList;
 
       /**
        * @ngdoc property
@@ -138,7 +129,7 @@ angular
        */
       function prizegiving() {
         // Check if the stats were already updated
-        if (!vm.playersList.wereStatsUpdated()) {
+        if (!PlayerStats.wereStatsUpdated()) {
           // Checks if a shutout has occurred during the match
           var rounds = Match.getRounds();
           angular.forEach(rounds, function(round) {
