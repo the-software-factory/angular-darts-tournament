@@ -51,6 +51,7 @@
     <!-- TODO this string needs to be translated -->
     <a class="btn btn-primary btn-lg btn-block"
         role="button"
+        ng-disabled="!vm.isSkipAllowed()"
         ng-click="vm.skipRound()">
       skip
       <span class="glyphicon glyphicon-forward"></span>

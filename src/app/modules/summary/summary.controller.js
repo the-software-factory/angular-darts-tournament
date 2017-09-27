@@ -26,6 +26,7 @@ angular
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
       vm.skipRound = skipRound;
+      vm.isSkipAllowed = isSkipAllowed;
       vm.prizegiving = prizegiving;
 
       /**
@@ -138,6 +139,26 @@ angular
        */
       function skipRound() {
         $location.path('summary/round/' + vm.roundID + '/player/' + vm.match.selectNextPlayer(vm.roundID).id);
+      }
+
+       /**
+       * @ngdoc method
+       * @name SummaryController#isSkipAllowed
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @return {boolean} True is youcan skip again
+       * @description
+       * Check if the makes sense to skip
+       */
+      function isSkipAllowed() {
+        // Check if there is one more player that must play
+        var roundPlayers = 0;
+        angular.forEach(vm.match.getRounds()[vm.roundID - 1], function() {
+          roundPlayers ++;
+        });
+        var allPlayers = vm.selectedPlayers.getAll().length;
+        // vm.match.getRounds()[vm.roundID - 1] are n players that have played plus the $$hashKey
+        return roundPlayers < allPlayers;
       }
 
       /**

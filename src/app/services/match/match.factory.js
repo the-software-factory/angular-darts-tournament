@@ -207,6 +207,9 @@ angular
             if (offset < SelectedPlayers.getAll().length - 1) {
               nextPlayer = SelectedPlayers.getAll()[offset + 1];
             }
+            else {
+              nextPlayer = SelectedPlayers.getAll()[0];
+            }
             setCurrentPlayer(nextPlayer);
           }
           while (angular.isNumber(getRoundPointsByPlayer(nextPlayer, round)));
