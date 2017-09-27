@@ -118,6 +118,9 @@ angular
        */
       function save(storageKey, list) {
         var matchList = Storage.get('matchList');
+        if (matchList == undefined) {
+          matchList = [];
+        }
         matchList.push(currentMatchID);
         Storage.set('matchList', matchList);
         Storage.set(storageKey, list);
