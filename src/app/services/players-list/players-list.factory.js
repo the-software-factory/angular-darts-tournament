@@ -117,10 +117,7 @@ angular
        * Replace the old list with the new one.
        */
       function save(storageKey, list) {
-        var matchList = Storage.get('matchList');
-        if (matchList == undefined) {
-          matchList = [];
-        }
+        var matchList = Storage.get('matchList') || [];
         matchList.push(currentMatchID);
         Storage.set('matchList', matchList);
         Storage.set(storageKey, list);
