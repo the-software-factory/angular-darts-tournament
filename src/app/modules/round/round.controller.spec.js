@@ -12,7 +12,7 @@ describe('Summary controller', function() {
         '$location': {},
         '$filter': {},
         'SelectedPlayers': {
-          'getById': angular.noop
+          'getByID': angular.noop
         },
         'Match': {
           'setCurrentPlayer': angular.noop

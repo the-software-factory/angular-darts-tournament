@@ -128,20 +128,23 @@ angular
        * Go to the prizegiving view, update the stats and send messages in Slack's chat.
        */
       function prizegiving() {
-        // Checks if a shutout has occurred during the match
-        var rounds = Match.getRounds();
-        angular.forEach(rounds, function(round) {
-          angular.forEach(getPlayers(), function(player) {
-            if (isShutout(player, rounds.indexOf(round))) {
-              PlayerStats.addShutout(player);
-              vm.slack.postShoutout(player);
-            }
+        // Check if the stats were already updated
+        if (!PlayerStats.wereStatsUpdated()) {
+          // Checks if a shutout has occurred during the match
+          var rounds = Match.getRounds();
+          angular.forEach(rounds, function(round) {
+            angular.forEach(getPlayers(), function(player) {
+              if (isShutout(player, rounds.indexOf(round))) {
+                PlayerStats.addShutout(player);
+                vm.slack.postShoutout(player);
+              }
+            });
           });
-        });
-        // Updates games and wins properties of the players
-        PlayerStats.updatePlayersGames();
-        PlayerStats.savePlayers();
-        vm.slack.postWinners(vm.match.getWinners());
+          // Updates games and wins properties of the players
+          PlayerStats.updatePlayersGames();
+          PlayerStats.savePlayers();
+          vm.slack.postWinners(vm.match.getWinners());
+        }
         $location.path('prizegiving');
       }
 

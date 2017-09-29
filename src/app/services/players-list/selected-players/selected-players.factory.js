@@ -105,7 +105,7 @@ angular
 
       /**
        * @ngdoc method
-       * @name SelectedPlayers#getById
+       * @name SelectedPlayers#getByID
        * @kind function
        * @methodOf app.service:SelectedPlayers
        * @param {number} id Value of the item id
@@ -113,18 +113,23 @@ angular
        * @description
        * Returns the item whose id matches the give one.
        */
-      function getById(id) {
-        return PlayersList.getById(storageKey, id);
+      function getByID(id) {
+        return PlayersList.getByID(storageKey, id);
+      }
+
+      function updateMatchID() {
+        PlayersList.updateMatchID();
       }
 
       return {
         add: add,
         getAll: getAll,
-        getById: getById,
+        getByID: getByID,
         getItemOffset: getItemOffset,
         isAdded: isAdded,
         remove: remove,
-        save: save
+        save: save,
+        updateMatchID: updateMatchID
       };
 
     }

@@ -14,6 +14,15 @@ angular
     function(Storage) {
 
       /**
+       * @ngdoc property
+       * @name PlayersList#currentMatchID
+       * @private
+       * @type {Object}
+       * @propertyOf app.service:Match
+       */
+      var currentMatchID;
+
+      /**
        * @ngdoc method
        * @name PlayersList#getItemOffset
        * @kind function
@@ -108,12 +117,15 @@ angular
        * Replace the old list with the new one.
        */
       function save(storageKey, list) {
+        var matchList = Storage.get('matchList') || [];
+        matchList.push(currentMatchID);
+        Storage.set('matchList', matchList);
         Storage.set(storageKey, list);
       }
 
       /**
        * @ngdoc method
-       * @name PlayersList#getById
+       * @name PlayersList#getByID
        * @kind function
        * @methodOf app.service:PlayersList
        * @param {string} storageKey Key used by storage to reference item
@@ -122,7 +134,7 @@ angular
        * @description
        * Returns the item whose id matches the give one.
        */
-      function getById(storageKey, id) {
+      function getByID(storageKey, id) {
         var item = null;
         angular.forEach(getAll(storageKey), function(iteratedItem) {
           if (iteratedItem.id == id) {
@@ -132,14 +144,28 @@ angular
         return item;
       }
 
+      /**
+       * @ngdoc method
+       * @name PlayersList#updateMatchID
+       * @kind function
+       * @methodOf app.service:PlayersList
+       * @description
+       * Update the matchID with a fresh one.
+       */
+      function updateMatchID() {
+        currentMatchID = new Date;
+      }
+
       return {
         add: add,
         getAll: getAll,
-        getById: getById,
+        getByID: getByID,
         getItemOffset: getItemOffset,
         isAdded: isAdded,
         remove: remove,
-        save: save
+        save: save,
+        updateMatchID: updateMatchID,
+        currentMatchID: currentMatchID
       };
 
     }

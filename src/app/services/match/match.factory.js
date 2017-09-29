@@ -45,6 +45,7 @@ angular
       function reset() {
         saveRounds([]);
         currentPlayer = null;
+        SelectedPlayers.updateMatchID();
       }
 
       /**
