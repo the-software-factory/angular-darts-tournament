@@ -312,7 +312,8 @@ angular
           PlayerStats.updateBestRound(vm.player, playerScore);
         }
         var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
-        $location.path('summary/round/' + nextRound + '/player/' + Match.selectNextPlayer(nextRound).id);
+        Match.setCurrentplayer(Match.getNextPlayer(nextRound));
+        $location.path('summary/round/' + nextRound + '/player/' + Match.getCurrentPlayer().id);
       }
 
       /**

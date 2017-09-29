@@ -190,32 +190,32 @@ angular
 
       /**
        * @ngdoc method
-       * @name Match#selectNextPlayer
+       * @name Match#getNextPlayer
        * @kind function
        * @methodOf app.service:Match
        * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
-       * set the next player as current and return it.
+       * Return the next player that should play.
        */
-      function selectNextPlayer(round) {
+      function getNextPlayer(round) {
         var nextPlayer = SelectedPlayers.getAll()[0];
-        if (getCurrentPlayer()) {
+        var currentPlayer = getCurrentPlayer();
+        if (currentPlayer) {
           // seek for the next player tha has NOT played yet this round.
           do {
-            var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
+            var offset = SelectedPlayers.getItemOffset(currentPlayer);
             if (offset < SelectedPlayers.getAll().length - 1) {
               nextPlayer = SelectedPlayers.getAll()[offset + 1];
             }
             else {
               nextPlayer = SelectedPlayers.getAll()[0];
             }
-            setCurrentPlayer(nextPlayer);
+            currentPlayer = nextPlayer;
           }
           while (angular.isNumber(getRoundPointsByPlayer(nextPlayer, round)));
           return nextPlayer;
         }
-        setCurrentPlayer(nextPlayer);
         return nextPlayer;
       }
 
@@ -307,7 +307,7 @@ angular
         getInitialPoints: getInitialPoints,
         getMaxPointsByRound: getMaxPointsByRound,
         getMinimumNumberOfPlayers: getMinimumNumberOfPlayers,
-        selectNextPlayer: selectNextPlayer,
+        getNextPlayer: getNextPlayer,
         getPointsUntilRound: getPointsUntilRound,
         getWinners: getWinners,
         getRoundPointsByPlayer: getRoundPointsByPlayer,

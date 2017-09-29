@@ -138,7 +138,8 @@ angular
        * Temporarily skip the current player
        */
       function skipRound() {
-        $location.path('summary/round/' + vm.roundID + '/player/' + vm.match.selectNextPlayer(vm.roundID).id);
+        vm.match.setCurrentPlayer(vm.match.getNextPlayer(vm.roundID));
+        $location.path('summary/round/' + vm.roundID + '/player/' + vm.match.getCurrentPlayer().id);
       }
 
        /**
