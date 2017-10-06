@@ -196,7 +196,7 @@ angular
        * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
-       * Return the next player that should play.
+       * Returns the next player that should play.
        */
       function getNextPlayer(round) {
         var nextPlayer = SelectedPlayers.getAll()[0];
