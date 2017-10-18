@@ -72,6 +72,13 @@
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
       </a>
       <a class="btn btn-primary btn-lg btn-block"
+          role="button"
+          ng-disabled="!vm.areSelectedPlayersEnough()"
+          ng-click="vm.loadMatch()">
+        riprendi partita
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+      </a>
+      <a class="btn btn-primary btn-lg btn-block"
          role="button"
          ng-click="vm.viewStats()">
         stats
