@@ -149,7 +149,6 @@ angular
        */
       function startMatch() {
         Match.reset();
-        localStorage.setItem('controlPlayer','0');
         $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
       }
       /**
@@ -158,11 +157,10 @@ angular
        * @kind function
        * @methodOf app.players.controller:PlayersController
        * @description
-       * Load a previus match and initializes 'controlPlayer' for the currentPlayer function on file sumrai.controller.js
+       * Load the previous match whit the last players and the relative score.
        */
       function loadMatch() {
-        localStorage.setItem('controlPlayer','1');
-        $location.path('summary/round/'+ localStorage.getItem('saveRound') + '/player/' + localStorage.getItem('savePlayerID'));
+        $location.path('summary/round/' + localStorage.getItem('saveRoundID') + '/player/' + localStorage.getItem('savePlayerID'));
       }
       /**
        * @ngdoc method

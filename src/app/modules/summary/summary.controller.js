@@ -26,8 +26,8 @@ angular
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
       vm.prizegiving = prizegiving;
-      vm.currentPlayer = currentPlayer;
-
+      vm.nextPlayer = nextPlayer;
+      vm.saveIDRoundPlayer = saveIDRoundPlayer;
       /**
        * @ngdoc property
        * @name SummaryController#slack
@@ -60,6 +60,36 @@ angular
        */
       vm.roundID = $routeParams.roundID;
 
+      vm.saveIDRoundPlayer();
+      /**
+       * @ngdoc method
+       * @name SummaryController#saveIDRoundPlayer
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Save the last roundID and playerID
+       */
+      function saveIDRoundPlayer() {
+        //Save the last Round ID
+        localStorage.setItem('saveRoundID', vm.roundID);
+
+        //Save the last player ID
+        localStorage.setItem('savePlayerID', vm.playerID);
+      }
+      
+      /**
+       * @ngdoc method
+       * @name SummaryController#nextPlayer
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @return {String} The name of next player.
+       * @description
+       * Return the next player that must play.
+       */
+      function nextPlayer() {
+        return SelectedPlayers.getByID(localStorage.getItem('savePlayerID')).name;
+      }
+
       /**
        * @ngdoc method
        * @name SummaryController#getPlayers
@@ -72,22 +102,7 @@ angular
       function getPlayers() {
         return SelectedPlayers.getAll();
       }
-      /**
-       * @ngdoc method
-       * @name SummaryController#currentPlayer
-       * @kind function
-       * @methodOf app.summary.controller:SummaryController
-       * @return {String} The name of next player.
-       * @description
-       * Returns next player, or load the next player saved from the previus game.
-       */
-      function currentPlayer(){
-        if(localStorage.getItem('controlPlayer')!= '1'){
-          localStorage.setItem('currentPlayer', vm.match.getNextPlayer(vm.roundID).name);
-        }
-        var currentPlayer = localStorage.getItem('currentPlayer');
-        return currentPlayer;
-      }
+
       /**
        * @ngdoc method
        * @name SummaryController#getMissingPoints
@@ -129,10 +144,9 @@ angular
        * @kind function
        * @methodOf app.summary.controller:SummaryController
        * @description
-       * Go to the round view and set controlPlayer to 0 for the currentPlayer function.
+       * Go to the round view.
        */
       function nextRound() {
-        localStorage.setItem('controlPlayer','0');
         $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
       }
 
@@ -176,10 +190,5 @@ angular
       function isMatchOver() {
         return vm.match.isMatchOver(vm.roundID - 1);
       }
-      //Save the current Round
-      localStorage.setItem('saveRound',$routeParams.roundID);
-
-      //Save the current player ID
-      localStorage.setItem('savePlayerID',$routeParams.playerID);
     }
   ]);
