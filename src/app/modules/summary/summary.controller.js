@@ -26,7 +26,8 @@ angular
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
       vm.prizegiving = prizegiving;
-
+      vm.nextPlayer = nextPlayer;
+      vm.saveIDRoundPlayer = saveIDRoundPlayer;
       /**
        * @ngdoc property
        * @name SummaryController#slack
@@ -58,6 +59,36 @@ angular
        * @propertyOf app.summary.controller:SummaryController
        */
       vm.roundID = $routeParams.roundID;
+
+      vm.saveIDRoundPlayer();
+      /**
+       * @ngdoc method
+       * @name SummaryController#saveIDRoundPlayer
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Save the last roundID and playerID
+       */
+      function saveIDRoundPlayer() {
+        //Save the last Round ID
+        localStorage.setItem('saveRoundID', vm.roundID);
+
+        //Save the last player ID
+        localStorage.setItem('savePlayerID', vm.playerID);
+      }
+      
+      /**
+       * @ngdoc method
+       * @name SummaryController#nextPlayer
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @return {String} The name of next player.
+       * @description
+       * Return the next player that must play.
+       */
+      function nextPlayer() {
+        return SelectedPlayers.getByID(localStorage.getItem('savePlayerID')).name;
+      }
 
       /**
        * @ngdoc method
@@ -159,6 +190,5 @@ angular
       function isMatchOver() {
         return vm.match.isMatchOver(vm.roundID - 1);
       }
-
     }
   ]);

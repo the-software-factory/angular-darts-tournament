@@ -27,6 +27,7 @@ angular
       vm.startMatch = startMatch;
       vm.togglePlayer = togglePlayer;
       vm.viewStats = viewStats;
+      vm.loadMatch = loadMatch;
 
       /**
        * @ngdoc property
@@ -150,7 +151,17 @@ angular
         Match.reset();
         $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
       }
-
+      /**
+       * @ngdoc method
+       * @name PlayersController#loadMatch
+       * @kind function
+       * @methodOf app.players.controller:PlayersController
+       * @description
+       * Load the previous match whit the last players and the relative score.
+       */
+      function loadMatch() {
+        $location.path('summary/round/' + localStorage.getItem('saveRoundID') + '/player/' + localStorage.getItem('savePlayerID'));
+      }
       /**
        * @ngdoc method
        * @name PlayersController#goToSettings
