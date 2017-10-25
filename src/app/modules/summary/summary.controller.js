@@ -25,6 +25,8 @@ angular
       vm.isMatchOver = isMatchOver;
       vm.isShutout = isShutout;
       vm.nextRound = nextRound;
+      vm.skipRound = skipRound;
+      vm.isSkipAllowed = isSkipAllowed;
       vm.prizegiving = prizegiving;
 
       /**
@@ -42,6 +44,14 @@ angular
        * @propertyOf app.summary.controller:SummaryController
        */
       vm.match = Match;
+
+      /**
+       * @ngdoc property
+       * @name SummaryController#selectedPlayers
+       * @type {Object}
+       * @propertyOf app.summary.controller:SummaryController
+       */
+      vm.selectedPlayers = SelectedPlayers;
 
       /**
        * @ngdoc property
@@ -117,6 +127,39 @@ angular
        */
       function nextRound() {
         $location.path('round/' + vm.roundID + '/player/' + vm.playerID);
+      }
+
+      /**
+       * @ngdoc method
+       * @name SummaryController#skipRound
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @description
+       * Temporarily skip the current player
+       */
+      function skipRound() {
+        vm.match.setCurrentPlayer(vm.match.getNextPlayer(vm.roundID));
+        $location.path('summary/round/' + vm.roundID + '/player/' + vm.match.getCurrentPlayer().id);
+      }
+
+       /**
+       * @ngdoc method
+       * @name SummaryController#isSkipAllowed
+       * @kind function
+       * @methodOf app.summary.controller:SummaryController
+       * @return {boolean} True if you can skip again
+       * @description
+       * Check if there are more players that must play, if so, the current turn can be skipped
+       */
+      function isSkipAllowed() {
+        // Count how many players must still play
+        var roundPlayers = 0;
+        angular.forEach(vm.match.getRounds()[vm.roundID - 1], function() {
+          roundPlayers ++;
+        });
+
+        var allPlayers = vm.selectedPlayers.getAll().length;
+        return roundPlayers < allPlayers;
       }
 
       /**

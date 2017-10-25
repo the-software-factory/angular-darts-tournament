@@ -197,25 +197,27 @@ angular
        * @param {number} round The number of the round to play
        * @return {Object} The next player
        * @description
-       * Returns the next player.
+       * Returns the next player that should play.
        */
       function getNextPlayer(round) {
-        if (getCurrentPlayer()) {
-          // Returns the current player if:
-          // - he/she didn't play yet
-          // - he/she is the first selected player
-          if (!angular.isNumber(getRoundPointsByPlayer(getCurrentPlayer(), round)) &&
-              (isRoundStarted(round) ||
-              angular.equals(getCurrentPlayer(), SelectedPlayers.getAll()[0]))) {
-            return getCurrentPlayer();
+        var nextPlayer = SelectedPlayers.getAll()[0];
+        var currentPlayer = getCurrentPlayer();
+        if (currentPlayer) {
+          // seek for the next player tha has NOT played yet this round.
+          do {
+            var offset = SelectedPlayers.getItemOffset(currentPlayer);
+            if (offset < SelectedPlayers.getAll().length - 1) {
+              nextPlayer = SelectedPlayers.getAll()[offset + 1];
+            }
+            else {
+              nextPlayer = SelectedPlayers.getAll()[0];
+            }
+            currentPlayer = nextPlayer;
           }
-
-          var offset = SelectedPlayers.getItemOffset(getCurrentPlayer());
-          if (offset < SelectedPlayers.getAll().length - 1) {
-            return SelectedPlayers.getAll()[offset + 1];
-          }
+          while (angular.isNumber(getRoundPointsByPlayer(nextPlayer, round)));
+          return nextPlayer;
         }
-        return SelectedPlayers.getAll()[0];
+        return nextPlayer;
       }
 
       /**
