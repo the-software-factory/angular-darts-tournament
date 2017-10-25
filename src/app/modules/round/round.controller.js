@@ -311,7 +311,7 @@ angular
         if (playerScore > vm.player.bestRoundScore) {
           PlayerStats.updateBestRound(vm.player, playerScore);
         }
-        
+
         var nextRound;
         if (currentRoundPlayedID.length < SelectedPlayers.getAll().length) {
           nextRound = vm.round;

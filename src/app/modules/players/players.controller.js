@@ -148,8 +148,7 @@ angular
        */
       function startMatch() {
         Match.reset();
-        Match.setCurrentPlayer(Match.getNextPlayer(1));
-        $location.path('summary/round/1/player/' + Match.getCurrentPlayer().id);
+        $location.path('summary/round/1/player/' + Match.getNextPlayer(1).id);
       }
 
       /**
