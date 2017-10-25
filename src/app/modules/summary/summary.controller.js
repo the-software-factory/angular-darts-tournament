@@ -152,11 +152,12 @@ angular
        * Check if there are more players that must play, if so, the current turn can be skipped
        */
       function isSkipAllowed() {
-        // Check if there is one or more players that must play
+        // Count how many players must still play
         var roundPlayers = 0;
         angular.forEach(vm.match.getRounds()[vm.roundID - 1], function() {
           roundPlayers ++;
         });
+
         var allPlayers = vm.selectedPlayers.getAll().length;
         return roundPlayers < allPlayers;
       }

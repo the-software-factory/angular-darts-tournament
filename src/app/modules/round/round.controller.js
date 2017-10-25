@@ -311,8 +311,16 @@ angular
         if (playerScore > vm.player.bestRoundScore) {
           PlayerStats.updateBestRound(vm.player, playerScore);
         }
-        var nextRound = currentRoundPlayedID.length < SelectedPlayers.getAll().length ? vm.round : vm.round + 1;
-        Match.setCurrentplayer(Match.getNextPlayer(nextRound));
+        
+        var nextRound;
+        if (currentRoundPlayedID.length < SelectedPlayers.getAll().length) {
+          nextRound = vm.round;
+          Match.setCurrentPlayer(Match.getNextPlayer(nextRound));
+        }
+        else {
+          nextRound = vm.round + 1;
+          Match.setCurrentPlayer(SelectedPlayers.getAll()[0]);
+        }
         $location.path('summary/round/' + nextRound + '/player/' + Match.getCurrentPlayer().id);
       }
 
